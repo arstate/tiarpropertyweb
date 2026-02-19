@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { MapPin, Bed, Bath, ArrowLeft, CheckCircle2, Phone, MessageCircle, Maximize, ShieldCheck, Share2 } from 'lucide-react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  MapPin, Bed, Bath, ArrowLeft, CheckCircle2, Phone, 
+  MessageCircle, Maximize, ShieldCheck, Share2, 
+  X, ChevronLeft, ChevronRight 
+} from 'lucide-react';
 
 // Mock Database for Detail Page
 const propertyDB = [
@@ -15,14 +19,14 @@ const propertyDB = [
     landSize: "90m²",
     buildingSize: "45m²",
     type: "Tropical Modern",
-    description: "Hunian modern tropis yang terletak strategis di perbatasan Sidoarjo dan Surabaya. Dilengkapi dengan fasilitas one gate system, taman bermain anak, dan keamanan 24 jam. Desain ceiling tinggi membuat sirkulasi udara sangat lancar, cocok untuk keluarga muda yang menginginkan hunian sehat.",
+    description: "Hunian modern tropis yang terletak strategis di perbatasan Sidoarjo and Surabaya. Dilengkapi dengan fasilitas one gate system, taman bermain anak, dan keamanan 24 jam. Desain ceiling tinggi membuat sirkulasi udara sangat lancar, cocok untuk keluarga muda yang menginginkan hunian sehat.",
     features: ["One Gate System", "CCTV 24 Jam", "Taman Bermain", "Masjid Complex", "Row Jalan 8 Meter", "Smart Door Lock"],
     mainImage: "https://picsum.photos/1200/800?random=10",
     gallery: [
-      "https://picsum.photos/800/600?random=101",
-      "https://picsum.photos/800/600?random=102",
-      "https://picsum.photos/800/600?random=103",
-      "https://picsum.photos/800/600?random=104"
+      "https://picsum.photos/1200/800?random=101",
+      "https://picsum.photos/1200/800?random=102",
+      "https://picsum.photos/1200/800?random=103",
+      "https://picsum.photos/1200/800?random=104"
     ]
   },
   {
@@ -40,9 +44,9 @@ const propertyDB = [
     features: ["Minimalist Garden", "Carport Luas", "Dekat Pasar Krian", "Bebas Banjir", "Air PDAM"],
     mainImage: "https://picsum.photos/1200/800?random=11",
     gallery: [
-      "https://picsum.photos/800/600?random=111",
-      "https://picsum.photos/800/600?random=112",
-      "https://picsum.photos/800/600?random=113"
+      "https://picsum.photos/1200/800?random=111",
+      "https://picsum.photos/1200/800?random=112",
+      "https://picsum.photos/1200/800?random=113"
     ]
   },
   {
@@ -60,9 +64,9 @@ const propertyDB = [
     features: ["Club House", "Kolam Renang", "Underground Cable", "Fiber Optic Ready", "Gym Center"],
     mainImage: "https://picsum.photos/1200/800?random=12",
     gallery: [
-      "https://picsum.photos/800/600?random=121",
-      "https://picsum.photos/800/600?random=122",
-      "https://picsum.photos/800/600?random=123"
+      "https://picsum.photos/1200/800?random=121",
+      "https://picsum.photos/1200/800?random=122",
+      "https://picsum.photos/1200/800?random=123"
     ]
   },
   {
@@ -80,9 +84,9 @@ const propertyDB = [
     features: ["Smart Home System", "Rooftop Garden Option", "Security 24H", "Dekat Mall Cito"],
     mainImage: "https://picsum.photos/1200/800?random=13",
     gallery: [
-      "https://picsum.photos/800/600?random=131",
-      "https://picsum.photos/800/600?random=132",
-      "https://picsum.photos/800/600?random=133"
+      "https://picsum.photos/1200/800?random=131",
+      "https://picsum.photos/1200/800?random=132",
+      "https://picsum.photos/1200/800?random=133"
     ]
   },
   {
@@ -100,8 +104,8 @@ const propertyDB = [
     features: ["Taman Hijau", "Jogging Track", "Playground", "One Gate"],
     mainImage: "https://picsum.photos/1200/800?random=14",
     gallery: [
-      "https://picsum.photos/800/600?random=141",
-      "https://picsum.photos/800/600?random=142"
+      "https://picsum.photos/1200/800?random=141",
+      "https://picsum.photos/1200/800?random=142"
     ]
   },
   {
@@ -119,14 +123,15 @@ const propertyDB = [
     features: ["Private Pool Option", "Golf Course View", "Luxury Club House", "International School Nearby"],
     mainImage: "https://picsum.photos/1200/800?random=15",
     gallery: [
-      "https://picsum.photos/800/600?random=151",
-      "https://picsum.photos/800/600?random=152"
+      "https://picsum.photos/1200/800?random=151",
+      "https://picsum.photos/1200/800?random=152"
     ]
   }
 ];
 
 export const PropertyDetailPage: React.FC = () => {
   const [property, setProperty] = useState<any>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   useEffect(() => {
     // Scroll to top on load
@@ -142,6 +147,39 @@ export const PropertyDetailPage: React.FC = () => {
     }
   }, []);
 
+  // Construct full image list for navigation
+  const allImages = property ? [property.mainImage, ...property.gallery] : [];
+
+  const handleNext = useCallback((e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (lightboxIndex !== null) {
+      setLightboxIndex((prev) => (prev! + 1) % allImages.length);
+    }
+  }, [lightboxIndex, allImages.length]);
+
+  const handlePrev = useCallback((e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    if (lightboxIndex !== null) {
+      setLightboxIndex((prev) => (prev! - 1 + allImages.length) % allImages.length);
+    }
+  }, [lightboxIndex, allImages.length]);
+
+  const handleClose = useCallback(() => {
+    setLightboxIndex(null);
+  }, []);
+
+  // Keyboard Navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (lightboxIndex === null) return;
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'ArrowLeft') handlePrev();
+      if (e.key === 'Escape') handleClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxIndex, handleNext, handlePrev, handleClose]);
+
   if (!property) {
     return (
         <div className="min-h-screen pt-32 flex items-center justify-center">
@@ -153,14 +191,71 @@ export const PropertyDetailPage: React.FC = () => {
   const whatsappMessage = `Halo Admin Tiar Property, saya tertarik dengan unit *${property.title}* di ${property.location} yang harganya ${property.priceDisplay}. Boleh minta info pricelist dan simulasi KPR?`;
   const whatsappLink = `https://wa.me/6282227896809?text=${encodeURIComponent(whatsappMessage)}`;
 
-  // Safe access to gallery items
-  const galleryImage1 = property.gallery.length > 0 ? property.gallery[0] : property.mainImage;
-  const galleryImage2 = property.gallery.length > 1 ? property.gallery[1] : null;
-  const remainingCount = property.gallery.length > 2 ? property.gallery.length - 2 : 0;
-
   return (
     <div className="bg-white min-h-screen pt-36 pb-24 font-sans relative">
         
+        {/* Full-Screen Lightbox */}
+        <AnimatePresence>
+            {lightboxIndex !== null && (
+                <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex flex-col items-center justify-center select-none"
+                    onClick={handleClose}
+                >
+                    {/* Top Bar */}
+                    <div className="absolute top-0 inset-x-0 p-6 flex justify-between items-center text-white z-[110]">
+                        <div className="text-sm font-bold tracking-widest uppercase opacity-60">
+                            {property.title} • {lightboxIndex + 1} / {allImages.length}
+                        </div>
+                        <button 
+                            onClick={handleClose}
+                            className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center cursor-pointer border-none"
+                        >
+                            <X size={24} />
+                        </button>
+                    </div>
+
+                    {/* Navigation Buttons */}
+                    <button 
+                        onClick={handlePrev}
+                        className="absolute left-6 w-16 h-16 rounded-full bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center text-white z-[110] cursor-pointer border-none"
+                    >
+                        <ChevronLeft size={32} />
+                    </button>
+                    <button 
+                        onClick={handleNext}
+                        className="absolute right-6 w-16 h-16 rounded-full bg-white/5 hover:bg-white/10 transition-colors flex items-center justify-center text-white z-[110] cursor-pointer border-none"
+                    >
+                        <ChevronRight size={32} />
+                    </button>
+
+                    {/* Image Container */}
+                    <motion.div 
+                        key={lightboxIndex}
+                        initial={{ opacity: 0, scale: 0.95, x: 20 }}
+                        animate={{ opacity: 1, scale: 1, x: 0 }}
+                        exit={{ opacity: 0, scale: 1.05, x: -20 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        className="w-full h-full max-w-6xl max-h-[80vh] p-4 flex items-center justify-center"
+                    >
+                        <img 
+                            src={allImages[lightboxIndex]} 
+                            className="max-w-full max-h-full object-contain shadow-2xl rounded-lg"
+                            alt={`Preview ${lightboxIndex}`}
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                    </motion.div>
+
+                    {/* Bottom Info */}
+                    <div className="absolute bottom-8 text-center text-white/50 text-xs tracking-widest uppercase px-12">
+                        Gunakan tombol panah atau klik kanan/kiri untuk navigasi
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
+
         {/* Breadcrumb / Back */}
         <div className="max-w-7xl mx-auto px-6 mb-8">
             <button 
@@ -171,11 +266,14 @@ export const PropertyDetailPage: React.FC = () => {
             </button>
         </div>
 
-        {/* Hero Image Grid - Fixed aspect ratios for zoom stability */}
+        {/* Hero Image Grid */}
         <div className="max-w-7xl mx-auto px-6 mb-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
                 {/* Main Image (Left) */}
-                <div className="lg:col-span-8 aspect-video lg:aspect-auto lg:h-[600px] rounded-3xl overflow-hidden relative group shadow-lg">
+                <div 
+                    className="lg:col-span-8 aspect-video lg:aspect-auto lg:h-[600px] rounded-3xl overflow-hidden relative group shadow-lg cursor-zoom-in"
+                    onClick={() => setLightboxIndex(0)}
+                >
                      <img src={property.mainImage} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Main" />
                      <div className="absolute top-6 left-6 bg-white/90 backdrop-blur px-4 py-2 rounded-full text-luxury-green font-bold text-sm uppercase tracking-wide">
                         {property.type}
@@ -184,19 +282,25 @@ export const PropertyDetailPage: React.FC = () => {
 
                 {/* Side Images (Right) */}
                 <div className="lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-4 lg:h-[600px]">
-                    {/* Top Right */}
-                    <div className="aspect-square lg:aspect-auto lg:h-full rounded-3xl overflow-hidden relative group shadow-md">
-                        <img src={galleryImage1} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Gallery 1" />
+                    {/* Thumbnail 1 (Second Image in List) */}
+                    <div 
+                        className="aspect-square lg:aspect-auto lg:h-full rounded-3xl overflow-hidden relative group shadow-md cursor-zoom-in"
+                        onClick={() => setLightboxIndex(1)}
+                    >
+                        <img src={property.gallery[0]} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Gallery 1" />
                     </div>
                     
-                    {/* Bottom Right */}
-                    <div className="aspect-square lg:aspect-auto lg:h-full rounded-3xl overflow-hidden relative group cursor-pointer shadow-md">
-                        {galleryImage2 ? (
+                    {/* Thumbnail 2 (Third Image in List) */}
+                    <div 
+                        className="aspect-square lg:aspect-auto lg:h-full rounded-3xl overflow-hidden relative group cursor-pointer shadow-md"
+                        onClick={() => setLightboxIndex(2)}
+                    >
+                        {property.gallery[1] ? (
                             <>
-                                <img src={galleryImage2} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Gallery 2" />
-                                {remainingCount > 0 && (
+                                <img src={property.gallery[1]} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Gallery 2" />
+                                {property.gallery.length > 2 && (
                                     <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-bold text-xl hover:bg-black/40 transition-colors backdrop-blur-[2px]">
-                                        +{remainingCount} More Photos
+                                        +{property.gallery.length - 2} More Photos
                                     </div>
                                 )}
                             </>
@@ -210,7 +314,7 @@ export const PropertyDetailPage: React.FC = () => {
             </div>
         </div>
 
-        {/* Main Content Grid - Using XL to ensure enough width for side-by-side layout */}
+        {/* Main Content Grid */}
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 xl:grid-cols-12 gap-12 relative">
             
             {/* Left Content: Details */}
@@ -237,22 +341,22 @@ export const PropertyDetailPage: React.FC = () => {
                         <div className="bg-luxury-offwhite p-5 rounded-2xl flex flex-col items-center justify-center text-center border border-gray-50">
                             <Bed size={28} className="text-luxury-gold mb-2" />
                             <span className="font-bold text-luxury-green text-xl">{property.beds}</span>
-                            <span className="text-[10px] text-gray-500 uppercase font-bold tracking-widest">Kamar Tidur</span>
+                            <span className="text-[10px] text-gray-500 uppercase font-bold tracking-widest text-nowrap">Kamar Tidur</span>
                         </div>
                         <div className="bg-luxury-offwhite p-5 rounded-2xl flex flex-col items-center justify-center text-center border border-gray-50">
                             <Bath size={28} className="text-luxury-gold mb-2" />
                             <span className="font-bold text-luxury-green text-xl">{property.baths}</span>
-                            <span className="text-[10px] text-gray-500 uppercase font-bold tracking-widest">Kamar Mandi</span>
+                            <span className="text-[10px] text-gray-500 uppercase font-bold tracking-widest text-nowrap">Kamar Mandi</span>
                         </div>
                          <div className="bg-luxury-offwhite p-5 rounded-2xl flex flex-col items-center justify-center text-center border border-gray-50">
                             <Maximize size={28} className="text-luxury-gold mb-2" />
                             <span className="font-bold text-luxury-green text-xl">{property.landSize}</span>
-                            <span className="text-[10px] text-gray-500 uppercase font-bold tracking-widest">Luas Tanah</span>
+                            <span className="text-[10px] text-gray-500 uppercase font-bold tracking-widest text-nowrap">Luas Tanah</span>
                         </div>
                          <div className="bg-luxury-offwhite p-5 rounded-2xl flex flex-col items-center justify-center text-center border border-gray-50">
                             <ShieldCheck size={28} className="text-luxury-gold mb-2" />
                             <span className="font-bold text-luxury-green text-xl">SHM</span>
-                            <span className="text-[10px] text-gray-500 uppercase font-bold tracking-widest">Sertifikat</span>
+                            <span className="text-[10px] text-gray-500 uppercase font-bold tracking-widest text-nowrap">Sertifikat</span>
                         </div>
                     </div>
                 </div>
@@ -282,7 +386,7 @@ export const PropertyDetailPage: React.FC = () => {
 
             </div>
 
-            {/* Right Sidebar: Sticky Pricing & CTA (Shown on XL only) */}
+            {/* Right Sidebar: Sticky Pricing & CTA */}
             <div className="hidden xl:block xl:col-span-4 relative">
                 <div className="sticky top-28 bg-white p-8 rounded-[2.5rem] shadow-2xl border border-luxury-gold/10 z-20 max-h-[calc(100vh-140px)] overflow-y-auto no-scrollbar">
                     <div className="text-center mb-8">
@@ -331,7 +435,7 @@ export const PropertyDetailPage: React.FC = () => {
 
         </div>
 
-        {/* Mobile/Tablet/Small Desktop Fixed Bottom CTA Bar (Visible when sidebar is hidden) */}
+        {/* Mobile Fixed Bottom CTA Bar */}
         <div className="xl:hidden fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-xl border-t border-gray-200 p-5 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-40 flex items-center justify-between gap-5">
             <div className="flex-1">
                  <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Harga Mulai</p>
