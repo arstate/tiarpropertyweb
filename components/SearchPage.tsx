@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Search, MapPin, DollarSign, Filter, Bed, Bath, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, MapPin, DollarSign, Filter, Bed, Bath, ChevronDown, Check } from 'lucide-react';
 
 // Mock Data (Expanded)
 const properties = [
@@ -78,6 +78,76 @@ const properties = [
   }
 ];
 
+// Reusable Custom Dropdown Component
+interface CustomDropdownProps {
+    icon: React.ReactNode;
+    value: string;
+    options: string[];
+    onChange: (value: string) => void;
+    labelMap?: (value: string) => string;
+    placeholder?: string;
+}
+
+const CustomDropdown: React.FC<CustomDropdownProps> = ({ icon, value, options, onChange, labelMap, placeholder }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    const displayLabel = labelMap ? labelMap(value) : value;
+
+    return (
+        <div className="relative" ref={containerRef}>
+            <button 
+                onClick={() => setIsOpen(!isOpen)}
+                className={`w-full bg-gray-50 border ${isOpen ? 'border-luxury-gold/50 ring-4 ring-luxury-gold/5 bg-white' : 'border-transparent'} hover:bg-white hover:border-luxury-gold/30 rounded-2xl py-3 pl-12 pr-10 text-left cursor-pointer text-luxury-green font-medium transition-all duration-200 flex items-center h-[52px] shadow-sm`}
+            >
+                <div className="absolute left-4 text-gray-400">
+                    {icon}
+                </div>
+                <span className="truncate">{displayLabel || placeholder}</span>
+                <div className={`absolute right-4 text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180 text-luxury-gold' : ''}`}>
+                    <ChevronDown size={18} />
+                </div>
+            </button>
+
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                        transition={{ duration: 0.15, ease: "easeOut" }}
+                        className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-100 overflow-hidden z-50 py-2 max-h-60 overflow-y-auto"
+                    >
+                        {options.map((option) => (
+                            <div
+                                key={option}
+                                onClick={() => {
+                                    onChange(option);
+                                    setIsOpen(false);
+                                }}
+                                className={`px-4 py-3 cursor-pointer flex items-center justify-between transition-colors ${value === option ? 'bg-luxury-gold/10 text-luxury-green font-bold' : 'text-gray-600 hover:bg-gray-50 hover:text-luxury-green'}`}
+                            >
+                                <span>{labelMap ? labelMap(option) : option}</span>
+                                {value === option && <Check size={16} className="text-luxury-gold" />}
+                            </div>
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+};
+
 export const SearchPage: React.FC = () => {
   const [keyword, setKeyword] = useState("");
   const [locationFilter, setLocationFilter] = useState("All");
@@ -91,6 +161,7 @@ export const SearchPage: React.FC = () => {
   }, []);
 
   const locations = ["All", ...Array.from(new Set(properties.map(p => p.location)))];
+  const priceOptions = ["All", "< 500 Juta", "500 - 900 Juta", "> 900 Juta"];
   
   const filteredProperties = properties.filter(prop => {
     const matchKeyword = prop.title.toLowerCase().includes(keyword.toLowerCase()) || 
@@ -139,48 +210,35 @@ export const SearchPage: React.FC = () => {
                         placeholder="Cari nama project atau area..."
                         value={keyword}
                         onChange={(e) => setKeyword(e.target.value)}
-                        className="w-full bg-gray-50 border border-transparent focus:border-luxury-gold/30 focus:bg-white focus:ring-4 focus:ring-luxury-gold/10 rounded-2xl py-3 pl-12 pr-4 outline-none transition-all placeholder:text-gray-400 text-luxury-green"
+                        className="w-full h-[52px] bg-gray-50 border border-transparent focus:border-luxury-gold/30 focus:bg-white focus:ring-4 focus:ring-luxury-gold/10 rounded-2xl py-3 pl-12 pr-4 outline-none transition-all placeholder:text-gray-400 text-luxury-green shadow-sm"
                     />
                 </div>
 
-                {/* Location Filter */}
-                <div className="md:col-span-3 relative">
-                    <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-                    <select 
+                {/* Custom Location Dropdown */}
+                <div className="md:col-span-3">
+                    <CustomDropdown 
+                        icon={<MapPin size={20} />}
                         value={locationFilter}
-                        onChange={(e) => setLocationFilter(e.target.value)}
-                        className="w-full bg-gray-50 border border-transparent focus:border-luxury-gold/30 focus:bg-white focus:ring-4 focus:ring-luxury-gold/10 rounded-2xl py-3 pl-12 pr-8 outline-none appearance-none cursor-pointer text-luxury-green font-medium"
-                    >
-                        {locations.map(loc => (
-                            <option key={loc} value={loc}>{loc === "All" ? "Semua Lokasi" : loc}</option>
-                        ))}
-                    </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                        <Filter size={16} className="text-gray-400" />
-                    </div>
+                        options={locations}
+                        onChange={setLocationFilter}
+                        labelMap={(val: string) => val === "All" ? "Semua Lokasi" : val}
+                    />
                 </div>
 
-                {/* Price Filter */}
-                <div className="md:col-span-3 relative">
-                    <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-                    <select 
+                {/* Custom Price Dropdown */}
+                <div className="md:col-span-3">
+                     <CustomDropdown 
+                        icon={<DollarSign size={20} />}
                         value={priceFilter}
-                        onChange={(e) => setPriceFilter(e.target.value)}
-                        className="w-full bg-gray-50 border border-transparent focus:border-luxury-gold/30 focus:bg-white focus:ring-4 focus:ring-luxury-gold/10 rounded-2xl py-3 pl-12 pr-8 outline-none appearance-none cursor-pointer text-luxury-green font-medium"
-                    >
-                        <option value="All">Semua Harga</option>
-                        <option value="< 500 Juta">&lt; 500 Juta</option>
-                        <option value="500 - 900 Juta">500 - 900 Juta</option>
-                        <option value="> 900 Juta">&gt; 900 Juta</option>
-                    </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                         <ArrowRight size={16} className="text-gray-400 rotate-90" />
-                    </div>
+                        options={priceOptions}
+                        onChange={setPriceFilter}
+                        labelMap={(val: string) => val === "All" ? "Semua Harga" : val}
+                    />
                 </div>
                 
-                {/* Search Button (Visual Only since filtering is realtime) */}
+                {/* Search Button */}
                 <div className="md:col-span-1">
-                     <button className="w-full h-full bg-luxury-green text-white rounded-2xl flex items-center justify-center hover:bg-black transition-colors shadow-lg shadow-luxury-green/20">
+                     <button className="w-full h-[52px] bg-luxury-green text-white rounded-2xl flex items-center justify-center hover:bg-black transition-colors shadow-lg shadow-luxury-green/20">
                         <Search size={20} />
                      </button>
                 </div>
