@@ -6,8 +6,18 @@ import { siteConfig } from '../data/siteConfig';
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeHash, setActiveHash] = useState('');
+  const [config, setConfig] = useState(siteConfig);
 
   useEffect(() => {
+    const savedConfig = localStorage.getItem('tiar_site_config');
+    if (savedConfig) {
+      try {
+        setConfig(JSON.parse(savedConfig));
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
     const onHashChange = () => {
       setActiveHash(window.location.hash || '#home');
     };
@@ -124,9 +134,13 @@ export const Navbar: React.FC = () => {
           {/* Logo - Darker for readability on high-saturation glass */}
           <button
             onClick={() => handleNav('#home')}
-            className="relative z-10 font-serif text-2xl font-bold tracking-tight text-luxury-green hover:scale-105 transition-transform bg-transparent border-none cursor-pointer"
+            className="relative z-10 font-serif tracking-tight text-luxury-green hover:scale-105 transition-transform bg-transparent border-none cursor-pointer flex items-center"
           >
-            {siteConfig.logo.text}<span className="text-black/60">{siteConfig.logo.subtext ? ` ${siteConfig.logo.subtext}` : '.'}</span>
+            {config.logo?.image ? (
+              <img src={config.logo.image} alt="Logo" className="w-auto h-8 opacity-90 mix-blend-multiply" />
+            ) : (
+              <span className="text-2xl font-bold">{config.logo?.text || "TIAR"}<span className="text-black/60">{config.logo?.subtext ? ` ${config.logo.subtext}` : '.'}</span></span>
+            )}
           </button>
 
           {/* Desktop Links - Bold and dark for maximum contrast */}

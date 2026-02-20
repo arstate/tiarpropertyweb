@@ -1,13 +1,25 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Bed, Bath, MoveRight } from 'lucide-react';
-import { initialProperties as properties } from '../data/properties';
+import { initialProperties } from '../data/properties';
 
 export const PropertyShowcase: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [properties, setProperties] = useState(initialProperties);
   const [centerId, setCenterId] = useState<number>(1);
   const [isHovered, setIsHovered] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const savedProps = localStorage.getItem('tiar_properties');
+    if (savedProps) {
+      try {
+        setProperties(JSON.parse(savedProps));
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }, []);
 
   // Transform vertical scroll to horizontal scroll for this section
   useEffect(() => {

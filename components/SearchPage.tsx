@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, MapPin, DollarSign, Filter, Bed, Bath, ChevronDown, Check, Building2 } from 'lucide-react';
-import { initialProperties as properties } from '../data/properties';
+import { initialProperties } from '../data/properties';
 
 
 
@@ -76,10 +76,22 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({ icon, value, options, o
 };
 
 export const SearchPage: React.FC = () => {
+    const [properties, setProperties] = useState(initialProperties);
     const [keyword, setKeyword] = useState("");
     const [locationFilter, setLocationFilter] = useState("All");
     const [priceFilter, setPriceFilter] = useState("All");
     const [developerFilter, setDeveloperFilter] = useState("All");
+
+    useEffect(() => {
+        const savedProps = localStorage.getItem('tiar_properties');
+        if (savedProps) {
+            try {
+                setProperties(JSON.parse(savedProps));
+            } catch (e) {
+                console.error("Failed to parse local properties");
+            }
+        }
+    }, []);
 
     // Automatically scroll to top when component mounts
     useEffect(() => {
