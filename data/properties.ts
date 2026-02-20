@@ -55,5 +55,70 @@ export const initialProperties: Property[] = [
     "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1200",
     "tag": "New",
     "type": "Modern"
+  },
+  {
+    "id": 1771584607437,
+    "title": "a",
+    "location": "a",
+    "developer": "a",
+    "priceRange": 0,
+    "priceDisplay": "a",
+    "beds": 0,
+    "baths": 0,
+    "image": "",
+    "tag": "New",
+    "type": "Modern"
+  },
+  {
+    "id": 1771584613108,
+    "title": "a",
+    "location": "a",
+    "developer": "a",
+    "priceRange": 0,
+    "priceDisplay": "a",
+    "beds": 0,
+    "baths": 0,
+    "image": "",
+    "tag": "New",
+    "type": "Modern"
+  },
+  {
+    "id": 1771584616557,
+    "title": "a",
+    "location": "a",
+    "developer": "a",
+    "priceRange": 0,
+    "priceDisplay": "a",
+    "beds": 0,
+    "baths": 0,
+    "image": "",
+    "tag": "New",
+    "type": "Modern"
+  },
+  {
+    "id": 1771584620099,
+    "title": "a",
+    "location": "a",
+    "developer": "a",
+    "priceRange": 0,
+    "priceDisplay": "a",
+    "beds": 0,
+    "baths": 0,
+    "image": "",
+    "tag": "New",
+    "type": "Modern"
+  },
+  {
+    "id": 1771584624413,
+    "title": "a",
+    "location": "a",
+    "developer": "a",
+    "priceRange": 0,
+    "priceDisplay": "a",
+    "beds": 0,
+    "baths": 0,
+    "image": "",
+    "tag": "New",
+    "type": "Modern"
   }
 ];
