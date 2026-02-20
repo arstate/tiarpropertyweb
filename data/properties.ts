@@ -34,10 +34,10 @@ export const initialProperties: Property[] = [
     "location": "e",
     "developer": "",
     "priceRange": 0,
-    "priceDisplay": "e",
+    "priceDisplay": "122",
     "beds": 0,
     "baths": 0,
-    "image": "e",
+    "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1200",
     "tag": "New",
     "type": "Modern"
   }
