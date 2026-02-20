@@ -6,6 +6,7 @@ import { LandingPage } from './components/LandingPage';
 import { SearchPage } from './components/SearchPage';
 import { AboutPage } from './components/AboutPage';
 import { PropertyDetailPage } from './components/PropertyDetailPage';
+import { AdminPage } from './components/AdminPage';
 
 export default function App() {
   const [route, setRoute] = useState(window.location.hash);
@@ -13,7 +14,7 @@ export default function App() {
   useEffect(() => {
     // Scroll behavior setting
     document.documentElement.style.scrollBehavior = 'smooth';
-    
+
     // Hash router logic
     const handleHashChange = () => {
       setRoute(window.location.hash);
@@ -29,26 +30,28 @@ export default function App() {
   const isSearchPage = route.startsWith('#/cari-rumah');
   const isAboutPage = route.startsWith('#/about-us');
   const isPropertyDetailPage = route.startsWith('#/properti/');
+  const isAdminPage = route.startsWith('#/admin');
 
   return (
     <div className="min-h-screen bg-luxury-offwhite font-sans overflow-x-hidden selection:bg-luxury-green selection:text-luxury-yellow">
-      <Navbar />
-      
-      {/* Route Rendering */}
-      {isPropertyDetailPage ? (
+      {isAdminPage ? (
+        <AdminPage />
+      ) : isPropertyDetailPage ? (
         <PropertyDetailPage />
       ) : isSearchPage ? (
         <SearchPage />
       ) : isAboutPage ? (
         <AboutPage />
       ) : (
-        <LandingPage />
+        <>
+          <Navbar />
+          <LandingPage />
+          <Footer />
+        </>
       )}
 
-      <Footer />
-      
-      {/* Floating AI Agent - Hidden on Property Detail Page */}
-      {!isPropertyDetailPage && <ChatAgent />}
+      {/* Floating AI Agent - Hidden on Property Detail or Admin Page */}
+      {!isPropertyDetailPage && !isAdminPage && <ChatAgent />}
     </div>
   );
 }

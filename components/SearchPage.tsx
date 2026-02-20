@@ -1,88 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, MapPin, DollarSign, Filter, Bed, Bath, ChevronDown, Check, Building2 } from 'lucide-react';
+import { initialProperties as properties } from '../data/properties';
 
-// Mock Data (Expanded)
-const properties = [
-    {
-        id: 1,
-        title: "The Grand Dhika",
-        location: "Sidoarjo Kota",
-        developer: "Adhi Persada Properti",
-        priceRange: 500, // in millions for filtering
-        priceDisplay: "Start 500jt-an",
-        beds: 3,
-        baths: 2,
-        image: "https://picsum.photos/600/400?random=10",
-        tag: "Hot Deal",
-        type: "Tropical Modern"
-    },
-    {
-        id: 2,
-        title: "Urban Living Trosobo",
-        location: "Krian",
-        developer: "Urban Development",
-        priceRange: 300,
-        priceDisplay: "Cicilan 2jt-an",
-        beds: 2,
-        baths: 1,
-        image: "https://picsum.photos/600/400?random=11",
-        tag: "Best Seller",
-        type: "Scandinavian"
-    },
-    {
-        id: 3,
-        title: "Royal Juanda",
-        location: "Sedati",
-        developer: "Royal Group",
-        priceRange: 800,
-        priceDisplay: "Start 800jt-an",
-        beds: 4,
-        baths: 3,
-        image: "https://picsum.photos/600/400?random=12",
-        tag: "Premium",
-        type: "Classic"
-    },
-    {
-        id: 4,
-        title: "Sapphire Residence",
-        location: "Waru",
-        developer: "Jewel Property",
-        priceRange: 600,
-        priceDisplay: "Start 600jt-an",
-        beds: 3,
-        baths: 2,
-        image: "https://picsum.photos/600/400?random=13",
-        tag: "New Cluster",
-        type: "Industrial"
-    },
-    {
-        id: 5,
-        title: "Green View Regency",
-        location: "Sidoarjo Kota",
-        developer: "Green Land",
-        priceRange: 450,
-        priceDisplay: "Start 450jt-an",
-        beds: 2,
-        baths: 1,
-        image: "https://picsum.photos/600/400?random=14",
-        tag: "Promo",
-        type: "Minimalist"
-    },
-    {
-        id: 6,
-        title: "Citra Garden Estate",
-        location: "Waru",
-        developer: "Ciputra Group",
-        priceRange: 1200,
-        priceDisplay: "Start 1.2M",
-        beds: 4,
-        baths: 3,
-        image: "https://picsum.photos/600/400?random=15",
-        tag: "Luxury",
-        type: "Modern Luxury"
-    }
-];
+
 
 // Reusable Custom Dropdown Component
 interface CustomDropdownProps {
