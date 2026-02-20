@@ -3,10 +3,19 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     Lock, Plus, Trash2, Save, Image as ImageIcon, X, LogOut,
     Copy, Check, MapPin, Settings, Globe, Layout, Github,
-    CloudUpload, AlertCircle, Loader2, MessageSquare
+    CloudUpload, AlertCircle, Loader2, MessageSquare, Upload, Trash
 } from 'lucide-react';
 import { initialProperties, Property } from '../data/properties';
 import { siteConfig as initialSiteConfig } from '../data/siteConfig';
+
+const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = error => reject(error);
+    });
+};
 
 export const AdminPage = () => {
     // --- AUTH ---
@@ -86,7 +95,7 @@ export const AdminPage = () => {
             const filesToUpdate = [
                 {
                     path: 'data/properties.ts',
-                    content: `import { Property } from './properties';\n\nexport interface Property {\n  id: number;\n  title: string;\n  location: string;\n  developer: string;\n  priceRange: number;\n  priceDisplay: string;\n  beds: number;\n  baths: number;\n  image: string;\n  tag: string;\n  type: string;\n}\n\nexport const initialProperties: Property[] = ${JSON.stringify(properties, null, 2)};`
+                    content: `export interface Property {\n  id: number;\n  title: string;\n  location: string;\n  developer: string;\n  priceRange: number;\n  priceDisplay: string;\n  beds: number;\n  baths: number;\n  image: string;\n  tag: string;\n  type: string;\n  landSize?: string;\n  buildingSize?: string;\n  description?: string;\n  features?: string[];\n  gallery?: string[];\n}\n\nexport const initialProperties: Property[] = ${JSON.stringify(properties, null, 2)};`
                 },
                 {
                     path: 'data/siteConfig.ts',
@@ -320,23 +329,112 @@ export const AdminPage = () => {
                                 <h3 className="text-sm font-bold uppercase tracking-widest text-luxury-gold mb-6 flex items-center gap-2">
                                     <Layout size={18} /> Logo & Identity
                                 </h3>
-                                <div className="grid grid-cols-2 gap-6">
-                                    <div className="space-y-2">
-                                        <label className="text-[10px] uppercase font-bold text-gray-400 px-1">Brand Name</label>
-                                        <input
-                                            value={siteConfig.logo.text}
-                                            onChange={e => saveToLocal(properties, { ...siteConfig, logo: { ...siteConfig.logo, text: e.target.value } })}
-                                            className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
-                                        />
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="space-y-4">
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] uppercase font-bold text-gray-400 px-1">Brand Name (If no image)</label>
+                                            <input
+                                                value={siteConfig.logo.text}
+                                                onChange={e => saveToLocal(properties, { ...siteConfig, logo: { ...siteConfig.logo, text: e.target.value } })}
+                                                className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] uppercase font-bold text-gray-400 px-1">Sub-Text / Dot</label>
+                                            <input
+                                                value={siteConfig.logo.subtext}
+                                                onChange={e => saveToLocal(properties, { ...siteConfig, logo: { ...siteConfig.logo, subtext: e.target.value } })}
+                                                className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
+                                            />
+                                        </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-[10px] uppercase font-bold text-gray-400 px-1">Sub-Text / Dot</label>
+                                        <label className="text-[10px] uppercase font-bold text-gray-400 px-1">Logo Image Upload (Optional)</label>
                                         <input
-                                            value={siteConfig.logo.subtext}
-                                            onChange={e => saveToLocal(properties, { ...siteConfig, logo: { ...siteConfig.logo, subtext: e.target.value } })}
-                                            className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={async (e) => {
+                                                if (e.target.files && e.target.files[0]) {
+                                                    const base64 = await fileToBase64(e.target.files[0]);
+                                                    saveToLocal(properties, { ...siteConfig, logo: { ...siteConfig.logo, image: base64 } });
+                                                }
+                                            }}
+                                            className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-luxury-gold file:text-white hover:file:bg-black transition-all cursor-pointer"
                                         />
+                                        {siteConfig.logo.image && (
+                                            <div className="relative inline-block mt-4 bg-gray-100 p-4 rounded-2xl">
+                                                <img src={siteConfig.logo.image} className="h-12 object-contain" alt="Logo preview" />
+                                                <button
+                                                    onClick={() => saveToLocal(properties, { ...siteConfig, logo: { ...siteConfig.logo, image: "" } })}
+                                                    className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:scale-110 transition-transform shadow-md"
+                                                >
+                                                    <X size={12} />
+                                                </button>
+                                            </div>
+                                        )}
                                     </div>
+                                </div>
+                            </section>
+
+                            {/* Developer Partners */}
+                            <section>
+                                <h3 className="text-sm font-bold uppercase tracking-widest text-luxury-gold mb-6 flex items-center gap-2">
+                                    <Layout size={18} /> Developer Partners
+                                </h3>
+                                <div className="space-y-4">
+                                    {siteConfig.developerLogos?.map((dev, idx) => (
+                                        <div key={idx} className="flex flex-col md:flex-row gap-4 items-center bg-gray-50 p-4 rounded-2xl">
+                                            <img src={dev.image} className="w-16 h-16 object-contain bg-white rounded-xl border border-gray-100 p-2 shadow-sm shrink-0" alt="" />
+                                            <input
+                                                value={dev.name}
+                                                onChange={e => {
+                                                    const newDevs = [...siteConfig.developerLogos];
+                                                    newDevs[idx].name = e.target.value;
+                                                    saveToLocal(properties, { ...siteConfig, developerLogos: newDevs });
+                                                }}
+                                                className="flex-1 w-full md:w-auto bg-white border-none px-4 py-3 rounded-xl shadow-sm focus:ring-2 focus:ring-luxury-gold/20"
+                                                placeholder="Developer Name"
+                                            />
+                                            <div className="flex w-full md:w-auto gap-2">
+                                                <input
+                                                    type="file"
+                                                    accept="image/*"
+                                                    id={`dev-upload-${idx}`}
+                                                    className="hidden"
+                                                    onChange={async (e) => {
+                                                        if (e.target.files && e.target.files[0]) {
+                                                            const base64 = await fileToBase64(e.target.files[0]);
+                                                            const newDevs = [...siteConfig.developerLogos];
+                                                            newDevs[idx].image = base64;
+                                                            saveToLocal(properties, { ...siteConfig, developerLogos: newDevs });
+                                                        }
+                                                    }}
+                                                />
+                                                <label htmlFor={`dev-upload-${idx}`} className="flex-1 flex justify-center cursor-pointer p-3 bg-luxury-gold/10 text-luxury-gold rounded-xl hover:bg-luxury-gold hover:text-white transition-colors">
+                                                    <Upload size={20} />
+                                                </label>
+                                                <button
+                                                    onClick={() => {
+                                                        const newDevs = [...siteConfig.developerLogos];
+                                                        newDevs.splice(idx, 1);
+                                                        saveToLocal(properties, { ...siteConfig, developerLogos: newDevs });
+                                                    }}
+                                                    className="flex-1 flex justify-center p-3 bg-red-50 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-colors"
+                                                >
+                                                    <Trash size={20} />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                    <button
+                                        onClick={() => saveToLocal(properties, {
+                                            ...siteConfig,
+                                            developerLogos: [...(siteConfig.developerLogos || []), { name: "New Developer", image: "https://picsum.photos/400/400" }]
+                                        })}
+                                        className="w-full py-4 border-2 border-dashed border-gray-200 text-gray-400 rounded-2xl flex justify-center items-center gap-2 hover:border-luxury-gold hover:text-luxury-gold hover:bg-luxury-gold/5 transition-colors font-bold"
+                                    >
+                                        <Plus size={20} /> Add Partner
+                                    </button>
                                 </div>
                             </section>
 
@@ -518,9 +616,85 @@ export const AdminPage = () => {
                                         <input type="number" value={editingProperty.baths} onChange={e => setEditingProperty({ ...editingProperty, baths: parseInt(e.target.value) || 0 })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
                                     </div>
                                 </div>
+                                <div className="col-span-1 sm:col-span-2 space-y-2 border-t border-gray-100 pt-6 mt-4">
+                                    <label className="text-xs uppercase font-bold text-luxury-gold">Main Image Upload</label>
+                                    <div className="flex items-center gap-4 bg-gray-50 p-4 rounded-2xl">
+                                        {editingProperty.image ? (
+                                            <img src={editingProperty.image} className="w-20 h-20 object-cover rounded-xl shadow-sm border border-gray-200" alt="Preview" />
+                                        ) : (
+                                            <div className="w-20 h-20 bg-gray-200 rounded-xl flex items-center justify-center text-gray-400"><ImageIcon /></div>
+                                        )}
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={async (e) => {
+                                                if (e.target.files && e.target.files[0]) {
+                                                    const base64 = await fileToBase64(e.target.files[0]);
+                                                    setEditingProperty({ ...editingProperty, image: base64 });
+                                                }
+                                            }}
+                                            className="flex-1 bg-white border border-gray-100 px-4 py-3 rounded-xl file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-luxury-green file:text-white cursor-pointer hover:shadow-sm transition-shadow"
+                                        />
+                                    </div>
+                                    <div className="mt-2 text-right">
+                                        <button
+                                            onClick={() => {
+                                                const url = prompt("Atau masukkan URL gambar secara manual:");
+                                                if (url) setEditingProperty({ ...editingProperty, image: url });
+                                            }}
+                                            className="text-[10px] text-gray-400 hover:text-luxury-green uppercase tracking-widest font-bold underline cursor-pointer"
+                                        >
+                                            Input Manual URL
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <div className="col-span-1 sm:col-span-2 space-y-2">
-                                    <label className="text-[10px] uppercase font-bold text-gray-400">Image URL</label>
-                                    <input value={editingProperty.image} onChange={e => setEditingProperty({ ...editingProperty, image: e.target.value })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
+                                    <label className="text-xs uppercase font-bold text-luxury-gold flex items-center gap-2">
+                                        Gallery Photos Upload <span className="text-[10px] text-gray-400 font-normal border px-2 py-0.5 rounded-full">Bisa pilih lebih dari satu</span>
+                                    </label>
+                                    <div className="bg-gray-50 p-4 rounded-2xl">
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            multiple
+                                            onChange={async (e) => {
+                                                if (e.target.files && e.target.files.length > 0) {
+                                                    const files = Array.from(e.target.files as FileList);
+                                                    const base64Promises = files.map(file => fileToBase64(file));
+                                                    const base64Strings = await Promise.all(base64Promises);
+                                                    setEditingProperty({
+                                                        ...editingProperty,
+                                                        gallery: [...(editingProperty.gallery || []), ...base64Strings]
+                                                    });
+                                                }
+                                            }}
+                                            className="w-full bg-white border border-gray-100 px-4 py-3 rounded-xl file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-luxury-gold file:text-white hover:file:bg-black transition-all cursor-pointer"
+                                        />
+
+                                        {/* Gallery Preview Grid */}
+                                        {editingProperty.gallery && editingProperty.gallery.length > 0 && (
+                                            <div className="flex gap-4 flex-wrap mt-6">
+                                                {editingProperty.gallery.map((imgUrl, i) => (
+                                                    <div key={i} className="relative group shadow-md rounded-xl overflow-hidden border border-gray-200 bg-white p-1">
+                                                        <img src={imgUrl} className="w-20 h-20 object-cover rounded-lg" alt="Gallery preview" />
+                                                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-lg">
+                                                            <button
+                                                                onClick={() => {
+                                                                    const newGallery = [...editingProperty.gallery!];
+                                                                    newGallery.splice(i, 1);
+                                                                    setEditingProperty({ ...editingProperty, gallery: newGallery });
+                                                                }}
+                                                                className="bg-red-500 text-white rounded-full p-2 hover:scale-110 active:scale-95 transition-transform"
+                                                            >
+                                                                <Trash size={14} />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
 

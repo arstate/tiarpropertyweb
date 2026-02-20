@@ -1,17 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+import { siteConfig } from '../data/siteConfig';
+
 export const DeveloperLogoSlider: React.FC = () => {
-  const developers = [
-    { id: 20, name: "Ciputra Group" },
-    { id: 45, name: "Adhi Persada" },
-    { id: 60, name: "Pakuwon Jati" },
-    { id: 80, name: "Sinar Mas Land" },
-    { id: 102, name: "Intiland" },
-    { id: 120, name: "Summarecon" },
-    { id: 140, name: "Lippo Homes" },
-    { id: 160, name: "Agung Podomoro" }
-  ];
+  const developers = siteConfig.developerLogos;
 
   // Duplicate sets to create a seamless loop
   const allDevelopers = [...developers, ...developers, ...developers, ...developers];
@@ -50,7 +43,7 @@ export const DeveloperLogoSlider: React.FC = () => {
                 {/* Image Container 1:1 */}
                 <div className="w-24 h-24 md:w-32 md:h-32 mb-4 relative overflow-hidden rounded-2xl bg-gray-50 border border-gray-100 shadow-sm transition-all duration-500 group-hover:shadow-xl group-hover:scale-110 group-hover:border-luxury-gold/30">
                   <img
-                    src={`https://picsum.photos/id/${dev.id}/400/400`}
+                    src={dev.image}
                     alt={dev.name}
                     className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
                   />

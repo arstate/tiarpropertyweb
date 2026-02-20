@@ -1,4 +1,3 @@
-import { Property } from './properties';
 
 export interface Property {
   id: number;
@@ -12,6 +11,11 @@ export interface Property {
   image: string;
   tag: string;
   type: string;
+  landSize?: string;
+  buildingSize?: string;
+  description?: string;
+  features?: string[];
+  gallery?: string[];
 }
 
 export const initialProperties: Property[] = [
