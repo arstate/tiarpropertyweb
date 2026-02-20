@@ -244,8 +244,8 @@ export const AdminPage = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             className={`mb-8 p-4 rounded-2xl flex items-center gap-4 border shadow-sm ${syncStatus === 'loading' ? 'bg-blue-50 border-blue-100 text-blue-700' :
-                                    syncStatus === 'success' ? 'bg-green-50 border-green-100 text-green-700' :
-                                        'bg-red-50 border-red-100 text-red-700'
+                                syncStatus === 'success' ? 'bg-green-50 border-green-100 text-green-700' :
+                                    'bg-red-50 border-red-100 text-red-700'
                                 }`}
                         >
                             {syncStatus === 'loading' ? <Loader2 className="animate-spin" size={20} /> :
@@ -479,24 +479,51 @@ export const AdminPage = () => {
                                 <button onClick={() => setEditingProperty(null)} className="p-2 hover:bg-gray-100 rounded-full transition-all text-gray-400"><X /></button>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-6">
-                                <div className="col-span-2 space-y-2">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div className="space-y-2">
                                     <label className="text-[10px] uppercase font-bold text-gray-400">Property Name</label>
                                     <input value={editingProperty.title} onChange={e => setEditingProperty({ ...editingProperty, title: e.target.value })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-[10px] uppercase font-bold text-gray-400">Price display</label>
-                                    <input value={editingProperty.priceDisplay} onChange={e => setEditingProperty({ ...editingProperty, priceDisplay: e.target.value })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
+                                    <label className="text-[10px] uppercase font-bold text-gray-400">Tag Line (e.g. Hot Deal)</label>
+                                    <input value={editingProperty.tag} onChange={e => setEditingProperty({ ...editingProperty, tag: e.target.value })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[10px] uppercase font-bold text-gray-400">Location</label>
                                     <input value={editingProperty.location} onChange={e => setEditingProperty({ ...editingProperty, location: e.target.value })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
                                 </div>
-                                <div className="col-span-2 space-y-2">
+                                <div className="space-y-2">
+                                    <label className="text-[10px] uppercase font-bold text-gray-400">Developer</label>
+                                    <input value={editingProperty.developer} onChange={e => setEditingProperty({ ...editingProperty, developer: e.target.value })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-[10px] uppercase font-bold text-gray-400">Price display (e.g. Start 500jt-an)</label>
+                                    <input value={editingProperty.priceDisplay} onChange={e => setEditingProperty({ ...editingProperty, priceDisplay: e.target.value })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-[10px] uppercase font-bold text-gray-400">Price Range (Millions)</label>
+                                    <input type="number" value={editingProperty.priceRange} onChange={e => setEditingProperty({ ...editingProperty, priceRange: parseInt(e.target.value) || 0 })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-[10px] uppercase font-bold text-gray-400">Design Type</label>
+                                    <input value={editingProperty.type} onChange={e => setEditingProperty({ ...editingProperty, type: e.target.value })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
+                                </div>
+                                <div className="flex gap-4">
+                                    <div className="space-y-2 flex-1">
+                                        <label className="text-[10px] uppercase font-bold text-gray-400">Beds</label>
+                                        <input type="number" value={editingProperty.beds} onChange={e => setEditingProperty({ ...editingProperty, beds: parseInt(e.target.value) || 0 })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
+                                    </div>
+                                    <div className="space-y-2 flex-1">
+                                        <label className="text-[10px] uppercase font-bold text-gray-400">Baths</label>
+                                        <input type="number" value={editingProperty.baths} onChange={e => setEditingProperty({ ...editingProperty, baths: parseInt(e.target.value) || 0 })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
+                                    </div>
+                                </div>
+                                <div className="col-span-1 sm:col-span-2 space-y-2">
                                     <label className="text-[10px] uppercase font-bold text-gray-400">Image URL</label>
                                     <input value={editingProperty.image} onChange={e => setEditingProperty({ ...editingProperty, image: e.target.value })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
                                 </div>
                             </div>
+
 
                             <div className="mt-10 flex gap-4">
                                 <button onClick={() => setEditingProperty(null)} className="flex-1 py-4 text-gray-400 font-bold hover:bg-gray-50 rounded-2xl transition-all">Discard</button>

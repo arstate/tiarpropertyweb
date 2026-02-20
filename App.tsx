@@ -34,7 +34,9 @@ export default function App() {
   const isAdminPage = currentHash.includes('/admin');
 
   return (
-    <div className="min-h-screen bg-luxury-offwhite font-sans overflow-x-hidden selection:bg-luxury-green selection:text-luxury-yellow">
+    <div className="min-h-screen bg-luxury-offwhite font-sans overflow-x-hidden selection:bg-luxury-green selection:text-luxury-yellow relative">
+      {!isAdminPage && <Navbar />}
+
       {isAdminPage ? (
         <AdminPage />
       ) : isPropertyDetailPage ? (
@@ -44,12 +46,10 @@ export default function App() {
       ) : isAboutPage ? (
         <AboutPage />
       ) : (
-        <>
-          <Navbar />
-          <LandingPage />
-          <Footer />
-        </>
+        <LandingPage />
       )}
+
+      {!isAdminPage && <Footer />}
 
       {/* Floating AI Agent - Hidden on Property Detail or Admin Page */}
       {!isPropertyDetailPage && !isAdminPage && <ChatAgent />}
