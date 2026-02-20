@@ -27,5 +27,18 @@ export const initialProperties: Property[] = [
     "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1200",
     "tag": "Hot Deal",
     "type": "Tropical Modern"
+  },
+  {
+    "id": 1771580368557,
+    "title": "ee",
+    "location": "e",
+    "developer": "",
+    "priceRange": 0,
+    "priceDisplay": "e",
+    "beds": 0,
+    "baths": 0,
+    "image": "e",
+    "tag": "New",
+    "type": "Modern"
   }
 ];
