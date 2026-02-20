@@ -10,7 +10,7 @@ export const siteConfig = {
     "cta": "Cari Properti"
   },
   "contact": {
-    "whatsapp": "6282227896809",
+    "whatsapp": "082227896809",
     "email": "info@tiarproperty.com",
     "address": "Sidoarjo, Jawa Timur, Indonesia"
   },
