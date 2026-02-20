@@ -223,10 +223,10 @@ export const AdminPage = () => {
     }
 
     return (
-        <div className="min-h-screen bg-[#f8f9f8] flex">
+        <div className="h-screen bg-[#f8f9f8] flex overflow-hidden">
 
             {/* Sidebar Navigation */}
-            <div className="w-24 md:w-64 bg-luxury-green text-white h-screen sticky top-0 flex flex-col p-4 md:p-6 transition-all border-r border-white/5 shadow-2xl z-50">
+            <div className="w-24 md:w-64 flex-shrink-0 bg-luxury-green text-white h-full flex flex-col p-4 md:p-6 transition-all border-r border-white/5 shadow-2xl z-50">
                 <div className="mb-12 flex items-center gap-3 px-2">
                     <div className="w-10 h-10 bg-luxury-yellow rounded-xl flex items-center justify-center flex-shrink-0">
                         <span className="font-serif font-bold text-luxury-green text-xl">T</span>
@@ -273,7 +273,7 @@ export const AdminPage = () => {
             </div>
 
             {/* Main Content Area */}
-            <div className="flex-1 p-6 md:p-12 overflow-y-auto">
+            <div className="flex-1 p-6 md:p-12 h-full overflow-y-auto relative">
 
                 {/* Status Bar */}
                 <AnimatePresence>
