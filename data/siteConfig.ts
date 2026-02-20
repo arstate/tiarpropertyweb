@@ -1,6 +1,6 @@
 export const siteConfig = {
   "logo": {
-    "text": "TIAR PROPERTY",
+    "text": "TIAR.",
     "subtext": "PROPERTY",
     "iconColor": "#C5A358"
   },
