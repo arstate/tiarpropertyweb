@@ -8,12 +8,33 @@ import {
 import { initialProperties, Property } from '../data/properties';
 import { siteConfig as initialSiteConfig } from '../data/siteConfig';
 
-const fileToBase64 = (file: File): Promise<string> => {
+const compressImage = (file: File, maxWidth: number = 800): Promise<string> => {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = error => reject(error);
+        reader.onload = (event) => {
+            const img = new Image();
+            img.src = event.target?.result as string;
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                let width = img.width;
+                let height = img.height;
+
+                if (width > maxWidth) {
+                    height = Math.round((height * maxWidth) / width);
+                    width = maxWidth;
+                }
+
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx?.drawImage(img, 0, 0, width, height);
+                // Compress to JPEG to save space in localStorage and GitHub API payload
+                resolve(canvas.toDataURL('image/jpeg', 0.7));
+            };
+            img.onerror = reject;
+        };
+        reader.onerror = reject;
     });
 };
 
@@ -68,10 +89,19 @@ export const AdminPage = () => {
     };
 
     const saveToLocal = (props: Property[], config: any) => {
-        setProperties(props);
-        setSiteConfig(config);
-        localStorage.setItem('tiar_properties', JSON.stringify(props));
-        localStorage.setItem('tiar_site_config', JSON.stringify(config));
+        try {
+            setProperties(props);
+            setSiteConfig(config);
+            localStorage.setItem('tiar_properties', JSON.stringify(props));
+            localStorage.setItem('tiar_site_config', JSON.stringify(config));
+        } catch (e: any) {
+            console.error(e);
+            if (e.name === 'QuotaExceededError') {
+                alert('Gagal menyimpan memori: Kuota ukuran gambar lokal terlalu besar. Cobalah hapus gambar yang tidak terpakai.');
+            } else {
+                alert('Gagal menyimpan ke memori lokal.');
+            }
+        }
     };
 
     const handleGithubConfigChange = (field: string, value: string) => {
@@ -355,7 +385,7 @@ export const AdminPage = () => {
                                             accept="image/*"
                                             onChange={async (e) => {
                                                 if (e.target.files && e.target.files[0]) {
-                                                    const base64 = await fileToBase64(e.target.files[0]);
+                                                    const base64 = await compressImage(e.target.files[0]);
                                                     saveToLocal(properties, { ...siteConfig, logo: { ...siteConfig.logo, image: base64 } });
                                                 }
                                             }}
@@ -403,7 +433,7 @@ export const AdminPage = () => {
                                                     className="hidden"
                                                     onChange={async (e) => {
                                                         if (e.target.files && e.target.files[0]) {
-                                                            const base64 = await fileToBase64(e.target.files[0]);
+                                                            const base64 = await compressImage(e.target.files[0]);
                                                             const newDevs = [...siteConfig.developerLogos];
                                                             newDevs[idx].image = base64;
                                                             saveToLocal(properties, { ...siteConfig, developerLogos: newDevs });
@@ -616,6 +646,29 @@ export const AdminPage = () => {
                                         <input type="number" value={editingProperty.baths} onChange={e => setEditingProperty({ ...editingProperty, baths: parseInt(e.target.value) || 0 })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
                                     </div>
                                 </div>
+                                <div className="col-span-1 sm:col-span-2 space-y-2">
+                                    <label className="text-[10px] uppercase font-bold text-gray-400">Fasilitas (Features - Pisahkan dengan koma)</label>
+                                    <input
+                                        value={editingProperty.features?.join(', ') || ''}
+                                        onChange={e => {
+                                            const val = e.target.value;
+                                            const features = val.split(',').map(s => s.trim()).filter(Boolean);
+                                            setEditingProperty({ ...editingProperty, features });
+                                        }}
+                                        className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl"
+                                        placeholder="Kolam Renang, Smart Home, Security 24 Jam"
+                                    />
+                                </div>
+                                <div className="col-span-1 sm:col-span-2 space-y-2">
+                                    <label className="text-[10px] uppercase font-bold text-gray-400">Deskripsi Lengkap</label>
+                                    <textarea
+                                        rows={3}
+                                        value={editingProperty.description || ''}
+                                        onChange={e => setEditingProperty({ ...editingProperty, description: e.target.value })}
+                                        className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl"
+                                        placeholder="Jelaskan mengenai keunggulan, material bangunan, dan info lainnya..."
+                                    />
+                                </div>
                                 <div className="col-span-1 sm:col-span-2 space-y-2 border-t border-gray-100 pt-6 mt-4">
                                     <label className="text-xs uppercase font-bold text-luxury-gold">Main Image Upload</label>
                                     <div className="flex items-center gap-4 bg-gray-50 p-4 rounded-2xl">
@@ -629,7 +682,7 @@ export const AdminPage = () => {
                                             accept="image/*"
                                             onChange={async (e) => {
                                                 if (e.target.files && e.target.files[0]) {
-                                                    const base64 = await fileToBase64(e.target.files[0]);
+                                                    const base64 = await compressImage(e.target.files[0]);
                                                     setEditingProperty({ ...editingProperty, image: base64 });
                                                 }
                                             }}
@@ -661,7 +714,7 @@ export const AdminPage = () => {
                                             onChange={async (e) => {
                                                 if (e.target.files && e.target.files.length > 0) {
                                                     const files = Array.from(e.target.files as FileList);
-                                                    const base64Promises = files.map(file => fileToBase64(file));
+                                                    const base64Promises = files.map(file => compressImage(file));
                                                     const base64Strings = await Promise.all(base64Promises);
                                                     setEditingProperty({
                                                         ...editingProperty,
