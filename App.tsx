@@ -27,10 +27,11 @@ export default function App() {
     };
   }, []);
 
-  const isSearchPage = route.startsWith('#/cari-rumah');
-  const isAboutPage = route.startsWith('#/about-us');
-  const isPropertyDetailPage = route.startsWith('#/properti/');
-  const isAdminPage = route.startsWith('#/admin');
+  const currentHash = route || window.location.hash;
+  const isSearchPage = currentHash.includes('/cari-rumah');
+  const isAboutPage = currentHash.includes('/about-us');
+  const isPropertyDetailPage = currentHash.includes('/properti/');
+  const isAdminPage = currentHash.includes('/admin');
 
   return (
     <div className="min-h-screen bg-luxury-offwhite font-sans overflow-x-hidden selection:bg-luxury-green selection:text-luxury-yellow">
