@@ -125,7 +125,7 @@ export const AdminPage = () => {
             const filesToUpdate = [
                 {
                     path: 'data/properties.ts',
-                    content: `export interface Property {\n  id: number;\n  title: string;\n  location: string;\n  developer: string;\n  priceRange: number;\n  priceDisplay: string;\n  beds: number;\n  baths: number;\n  image: string;\n  tag: string;\n  type: string;\n  landSize?: string;\n  buildingSize?: string;\n  description?: string;\n  features?: string[];\n  gallery?: string[];\n}\n\nexport const initialProperties: Property[] = ${JSON.stringify(properties, null, 2)};`
+                    content: `export interface Property {\n  id: number;\n  title: string;\n  location: string;\n  developer: string;\n  priceRange: number;\n  priceDisplay: string;\n  beds: number;\n  baths: number;\n  image: string;\n  tag: string;\n  type: string;\n  landSize?: string;\n  buildingSize?: string;\n  description?: string;\n  features?: string[];\n  gallery?: string[];\n  certificate?: string;\n}\n\nexport const initialProperties: Property[] = ${JSON.stringify(properties, null, 2)};`
                 },
                 {
                     path: 'data/siteConfig.ts',
@@ -311,7 +311,9 @@ export const AdminPage = () => {
                                         baths: 0,
                                         image: "",
                                         tag: "New",
-                                        type: "Modern"
+                                        type: "Modern",
+                                        landSize: "",
+                                        certificate: "SHM"
                                     });
                                 }}
                                 className="flex items-center gap-2 px-6 py-3 bg-luxury-green text-white rounded-2xl font-bold shadow-xl shadow-luxury-green/10 hover:bg-black transition-all"
@@ -644,6 +646,16 @@ export const AdminPage = () => {
                                     <div className="space-y-2 flex-1">
                                         <label className="text-[10px] uppercase font-bold text-gray-400">Baths</label>
                                         <input type="number" value={editingProperty.baths} onChange={e => setEditingProperty({ ...editingProperty, baths: parseInt(e.target.value) || 0 })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
+                                    </div>
+                                </div>
+                                <div className="flex gap-4">
+                                    <div className="space-y-2 flex-1">
+                                        <label className="text-[10px] uppercase font-bold text-gray-400">Luas Tanah/Bangunan</label>
+                                        <input value={editingProperty.landSize || ''} onChange={e => setEditingProperty({ ...editingProperty, landSize: e.target.value })} placeholder="ex: 72/90" className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
+                                    </div>
+                                    <div className="space-y-2 flex-1">
+                                        <label className="text-[10px] uppercase font-bold text-gray-400">Sertifikat / Legalitas</label>
+                                        <input value={editingProperty.certificate || ''} onChange={e => setEditingProperty({ ...editingProperty, certificate: e.target.value })} placeholder="ex: SHM" className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
                                     </div>
                                 </div>
                                 <div className="col-span-1 sm:col-span-2 space-y-2">

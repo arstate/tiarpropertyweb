@@ -15,6 +15,7 @@ export interface Property {
   description?: string;
   features?: string[];
   gallery?: string[];
+  certificate?: string;
 }
 
 export const initialProperties: Property[] = [

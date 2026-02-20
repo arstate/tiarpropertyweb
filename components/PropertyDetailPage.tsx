@@ -258,7 +258,7 @@ export const PropertyDetailPage: React.FC = () => {
                             </div>
                             <div className="bg-luxury-offwhite p-5 rounded-2xl flex flex-col items-center justify-center text-center border border-gray-50">
                                 <ShieldCheck size={28} className="text-luxury-gold mb-2" />
-                                <span className="font-bold text-luxury-green text-xl">SHM</span>
+                                <span className="font-bold text-luxury-green text-xl">{property.certificate || 'SHM'}</span>
                                 <span className="text-[10px] text-gray-500 uppercase font-bold tracking-widest text-nowrap">Sertifikat</span>
                             </div>
                         </div>
