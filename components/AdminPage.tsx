@@ -1,25 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Lock, Plus, Trash2, Save, Image as ImageIcon, X, LogOut, Download, Copy, Check, MapPin } from 'lucide-react';
+import {
+    Lock, Plus, Trash2, Save, Image as ImageIcon, X, LogOut,
+    Copy, Check, MapPin, Settings, Globe, Layout, Github,
+    CloudUpload, AlertCircle, Loader2, MessageSquare
+} from 'lucide-react';
 import { initialProperties, Property } from '../data/properties';
+import { siteConfig as initialSiteConfig } from '../data/siteConfig';
 
 export const AdminPage = () => {
+    // --- AUTH ---
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+
+    // --- DATA ---
+    const [activeTab, setActiveTab] = useState<'properties' | 'site' | 'github'>('properties');
     const [properties, setProperties] = useState<Property[]>([]);
+    const [siteConfig, setSiteConfig] = useState(initialSiteConfig);
     const [editingProperty, setEditingProperty] = useState<Property | null>(null);
+
+    // --- GITHUB SYNC ---
+    const [githubConfig, setGithubConfig] = useState({
+        token: '',
+        owner: 'arstate',
+        repo: 'tiarpropertyweb',
+        branch: 'main'
+    });
+    const [syncStatus, setSyncStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [syncMessage, setSyncMessage] = useState('');
+
     const [isCopying, setIsCopying] = useState(false);
 
     useEffect(() => {
-        const saved = localStorage.getItem('tiar_properties');
-        if (saved) {
-            setProperties(JSON.parse(saved));
-        } else {
-            setProperties(initialProperties);
-        }
+        // Load properties from localStorage for session persistence
+        const savedProps = localStorage.getItem('tiar_properties');
+        if (savedProps) setProperties(JSON.parse(savedProps));
+        else setProperties(initialProperties);
+
+        // Load siteConfig from localStorage
+        const savedConfig = localStorage.getItem('tiar_site_config');
+        if (savedConfig) setSiteConfig(JSON.parse(savedConfig));
+
+        // Load GitHub config
+        const savedGithub = localStorage.getItem('tiar_github_config');
+        if (savedGithub) setGithubConfig(JSON.parse(savedGithub));
     }, []);
 
+    // --- HANDLERS ---
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
         if (password === '1509') {
@@ -30,47 +58,85 @@ export const AdminPage = () => {
         }
     };
 
-    const handleSaveToLocalStorage = () => {
-        localStorage.setItem('tiar_properties', JSON.stringify(properties));
-        alert('Data tersimpan sementara di browser ini!');
+    const saveToLocal = (props: Property[], config: any) => {
+        setProperties(props);
+        setSiteConfig(config);
+        localStorage.setItem('tiar_properties', JSON.stringify(props));
+        localStorage.setItem('tiar_site_config', JSON.stringify(config));
     };
 
-    const deleteProperty = (id: number) => {
-        if (window.confirm('Yakin ingin menghapus properti ini?')) {
-            const updated = properties.filter((p: Property) => p.id !== id);
-            setProperties(updated);
+    const handleGithubConfigChange = (field: string, value: string) => {
+        const newConfig = { ...githubConfig, [field]: value };
+        setGithubConfig(newConfig);
+        localStorage.setItem('tiar_github_config', JSON.stringify(newConfig));
+    };
+
+    // --- GITHUB API REAL-TIME SYNC ---
+    const pushToGithub = async () => {
+        if (!githubConfig.token) {
+            setSyncStatus('error');
+            setSyncMessage('Silakan atur GitHub Token di tab Settings terlebih dahulu.');
+            return;
         }
-    };
 
-    const startEdit = (property: Property) => {
-        setEditingProperty({ ...property });
-    };
+        setSyncStatus('loading');
+        setSyncMessage('Memulai proses sinkronisasi...');
 
-    const startAdd = () => {
-        setEditingProperty({
-            id: Date.now(),
-            title: "",
-            location: "",
-            developer: "",
-            priceRange: 0,
-            priceDisplay: "",
-            beds: 0,
-            baths: 0,
-            image: "",
-            tag: "",
-            type: ""
-        });
-    };
+        try {
+            const filesToUpdate = [
+                {
+                    path: 'data/properties.ts',
+                    content: `import { Property } from './properties';\n\nexport interface Property {\n  id: number;\n  title: string;\n  location: string;\n  developer: string;\n  priceRange: number;\n  priceDisplay: string;\n  beds: number;\n  baths: number;\n  image: string;\n  tag: string;\n  type: string;\n}\n\nexport const initialProperties: Property[] = ${JSON.stringify(properties, null, 2)};`
+                },
+                {
+                    path: 'data/siteConfig.ts',
+                    content: `export const siteConfig = ${JSON.stringify(siteConfig, null, 2)};`
+                }
+            ];
 
-    const saveEdit = () => {
-        if (!editingProperty) return;
+            for (const file of filesToUpdate) {
+                setSyncMessage(`Mengunggah ${file.path}...`);
 
-        if (properties.find((p: Property) => p.id === editingProperty.id)) {
-            setProperties(properties.map((p: Property) => p.id === editingProperty.id ? editingProperty : p));
-        } else {
-            setProperties([...properties, editingProperty]);
+                // 1. Get current file data to get SHA
+                const getRes = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${file.path}?ref=${githubConfig.branch}`, {
+                    headers: { 'Authorization': `token ${githubConfig.token}` }
+                });
+
+                let sha = '';
+                if (getRes.ok) {
+                    const data = await getRes.json();
+                    sha = data.sha;
+                }
+
+                // 2. Update/Create file
+                const putRes = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${file.path}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubConfig.token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: `Admin Update: ${new Date().toLocaleString()}`,
+                        content: btoa(unescape(encodeURIComponent(file.content))),
+                        sha: sha || undefined,
+                        branch: githubConfig.branch
+                    })
+                });
+
+                if (!putRes.ok) {
+                    const errorData = await putRes.json();
+                    throw new Error(`Gagal mengunggah ${file.path}: ${errorData.message}`);
+                }
+            }
+
+            setSyncStatus('success');
+            setSyncMessage('Website Berhasil Diperbarui Online! Tunggu 1-2 menit untuk GitHub Build.');
+            setTimeout(() => setSyncStatus('idle'), 5000);
+
+        } catch (err: any) {
+            setSyncStatus('error');
+            setSyncMessage(err.message || 'Terjadi kesalahan saat push ke GitHub.');
         }
-        setEditingProperty(null);
     };
 
     const copyJson = () => {
@@ -83,7 +149,6 @@ export const AdminPage = () => {
     if (!isAuthenticated) {
         return (
             <div className="min-h-screen bg-[#0f140f] flex items-center justify-center p-6 relative overflow-hidden">
-                {/* Decorative elements */}
                 <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
                     <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-luxury-gold rounded-full blur-[120px]" />
                     <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-luxury-gold rounded-full blur-[120px]" />
@@ -101,28 +166,15 @@ export const AdminPage = () => {
                     <p className="text-gray-400 mb-8 text-sm">Enter the secure key to manage your assets</p>
 
                     <form onSubmit={handleLogin} className="space-y-4">
-                        <div className="relative">
-                            <input
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Secure Password"
-                                className="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-xl text-white placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-luxury-gold/50 transition-all text-center tracking-[0.5em] text-xl"
-                            />
-                        </div>
-                        {error && (
-                            <motion.p
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className="text-red-400 text-sm font-medium"
-                            >
-                                {error}
-                            </motion.p>
-                        )}
-                        <button
-                            type="submit"
-                            className="w-full py-4 bg-luxury-gold text-luxury-green rounded-xl font-bold hover:bg-white hover:text-black transition-all shadow-lg shadow-luxury-gold/20"
-                        >
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Secure Password"
+                            className="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-xl text-white placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-luxury-gold/50 transition-all text-center tracking-[0.5em] text-xl"
+                        />
+                        {error && <p className="text-red-400 text-sm font-medium">{error}</p>}
+                        <button type="submit" className="w-full py-4 bg-luxury-gold text-luxury-green rounded-xl font-bold hover:bg-white hover:text-black transition-all shadow-lg shadow-luxury-gold/20">
                             Authorize Access
                         </button>
                     </form>
@@ -132,251 +184,334 @@ export const AdminPage = () => {
     }
 
     return (
-        <div className="min-h-screen bg-[#f8f9f8] pt-32 pb-24 px-6">
-            <div className="max-w-6xl mx-auto">
+        <div className="min-h-screen bg-[#f8f9f8] flex">
 
-                {/* Header Dashboard */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
-                    <div>
-                        <h1 className="font-serif text-4xl text-luxury-green mb-2">Portfolio Manager</h1>
-                        <p className="text-luxury-slate">Manage your properties and showcase items.</p>
+            {/* Sidebar Navigation */}
+            <div className="w-24 md:w-64 bg-luxury-green text-white h-screen sticky top-0 flex flex-col p-4 md:p-6 transition-all border-r border-white/5 shadow-2xl z-50">
+                <div className="mb-12 flex items-center gap-3 px-2">
+                    <div className="w-10 h-10 bg-luxury-yellow rounded-xl flex items-center justify-center flex-shrink-0">
+                        <span className="font-serif font-bold text-luxury-green text-xl">T</span>
                     </div>
-
-                    <div className="flex flex-wrap gap-3">
-                        <button
-                            onClick={copyJson}
-                            className="flex items-center gap-2 px-6 py-3 bg-white border border-gray-200 text-luxury-green rounded-full text-sm font-bold shadow-sm hover:shadow-md transition-all active:scale-95"
-                        >
-                            {isCopying ? <Check size={18} className="text-green-500" /> : <Copy size={18} />}
-                            {isCopying ? 'Copied to Code!' : 'Copy Code for Dev'}
-                        </button>
-                        <button
-                            onClick={startAdd}
-                            className="flex items-center gap-2 px-6 py-3 bg-luxury-green text-white rounded-full text-sm font-bold shadow-lg shadow-luxury-green/20 hover:bg-black transition-all active:scale-95"
-                        >
-                            <Plus size={18} /> Add New Property
-                        </button>
-                        <button
-                            onClick={() => setIsAuthenticated(false)}
-                            className="p-3 bg-red-50 text-red-600 rounded-full hover:bg-red-100 transition-all"
-                            title="Logout"
-                        >
-                            <LogOut size={20} />
-                        </button>
+                    <div className="hidden md:block">
+                        <p className="font-serif font-bold text-lg leading-none">Admin</p>
+                        <p className="text-[10px] text-luxury-yellow/60 uppercase tracking-widest mt-1">Dashboard v2.0</p>
                     </div>
                 </div>
 
-                {/* Content Section */}
-                <div className="grid grid-cols-1 gap-6">
-                    {properties.map((prop) => (
-                        <motion.div
-                            layoutId={prop.id.toString()}
-                            key={prop.id}
-                            className="bg-white p-4 rounded-3xl shadow-sm border border-gray-100 flex flex-col sm:flex-row items-center gap-6 group hover:shadow-xl hover:border-luxury-gold/20 transition-all duration-300"
-                        >
-                            <div className="w-full sm:w-32 h-32 rounded-2xl overflow-hidden bg-gray-100 flex-shrink-0 relative">
-                                <img src={prop.image} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                <div className="absolute top-2 left-2 px-2 py-0.5 bg-luxury-gold text-white text-[10px] font-bold rounded-md">{prop.tag}</div>
-                            </div>
-
-                            <div className="flex-1 text-center sm:text-left">
-                                <div className="flex flex-wrap items-center gap-2 mb-1 justify-center sm:justify-start">
-                                    <span className="text-[10px] uppercase tracking-widest text-luxury-gold font-bold">{prop.type}</span>
-                                    <span className="text-[10px] text-gray-300">•</span>
-                                    <span className="text-[10px] uppercase tracking-widest text-gray-500 font-medium">{prop.developer}</span>
-                                </div>
-                                <h3 className="font-serif text-xl text-luxury-green">{prop.title}</h3>
-                                <p className="text-sm text-gray-400 flex items-center gap-1 justify-center sm:justify-start"><MapPin size={12} /> {prop.location}</p>
-                            </div>
-
-                            <div className="text-center sm:text-right">
-                                <p className="text-lg font-bold text-luxury-green mb-1">{prop.priceDisplay}</p>
-                                <div className="flex gap-4 text-xs text-gray-400 justify-center sm:justify-end">
-                                    <span>{prop.beds} Beds</span>
-                                    <span>{prop.baths} Baths</span>
-                                </div>
-                            </div>
-
-                            <div className="flex gap-2 sm:ml-4">
-                                <button
-                                    onClick={() => startEdit(prop)}
-                                    className="p-3 text-luxury-green hover:bg-luxury-gold/10 hover:text-luxury-gold rounded-2xl transition-all"
-                                    title="Edit"
-                                >
-                                    <ImageIcon size={20} />
-                                </button>
-                                <button
-                                    onClick={() => deleteProperty(prop.id)}
-                                    className="p-3 text-red-400 hover:bg-red-50 hover:text-red-600 rounded-2xl transition-all"
-                                    title="Delete"
-                                >
-                                    <Trash2 size={20} />
-                                </button>
-                            </div>
-                        </motion.div>
-                    ))}
+                <div className="space-y-2 flex-1">
+                    <button
+                        onClick={() => setActiveTab('properties')}
+                        className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all ${activeTab === 'properties' ? 'bg-white/10 text-luxury-yellow' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
+                    >
+                        <Layout size={24} />
+                        <span className="hidden md:block font-bold text-sm">Properties</span>
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('site')}
+                        className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all ${activeTab === 'site' ? 'bg-white/10 text-luxury-yellow' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
+                    >
+                        <Globe size={24} />
+                        <span className="hidden md:block font-bold text-sm">Site Design</span>
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('github')}
+                        className={`w-full flex items-center gap-4 p-4 rounded-2xl transition-all ${activeTab === 'github' ? 'bg-white/10 text-luxury-yellow' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
+                    >
+                        <Github size={24} />
+                        <span className="hidden md:block font-bold text-sm">Sync Online</span>
+                    </button>
                 </div>
 
-                {/* Info Box */}
-                <div className="mt-12 p-8 bg-luxury-green text-white rounded-[2.5rem] relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-luxury-gold/10 rounded-full blur-3xl -mr-32 -mt-32" />
-                    <div className="relative z-10">
-                        <h3 className="text-xl font-serif mb-3 flex items-center gap-2">
-                            <Save size={20} className="text-luxury-gold" />
-                            How to Permanent Update?
-                        </h3>
-                        <p className="text-white/60 text-sm leading-relaxed max-w-2xl">
-                            Since this is a static project on GitHub Pages, changes here are temporary to your browser.
-                            To make them permanent: <strong>Edit</strong> your properties, click <strong>"Copy Code for Dev"</strong>,
-                            then paste that content into your <code>data/properties.ts</code> file in the repository.
-                        </p>
-                    </div>
+                <div className="pt-6 border-t border-white/5">
+                    <button
+                        onClick={() => setIsAuthenticated(false)}
+                        className="w-full flex items-center gap-4 p-4 rounded-2xl text-red-400 hover:bg-red-400/10 transition-all font-bold text-sm"
+                    >
+                        <LogOut size={24} />
+                        <span className="hidden md:block">Logout</span>
+                    </button>
                 </div>
             </div>
 
-            {/* Editor Modal */}
+            {/* Main Content Area */}
+            <div className="flex-1 p-6 md:p-12 overflow-y-auto">
+
+                {/* Status Bar */}
+                <AnimatePresence>
+                    {syncStatus !== 'idle' && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            className={`mb-8 p-4 rounded-2xl flex items-center gap-4 border shadow-sm ${syncStatus === 'loading' ? 'bg-blue-50 border-blue-100 text-blue-700' :
+                                    syncStatus === 'success' ? 'bg-green-50 border-green-100 text-green-700' :
+                                        'bg-red-50 border-red-100 text-red-700'
+                                }`}
+                        >
+                            {syncStatus === 'loading' ? <Loader2 className="animate-spin" size={20} /> :
+                                syncStatus === 'success' ? <Check size={20} /> : <AlertCircle size={20} />}
+                            <p className="font-bold text-sm">{syncMessage}</p>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                {activeTab === 'properties' && (
+                    <div className="max-w-5xl">
+                        <div className="flex justify-between items-center mb-10">
+                            <h2 className="font-serif text-4xl text-luxury-green">Portfolio Items</h2>
+                            <button
+                                onClick={() => {
+                                    setEditingProperty({
+                                        id: Date.now(),
+                                        title: "",
+                                        location: "",
+                                        developer: "",
+                                        priceRange: 0,
+                                        priceDisplay: "",
+                                        beds: 0,
+                                        baths: 0,
+                                        image: "",
+                                        tag: "New",
+                                        type: "Modern"
+                                    });
+                                }}
+                                className="flex items-center gap-2 px-6 py-3 bg-luxury-green text-white rounded-2xl font-bold shadow-xl shadow-luxury-green/10 hover:bg-black transition-all"
+                            >
+                                <Plus size={20} /> Add Property
+                            </button>
+                        </div>
+
+                        <div className="grid gap-4">
+                            {properties.map(prop => (
+                                <div key={prop.id} className="bg-white p-4 rounded-3xl border border-gray-100 flex items-center gap-6 group hover:shadow-xl transition-all">
+                                    <div className="w-20 h-20 rounded-xl overflow-hidden bg-gray-50 flex-shrink-0">
+                                        <img src={prop.image} className="w-full h-full object-cover" alt="" />
+                                    </div>
+                                    <div className="flex-1">
+                                        <h3 className="font-bold text-luxury-green">{prop.title}</h3>
+                                        <p className="text-xs text-gray-400">{prop.location}</p>
+                                    </div>
+                                    <div className="text-right">
+                                        <p className="font-bold text-sm text-luxury-green">{prop.priceDisplay}</p>
+                                        <p className="text-[10px] text-gray-400">{prop.beds} Beds • {prop.baths} Baths</p>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <button onClick={() => setEditingProperty(prop)} className="p-2 text-luxury-green hover:bg-gray-50 rounded-lg transition-all"><ImageIcon size={20} /></button>
+                                        <button onClick={() => {
+                                            if (window.confirm('Delete?')) {
+                                                const updated = properties.filter(n => n.id !== prop.id);
+                                                saveToLocal(updated, siteConfig);
+                                            }
+                                        }} className="p-2 text-red-400 hover:bg-red-50 rounded-lg transition-all"><Trash2 size={20} /></button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {activeTab === 'site' && (
+                    <div className="max-w-4xl">
+                        <h2 className="font-serif text-4xl text-luxury-green mb-10">Website Configuration</h2>
+                        <div className="bg-white rounded-[2.5rem] p-8 border border-gray-100 shadow-sm space-y-8">
+
+                            {/* Logo Settings */}
+                            <section>
+                                <h3 className="text-sm font-bold uppercase tracking-widest text-luxury-gold mb-6 flex items-center gap-2">
+                                    <Layout size={18} /> Logo & Identity
+                                </h3>
+                                <div className="grid grid-cols-2 gap-6">
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] uppercase font-bold text-gray-400 px-1">Brand Name</label>
+                                        <input
+                                            value={siteConfig.logo.text}
+                                            onChange={e => saveToLocal(properties, { ...siteConfig, logo: { ...siteConfig.logo, text: e.target.value } })}
+                                            className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] uppercase font-bold text-gray-400 px-1">Sub-Text / Dot</label>
+                                        <input
+                                            value={siteConfig.logo.subtext}
+                                            onChange={e => saveToLocal(properties, { ...siteConfig, logo: { ...siteConfig.logo, subtext: e.target.value } })}
+                                            className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
+                                        />
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* Hero Section */}
+                            <section>
+                                <h3 className="text-sm font-bold uppercase tracking-widest text-luxury-gold mb-6 flex items-center gap-2">
+                                    <Globe size={18} /> Hero Homepage
+                                </h3>
+                                <div className="space-y-6">
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] uppercase font-bold text-gray-400 px-1">Main Heading</label>
+                                        <textarea
+                                            rows={2}
+                                            value={siteConfig.hero.title}
+                                            onChange={e => saveToLocal(properties, { ...siteConfig, hero: { ...siteConfig.hero, title: e.target.value } })}
+                                            className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] uppercase font-bold text-gray-400 px-1">Short Description</label>
+                                        <textarea
+                                            rows={3}
+                                            value={siteConfig.hero.subtitle}
+                                            onChange={e => saveToLocal(properties, { ...siteConfig, hero: { ...siteConfig.hero, subtitle: e.target.value } })}
+                                            className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
+                                        />
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* Contact Info */}
+                            <section>
+                                <h3 className="text-sm font-bold uppercase tracking-widest text-luxury-gold mb-6 flex items-center gap-2">
+                                    <MessageSquare size={18} /> Official Contact
+                                </h3>
+                                <div className="grid grid-cols-2 gap-6">
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] uppercase font-bold text-gray-400 px-1">WhatsApp (62...)</label>
+                                        <input
+                                            value={siteConfig.contact.whatsapp}
+                                            onChange={e => saveToLocal(properties, { ...siteConfig, contact: { ...siteConfig.contact, whatsapp: e.target.value } })}
+                                            className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] uppercase font-bold text-gray-400 px-1">Official Email</label>
+                                        <input
+                                            value={siteConfig.contact.email}
+                                            onChange={e => saveToLocal(properties, { ...siteConfig, contact: { ...siteConfig.contact, email: e.target.value } })}
+                                            className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
+                                        />
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                )}
+
+                {activeTab === 'github' && (
+                    <div className="max-w-4xl text-center md:text-left">
+                        <h2 className="font-serif text-4xl text-luxury-green mb-4">Sync Online</h2>
+                        <p className="text-gray-500 mb-10 max-w-2xl">Atur koneksi GitHub untuk menyimpan semua perubahan secara otomatis ke website online.</p>
+
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                            <div className="bg-white rounded-[2.5rem] p-8 border border-gray-100 shadow-sm space-y-6">
+                                <h3 className="text-lg font-bold text-luxury-green mb-4 flex items-center gap-2">
+                                    <Github size={20} /> Connection Settings
+                                </h3>
+
+                                <div className="space-y-4">
+                                    <div className="space-y-1">
+                                        <label className="text-[10px] uppercase font-bold text-gray-400">Personal Access Token (PAT)</label>
+                                        <input
+                                            type="password"
+                                            value={githubConfig.token}
+                                            onChange={e => handleGithubConfigChange('token', e.target.value)}
+                                            placeholder="ghp_xxxxxxxxxxxx"
+                                            className="w-full bg-gray-50 border-none px-4 py-3 rounded-xl focus:ring-2 focus:ring-luxury-gold/20"
+                                        />
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="space-y-1">
+                                            <label className="text-[10px] uppercase font-bold text-gray-400">Username</label>
+                                            <input
+                                                value={githubConfig.owner}
+                                                onChange={e => handleGithubConfigChange('owner', e.target.value)}
+                                                className="w-full bg-gray-50 border-none px-4 py-3 rounded-xl focus:ring-2 focus:ring-luxury-gold/20"
+                                            />
+                                        </div>
+                                        <div className="space-y-1">
+                                            <label className="text-[10px] uppercase font-bold text-gray-400">Repo Name</label>
+                                            <input
+                                                value={githubConfig.repo}
+                                                onChange={e => handleGithubConfigChange('repo', e.target.value)}
+                                                className="w-full bg-gray-50 border-none px-4 py-3 rounded-xl focus:ring-2 focus:ring-luxury-gold/20"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="p-4 bg-yellow-50 rounded-2xl border border-yellow-100">
+                                    <p className="text-[11px] text-yellow-700 leading-relaxed italic">
+                                        <AlertCircle size={14} className="inline mr-1" />
+                                        Token Anda disimpan secara aman hanya di browser ini. Pastikan Token memiliki izin "repo access".
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="bg-luxury-green rounded-[2.5rem] p-10 text-white shadow-2xl relative overflow-hidden h-full">
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-luxury-gold/10 rounded-full blur-3xl -mr-32 -mt-32" />
+                                <div className="relative z-10 flex flex-col h-full justify-between">
+                                    <div>
+                                        <h3 className="text-2xl font-serif mb-4">Mulai Sinkronisasi</h3>
+                                        <p className="text-white/60 text-sm mb-8">
+                                            Semua foto produk, teks website, dan pengaturan lainnya akan langsung diperbarui di repository GitHub dan dipublikasikan otomatis.
+                                        </p>
+                                    </div>
+                                    <button
+                                        onClick={pushToGithub}
+                                        disabled={syncStatus === 'loading'}
+                                        className="w-full py-5 bg-luxury-gold text-luxury-green rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-white transition-all shadow-xl shadow-luxury-gold/20 disabled:opacity-50"
+                                    >
+                                        {syncStatus === 'loading' ? <Loader2 className="animate-spin" size={24} /> : <CloudUpload size={24} />}
+                                        PUSH KE ONLINE LIVE
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            {/* Editor Modal for Properties */}
             <AnimatePresence>
                 {editingProperty && (
                     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="absolute inset-0 bg-black/60 backdrop-blur-md"
-                            onClick={() => setEditingProperty(null)}
-                        />
-
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className="bg-white w-full max-w-2xl rounded-[2.5rem] p-4 sm:p-10 shadow-2xl relative z-10 max-h-[90vh] overflow-y-auto"
-                        >
-                            <div className="flex justify-between items-center mb-8">
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-black/60 backdrop-blur-md" onClick={() => setEditingProperty(null)} />
+                        <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className="bg-white w-full max-w-2xl rounded-[2.5rem] p-10 shadow-2xl relative z-10 max-h-[90vh] overflow-y-auto">
+                            <div className="flex justify-between items-center mb-10">
                                 <h2 className="font-serif text-3xl text-luxury-green">Property Detailed</h2>
-                                <button onClick={() => setEditingProperty(null)} className="p-2 hover:bg-gray-100 rounded-full transition-all">
-                                    <X />
-                                </button>
+                                <button onClick={() => setEditingProperty(null)} className="p-2 hover:bg-gray-100 rounded-full transition-all text-gray-400"><X /></button>
                             </div>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                                <div className="space-y-2">
-                                    <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400 px-2">Project Name</label>
-                                    <input
-                                        type="text"
-                                        value={editingProperty.title}
-                                        onChange={e => setEditingProperty({ ...editingProperty, title: e.target.value })}
-                                        className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
-                                    />
+                            <div className="grid grid-cols-2 gap-6">
+                                <div className="col-span-2 space-y-2">
+                                    <label className="text-[10px] uppercase font-bold text-gray-400">Property Name</label>
+                                    <input value={editingProperty.title} onChange={e => setEditingProperty({ ...editingProperty, title: e.target.value })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400 px-2">Tag Line</label>
-                                    <input
-                                        type="text"
-                                        value={editingProperty.tag}
-                                        onChange={e => setEditingProperty({ ...editingProperty, tag: e.target.value })}
-                                        placeholder="e.g. Hot Deal"
-                                        className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
-                                    />
+                                    <label className="text-[10px] uppercase font-bold text-gray-400">Price display</label>
+                                    <input value={editingProperty.priceDisplay} onChange={e => setEditingProperty({ ...editingProperty, priceDisplay: e.target.value })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400 px-2">Location</label>
-                                    <input
-                                        type="text"
-                                        value={editingProperty.location}
-                                        onChange={e => setEditingProperty({ ...editingProperty, location: e.target.value })}
-                                        className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
-                                    />
+                                    <label className="text-[10px] uppercase font-bold text-gray-400">Location</label>
+                                    <input value={editingProperty.location} onChange={e => setEditingProperty({ ...editingProperty, location: e.target.value })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400 px-2">Developer</label>
-                                    <input
-                                        type="text"
-                                        value={editingProperty.developer}
-                                        onChange={e => setEditingProperty({ ...editingProperty, developer: e.target.value })}
-                                        className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
-                                    />
+                                <div className="col-span-2 space-y-2">
+                                    <label className="text-[10px] uppercase font-bold text-gray-400">Image URL</label>
+                                    <input value={editingProperty.image} onChange={e => setEditingProperty({ ...editingProperty, image: e.target.value })} className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl" />
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400 px-2">Price Label</label>
-                                    <input
-                                        type="text"
-                                        value={editingProperty.priceDisplay}
-                                        onChange={e => setEditingProperty({ ...editingProperty, priceDisplay: e.target.value })}
-                                        placeholder="e.g. Start 500jt-an"
-                                        className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400 px-2">Price Range (Millions)</label>
-                                    <input
-                                        type="number"
-                                        value={editingProperty.priceRange}
-                                        onChange={e => setEditingProperty({ ...editingProperty, priceRange: parseInt(e.target.value) || 0 })}
-                                        className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400 px-2">Design Type</label>
-                                    <input
-                                        type="text"
-                                        value={editingProperty.type}
-                                        onChange={e => setEditingProperty({ ...editingProperty, type: e.target.value })}
-                                        placeholder="e.g. Modern Minimalist"
-                                        className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
-                                    />
-                                </div>
-                                <div className="flex gap-4">
-                                    <div className="space-y-2 flex-1">
-                                        <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400 px-2">Beds</label>
-                                        <input
-                                            type="number"
-                                            value={editingProperty.beds}
-                                            onChange={e => setEditingProperty({ ...editingProperty, beds: parseInt(e.target.value) || 0 })}
-                                            className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
-                                        />
-                                    </div>
-                                    <div className="space-y-2 flex-1">
-                                        <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400 px-2">Baths</label>
-                                        <input
-                                            type="number"
-                                            value={editingProperty.baths}
-                                            onChange={e => setEditingProperty({ ...editingProperty, baths: parseInt(e.target.value) || 0 })}
-                                            className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="mt-6 space-y-2">
-                                <label className="text-[10px] uppercase tracking-widest font-bold text-gray-400 px-2">Image URL</label>
-                                <input
-                                    type="text"
-                                    value={editingProperty.image}
-                                    onChange={e => setEditingProperty({ ...editingProperty, image: e.target.value })}
-                                    placeholder="https://images.unsplash.com/..."
-                                    className="w-full bg-gray-50 border-none px-6 py-4 rounded-2xl focus:ring-2 focus:ring-luxury-gold/20"
-                                />
                             </div>
 
                             <div className="mt-10 flex gap-4">
-                                <button
-                                    onClick={() => setEditingProperty(null)}
-                                    className="flex-1 py-4 border border-gray-100 rounded-2xl font-bold text-gray-400 hover:bg-gray-50 transition-all"
-                                >
-                                    Discard Changes
-                                </button>
-                                <button
-                                    onClick={saveEdit}
-                                    className="flex-1 py-4 bg-luxury-green text-white rounded-2xl font-bold hover:bg-black transition-all shadow-xl shadow-luxury-green/10"
-                                >
-                                    Apply & Save
-                                </button>
+                                <button onClick={() => setEditingProperty(null)} className="flex-1 py-4 text-gray-400 font-bold hover:bg-gray-50 rounded-2xl transition-all">Discard</button>
+                                <button onClick={() => {
+                                    const exists = properties.find(p => p.id === editingProperty.id);
+                                    const updated = exists ? properties.map(p => p.id === editingProperty.id ? editingProperty : p) : [...properties, editingProperty];
+                                    saveToLocal(updated, siteConfig);
+                                    setEditingProperty(null);
+                                }} className="flex-1 py-4 bg-luxury-green text-white rounded-2xl font-bold hover:bg-black transition-all">Simpan Item</button>
                             </div>
                         </motion.div>
                     </div>
                 )}
             </AnimatePresence>
+
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight } from 'lucide-react';
+import { siteConfig } from '../data/siteConfig';
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -125,7 +126,7 @@ export const Navbar: React.FC = () => {
             onClick={() => handleNav('#home')}
             className="relative z-10 font-serif text-2xl font-bold tracking-tight text-luxury-green hover:scale-105 transition-transform bg-transparent border-none cursor-pointer"
           >
-            TIAR<span className="text-black/60">.</span>
+            {siteConfig.logo.text}<span className="text-black/60">{siteConfig.logo.subtext ? ` ${siteConfig.logo.subtext}` : '.'}</span>
           </button>
 
           {/* Desktop Links - Bold and dark for maximum contrast */}
