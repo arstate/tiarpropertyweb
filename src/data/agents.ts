@@ -44,7 +44,7 @@ export function buildAgentWaUrl(
   } else if (options?.city) {
     message = `Halo ${targetAgent.name}, saya tertarik cari info perumahan di ${options.city}. Boleh minta tolong temenin cek pilihan unit dan promo DP 0% ya kak?`;
   } else {
-    message = `Halo ${targetAgent.name}, saya ingin tanya info promo rumah DP 0% dan simulasi KPR di Tiar Property. Ada waktu buat nemenin saya survei lokasinya kak?`;
+    message = `Halo ${targetAgent.name}, saya ingin tanya info promo rumah DP 0% dan konsultasi estimasi cicilan di Tiar Property. Ada waktu buat nemenin saya survei lokasinya kak?`;
   }
   return `https://wa.me/${targetAgent.phone}?text=${encodeURIComponent(message)}`;
 }

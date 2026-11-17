@@ -1,86 +1,110 @@
 import React from 'react';
 import Link from 'next/link';
-import { PropertyUnit } from '@/data/properties';
+import { ArrowRight, MessageCircle } from 'lucide-react';
+import type { PropertyUnit } from '@/data/properties';
+import { WA_CS_NUMBER } from '@/data/properties';
 
 interface PropertyCardProps {
   property: PropertyUnit;
-  onSelect?: (property: PropertyUnit) => void;
-  basePath?: '/properti' | '/produk';
+  basePath?: string;
+  aspectVariant?: 'wide' | 'tall' | 'standard';
 }
 
-/**
- * Pure borderless property card matching Reome visual layout.
- * Single Responsibility: Render single listing with 4:3 photo, badges, 2-column inline metadata, and star rating.
- * Accessible with Link wrapper supporting direct navigation, new tab, and crawlability.
- */
-export function PropertyCard({ property, basePath = '/properti' }: PropertyCardProps) {
+export function PropertyCard({
+  property,
+  basePath = '/properti',
+  aspectVariant = 'standard',
+}: PropertyCardProps) {
+  const detailHref = `${basePath}/${property.id}`;
+  const waMessage = encodeURIComponent(
+    `Halo Mbak Ningsih, saya tertarik dengan klaster "${property.codeName}" (${property.locationAreaShort}) harga mulai ${property.priceStart}. Boleh minta tolong ditemenin survei lokasinya kak?`
+  );
+  const waHref = `https://wa.me/${WA_CS_NUMBER}?text=${waMessage}`;
+
+  const aspectClass =
+    aspectVariant === 'wide'
+      ? 'aspect-[4/3] sm:aspect-[16/10]'
+      : aspectVariant === 'tall'
+      ? 'aspect-[4/3] lg:aspect-[4/5]'
+      : 'aspect-[4/3]';
+
   return (
-    <Link
-      href={`${basePath}/${property.id}`}
-      className="group block cursor-pointer transition-transform duration-300 hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#16362f] rounded-2xl"
-    >
-      {/* 4:3 Standalone Rounded Image */}
-      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#e6eeea]">
+    <article className="group flex flex-col gap-4 min-w-0">
+      <Link
+        href={detailHref}
+        className={`relative block overflow-hidden rounded-xl bg-[#E8E4E1] ring-1 ring-inset ring-[#38352C]/14 ${aspectClass}`}
+      >
         <img
           src={property.imageUrl}
-          alt={property.codeName}
+          alt={`Fasad ${property.codeName} di ${property.locationAreaShort}`}
+          width={1200}
+          height={900}
           loading="lazy"
-          decoding="async"
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03]"
         />
-        <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-
-        {/* Floating Badges */}
-        <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-          <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#081613]/85 backdrop-blur-md text-white border border-white/20 shadow-xs">
-            {property.city} • {property.floors} Lantai
+        {property.status === 'reserved' && (
+          <span className="num-clean absolute top-3 left-3 px-3 py-1 rounded-full bg-[#38352C]/90 text-[#FFCA4F] text-xs font-medium">
+            Unit Terbatas
           </span>
-          <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-[#16362f]/90 backdrop-blur-md text-white border border-white/20 shadow-xs">
-            {property.utjAmount}
+        )}
+        {property.status === 'sold' && (
+          <span className="num-clean absolute top-3 left-3 px-3 py-1 rounded-full bg-[#38352C]/90 text-[#E8E4E1] text-xs font-medium">
+            Terjual
           </span>
-        </div>
-      </div>
+        )}
+      </Link>
 
-      {/* 2-Column Inline Metadata (Exact Reome Structure) */}
-      <div className="mt-3.5 space-y-1 px-0.5">
-        {/* Row 1: Title & Key Metric */}
-        <div className="flex items-center justify-between">
-          <h3 className="font-extrabold text-base sm:text-lg text-[#081613] tracking-tight group-hover:text-[#16362f] transition-colors">
+      {/* Meta Top Row with Hairline Rule */}
+      <div className="flex items-baseline justify-between gap-3 pb-2.5 border-b border-[#C5BEB4]">
+        <h3 className="font-display font-medium text-[clamp(1.45rem,2.1vw,1.95rem)] leading-[1.15] text-[#38352C] min-w-0">
+          <Link href={detailHref} className="hover:underline underline-offset-4 decoration-[#C5BEB4]">
             {property.codeName}
-          </h3>
-          <span className="font-extrabold text-xs sm:text-sm text-[#081613] flex items-center gap-1.5">
-            {property.specs.luasTanah}
-            <svg className="w-3.5 h-3.5 text-[#5d8b7b] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
+          </Link>
+        </h3>
+        <span className="mono-num text-sm font-medium text-[#38352C] whitespace-nowrap shrink-0">
+          {property.priceStart}
+        </span>
+      </div>
+
+      {/* Specs & Promo Row (0% Serif Numerals) */}
+      <div className="flex flex-col gap-1.5 text-sm text-[#57534A]">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+          <span>{property.locationAreaShort}</span>
+          <span className="num-clean">
+            {property.specs.bedrooms} KT · {property.specs.bathrooms} KM · LT {property.specs.luasTanah} · LB{' '}
+            {property.specs.luasBangunan}
           </span>
         </div>
-
-        {/* Row 2: Location Subtitle & Pricing */}
-        <div className="flex items-center justify-between text-xs text-[#477769] font-medium">
-          <span className="truncate max-w-[180px]">{property.locationAreaShort}</span>
-          <div className="text-right flex items-center gap-1.5">
-            <span className="text-[11px] text-[#8baf9f] line-through font-normal">
-              {property.priceStrikethrough}
-            </span>
-            <span className="font-extrabold text-sm text-[#081613]">
-              {property.priceStart}
-            </span>
-          </div>
-        </div>
-
-        {/* Row 3: Room Specs (KT • KM) & Cicilan */}
-        <div className="pt-1 flex items-center justify-between text-xs">
-          <span className="font-semibold text-[#5d8b7b] flex items-center gap-1.5">
-            <span>{property.specs.bedrooms} KT</span>
-            <span className="text-[#8baf9f]">•</span>
-            <span>{property.specs.bathrooms} KM</span>
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-[13px]">
+          <span className="num-clean font-medium text-[#38352C]">
+            Cicilan {property.cicilanPromo}
           </span>
-          <span className="font-bold text-[#081613]">
-            {property.cicilanPromo}
+          <span className="num-clean text-[#57534A]">
+            {property.utjAmount} · {property.floors} Lantai
           </span>
         </div>
       </div>
-    </Link>
+
+      {/* Clean Action Row (>= 44px touch targets, single line) */}
+      <div className="flex flex-wrap items-center gap-2 pt-1">
+        <Link
+          href={detailHref}
+          className="inline-flex items-center justify-center gap-2 min-h-[44px] px-4 rounded-full border border-[#C5BEB4] bg-transparent text-[#38352C] text-sm font-medium hover:bg-[#E8E4E1] hover:border-[#38352C] active:scale-[0.97] transition-all whitespace-nowrap"
+        >
+          <span>Lihat Detail Unit</span>
+          <ArrowRight className="w-4 h-4 shrink-0" strokeWidth={1.6} aria-hidden="true" />
+        </Link>
+
+        <a
+          href={waHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center gap-2 min-h-[44px] px-4 rounded-full bg-[#E8E4E1] text-[#38352C] border border-transparent text-sm font-medium hover:bg-[#38352C] hover:text-[#E8E4E1] active:scale-[0.97] transition-all whitespace-nowrap"
+        >
+          <MessageCircle className="w-4 h-4 shrink-0" strokeWidth={1.6} aria-hidden="true" />
+          <span>Tanya Unit</span>
+        </a>
+      </div>
+    </article>
   );
 }

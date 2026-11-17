@@ -30,8 +30,8 @@ export default function ProdukPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-[#f7faf8]">
-          <div className="w-8 h-8 rounded-full border-2 border-[#16362f] border-t-transparent animate-spin" />
+        <div className="min-h-screen flex items-center justify-center bg-[#F1F1F1]">
+          <div className="w-8 h-8 rounded-full border-2 border-[#38352C] border-t-transparent animate-spin" />
         </div>
       }
     >

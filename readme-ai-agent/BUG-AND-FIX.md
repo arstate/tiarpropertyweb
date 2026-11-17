@@ -108,6 +108,15 @@
   3. `src/components/SearchFilterBar.tsx:48,55,63,71` & `src/components/PropertyDetailView.tsx:803` masih menggunakan emoji literal (`📍`, `✨`, `💳`, `🏠`, `🧍`) yang melanggar Gate 30–31 (`lucide-react` single icon lock). **Target Fix:** Ganti dengan komponen ikon `lucide-react` / SVG bersih.
   4. Direktori `tiar-property-website/` belum memiliki `.git` repository, dan foto properti masih mengandalkan URL Unsplash `w=800`. **Target Fix:** Jalankan `git init` baseline sebelum Milestone 1 + lokalkan & upscale aset Hero/Lookbook ke `public/images/properties/` via `/boost`.
 
+### [2026-11-17] - Full Redesign v2.0.0 (`Mejuma Warm Stone`), Hapus Total Kalkulator KPR, & 0% Serif Numerals
+- **Scope:** Rombakan menyeluruh `layout.tsx`, `globals.css`, `Navbar.tsx`, `Hero.tsx`, `UspFeatureBar.tsx`, `SearchFilterBar.tsx`, `PropertyCatalog.tsx`, `PropertyCard.tsx`, `HeroOffers.tsx`, `ComparisonTable.tsx`, `Testimonials.tsx`, `FaqSection.tsx`, `Footer.tsx`, `FloatingWhatsApp.tsx`, `PropertiCatalogView.tsx`, `PropertyDetailView.tsx`, `AgentDirectoryView.tsx`, dan aset lokal WebP 4K.
+- **Root Fixes Executed:**
+  1. **Information Gap Fix:** Teks `"Partner PT TMJ"` pada footer trust grid `PropertyDetailView.tsx` (dan komentar JSX internal) diganti menjadi `"Partner Resmi"` — `0` kebocoran `TMJ`/`Trimitra`/`BLT` di seluruh bundle publik.
+  2. **Sticky Layout Fix:** Mengganti `overflow-x: hidden` di `globals.css` menjadi `overflow-x: clip` agar `lg:sticky` pada `HeroOffers.tsx` (5-col spine) dan `PropertyDetailView.tsx` (4-col sidebar) bekerja 100%.
+  3. **Hapus Total Kalkulator KPR:** Menghapus `src/components/KprCalculator.tsx`, import di `src/app/page.tsx`, tautan `#kalkulator` di `Navbar.tsx`, dan blok `#simulasi-kpr` di `PropertyDetailView.tsx`, menggantinya dengan CTA langsung *"Hitung Cicilan & Cek SLIK via WhatsApp"*.
+  4. **0% Serif Numerals:** Menambahkan class utilitas `.num-clean` (`Golos Text`) dan `.mono-num` (`JetBrains Mono`) dengan `font-variant-numeric: lining-nums tabular-nums` agar seluruh angka tidak lagi mewarisi oldstyle numerals `Cormorant Garamond`.
+  5. **Iconography, Touch Target, & Asset Optimization:** Menghapus seluruh emoji di UI publik (`lucide-react` murni), memperbesar seluruh tombol interaktif mobile & modal (`Minta Shareloc Lokasi`, `Bagikan Unit`, `Profil`, tab `/agen`, tombol tutup modal) ke `min-h-[44px]`, menambahkan `src/app/icon.svg` untuk mencegah 404 favicon, serta meng-upscale 16 foto lokal via CUDA (`upscale-img -m nmkd`) ke format `.webp`.
+
 ### [2026-10-21] - Shareloc Modal UI/UX Redesign & Swiss Dark Luxury Polish (Milestone 14)
 - **Issue:** Tampilan modal popup sebelumnya dinilai pengguna "kurang rapih layout design ui uxnya masih sangat jelek": lock icon kuning kotak bulky bertumpuk canggung di kiri, badge terhimpit, garis pelangi atas murahan, paragraf panjang kaku, tombol WhatsApp hijau neon bertabrakan tema, dan bullet points footer berantakan/terpotong di layar HP 390px.
 - **Root Cause:** Struktur grid asimetris tidak seimbang, tombol CTA bentrok dengan palet Dark Luxury, dan footer menggunakan inline bullet text bukan grid struktural.

@@ -25,11 +25,11 @@
       "Row Jalan Paving 8 Meter (Bisa 2 Mobil)",
       "Bebas Banjir & Air Bersih Jernih"
     ],
-    "imageUrl": "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80",
+    "imageUrl": "/images/properties/cluster-sukodono.webp",
     "galleryImages": [
-      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80"
+      "/images/properties/cluster-sukodono.webp",
+      "/images/properties/hero-residence.webp",
+      "/images/properties/editorial-diptych.webp"
     ],
     "assignedAgentId": "mbak-ningsih",
     "status": "available"
@@ -60,11 +60,11 @@
       "12 Menit ke Kampus UPN & MERR Rungkut",
       "One Gate System + Keamanan CCTV 24 Jam"
     ],
-    "imageUrl": "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80",
+    "imageUrl": "/images/properties/cluster-juanda.webp",
     "galleryImages": [
-      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80"
+      "/images/properties/cluster-juanda.webp",
+      "/images/properties/cluster-juanda-facade.webp",
+      "/images/properties/editorial-footer.webp"
     ],
     "assignedAgentId": "dimas-prasetyo",
     "status": "available"
@@ -90,16 +90,16 @@
       "luasBangunan": "68 m²"
     },
     "features": [
-      "Arsitektur 2 Lantai Scandinavian Modern",
+      "Arsitektur 2 Lantai Modern Scandinavian",
       "Clubhouse Eksklusif & Kolam Renang",
       "5 Menit ke Galaxy Mall & Kampus ITS",
       "Akses Jalan Kembar Row 10 Meter"
     ],
-    "imageUrl": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
+    "imageUrl": "/images/properties/cluster-merr.webp",
     "galleryImages": [
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80"
+      "/images/properties/cluster-merr.webp",
+      "/images/properties/cluster-merr-villa.webp",
+      "/images/properties/cluster-sukodono.webp"
     ],
     "assignedAgentId": "rizky-pratama",
     "status": "available"
@@ -130,11 +130,11 @@
       "Lingkungan Sejuk Dekat Stasiun Sidoarjo",
       "One Gate System & Row Jalan 8 Meter"
     ],
-    "imageUrl": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80",
+    "imageUrl": "/images/properties/editorial-footer.webp",
     "galleryImages": [
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80"
+      "/images/properties/editorial-footer.webp",
+      "/images/properties/cluster-anggaswangi-ext.webp",
+      "/images/properties/cluster-juanda.webp"
     ],
     "assignedAgentId": "dimas-prasetyo",
     "status": "available"
@@ -160,16 +160,16 @@
       "luasBangunan": "40 m²"
     },
     "features": [
-      "Desain Scandinavian Estetik",
+      "Desain Modern Estetik Natural",
       "Free Pompa Air & Meja Dapur",
       "7 Menit ke Akses Tol Sepanjang & Waru",
       "Row Jalan Paving Lebar 8 Meter"
     ],
-    "imageUrl": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80",
+    "imageUrl": "/images/properties/editorial-diptych.webp",
     "galleryImages": [
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=800&q=80"
+      "/images/properties/editorial-diptych.webp",
+      "/images/properties/cluster-masangan-living.webp",
+      "/images/properties/cluster-waru.webp"
     ],
     "assignedAgentId": "dimas-prasetyo",
     "status": "available"
@@ -200,11 +200,11 @@
       "Bebas Seluruh Biaya Realisasi KPR",
       "Saluran Bawah Tanah & Air PDAM Lancar"
     ],
-    "imageUrl": "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=800&q=80",
+    "imageUrl": "/images/properties/cluster-waru.webp",
     "galleryImages": [
-      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+      "/images/properties/cluster-waru.webp",
+      "/images/properties/cluster-waru-kitchen.webp",
+      "/images/properties/cluster-merr.webp"
     ],
     "assignedAgentId": "maya-anggraini",
     "status": "available"
@@ -235,11 +235,11 @@
       "5 Menit ke Akses Tol Tambak Sumur & MERR",
       "One Gate System & CCTV 24 Jam"
     ],
-    "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+    "imageUrl": "/images/properties/hero-residence.webp",
     "galleryImages": [
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+      "/images/properties/hero-residence.webp",
+      "/images/properties/cluster-juanda-facade.webp",
+      "/images/properties/cluster-merr-villa.webp"
     ],
     "assignedAgentId": "mbak-ningsih",
     "status": "available"
@@ -270,11 +270,11 @@
       "Bebas Banjir Lingkungan Asri Sejuk",
       "Sertifikat SHM & IMB Siap Akad"
     ],
-    "imageUrl": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+    "imageUrl": "/images/properties/cluster-masangan-living.webp",
     "galleryImages": [
-      "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80"
+      "/images/properties/cluster-masangan-living.webp",
+      "/images/properties/editorial-diptych.webp",
+      "/images/properties/cluster-sukodono.webp"
     ],
     "assignedAgentId": "rizky-pratama",
     "status": "available"
@@ -305,11 +305,11 @@
       "Free Pompa Air & Meja Dapur",
       "Row Jalan Lebar Paving 8 Meter"
     ],
-    "imageUrl": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+    "imageUrl": "/images/properties/cluster-anggaswangi-ext.webp",
     "galleryImages": [
-      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80"
+      "/images/properties/cluster-anggaswangi-ext.webp",
+      "/images/properties/cluster-juanda.webp",
+      "/images/properties/editorial-footer.webp"
     ],
     "assignedAgentId": "dimas-prasetyo",
     "status": "available"

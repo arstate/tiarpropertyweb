@@ -1,75 +1,129 @@
 import React from 'react';
 import Link from 'next/link';
-import { WA_CS_NUMBER, DEFAULT_WA_MESSAGE } from '@/data/properties';
+import { ArrowRight } from 'lucide-react';
+import { WA_CS_NUMBER } from '@/data/properties';
 
 export function Footer() {
-  const waUrl = `https://wa.me/${WA_CS_NUMBER}?text=${DEFAULT_WA_MESSAGE}`;
+  const waSurveyUrl = `https://wa.me/${WA_CS_NUMBER}?text=${encodeURIComponent(
+    'Halo Mbak Ningsih, saya mau booking jadwal survei rumah Sabtu atau Minggu ini.'
+  )}`;
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#081613] border-t border-[#16362f] py-14 text-white text-xs sm:text-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-[#16362f]">
-          {/* Brand */}
-          <div>
-            <div className="flex items-center">
-              <span className="text-xl font-black text-white tracking-tighter">
-                Tiar<span className="text-[#dde8e2]">Property</span>
-              </span>
-            </div>
-            <p className="mt-3.5 text-white/90 text-xs leading-relaxed max-w-sm">
-              Partner Pemasaran Hunian Terpercaya Surabaya & Sidoarjo. Solusi punya rumah pertama DP 0% & All-In Free.
-            </p>
-            <div className="mt-4 flex items-center gap-3 text-xs font-bold text-[#dde8e2]">
-              <Link href="/properti" className="hover:text-white transition-colors">
-                Katalog Rumah →
-              </Link>
-              <span>•</span>
-              <Link href="/agen" className="hover:text-white transition-colors">
-                Tim Konsultan →
-              </Link>
-            </div>
-          </div>
+    <footer className="bg-[#F1F1F1] pt-14 sm:pt-20 pb-10 border-t border-[#C5BEB4]">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+        {/* Pre-Footer Survey CTA Strip */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-12 mb-12 border-b border-[#C5BEB4]">
+          <h2 className="font-display font-medium text-[clamp(2.1rem,4vw,3.6rem)] leading-[1.06] tracking-[-0.025em] text-[#38352C] max-w-[18ch]">
+            Siap melihat langsung kondisi unit akhir pekan ini?
+          </h2>
 
-          {/* Area */}
-          <div>
-            <h4 className="text-white font-black text-xs uppercase tracking-wider mb-3.5">
-              Area Pemasaran
-            </h4>
-            <ul className="space-y-1.5 text-xs text-white/90">
-              <li>• Sukodono & Anggaswangi, Sidoarjo</li>
-              <li>• Sedati, Kwangsan, & Akses Juanda</li>
-              <li>• Waru, Gedangan, & Perbatasan Surabaya</li>
-              <li>• MERR & Rungkut, Surabaya Timur</li>
-            </ul>
-          </div>
-
-          {/* Konsultasi */}
-          <div>
-            <h4 className="text-white font-black text-xs uppercase tracking-wider mb-3.5">
-              Layanan Konsumen
-            </h4>
-            <p className="text-xs text-white/90 mb-4 leading-relaxed">
-              Konsultasi syarat KPR, BI checking, dan booking jadwal survei didampingi tim kami.
-            </p>
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-[#081613] text-xs font-black hover:bg-[#dde8e2] transition-all shadow-md active:scale-95"
-            >
-              <span>Konsultasi WA: Tim Konsultan</span>
-            </a>
-          </div>
+          <a
+            href={waSurveyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="dual-cta self-start lg:self-auto"
+          >
+            <span className="dual-cta__label">Jadwalkan Survei Bersama</span>
+            <span className="dual-cta__circle" aria-hidden="true">
+              <ArrowRight className="w-4 h-4" strokeWidth={1.75} />
+            </span>
+          </a>
         </div>
 
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-white/70 gap-4">
-          <p>© {new Date().getFullYear()} Tiar Property. All rights reserved.</p>
-          <div className="flex items-center gap-3">
-            <span>Surabaya & Sidoarjo, Jawa Timur</span>
-            <span>•</span>
-            <Link href="/admin" className="text-white/40 hover:text-white/80 transition-colors">
-              Portal Admin
-            </Link>
+        {/* Ft2 Split Grid: 4-col Portrait Photo + 8-col Dark #38352C Panel */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+          <div className="lg:col-span-4 rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-[3/4] bg-[#E8E4E1] ring-1 ring-inset ring-[#38352C]/14">
+            <img
+              src="/images/properties/editorial-footer.webp"
+              alt="Interior ruang tamu hangat rumah siap huni di kawasan Sidoarjo dan Surabaya"
+              width={900}
+              height={1200}
+              loading="lazy"
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <div className="lg:col-span-8 rounded-2xl bg-[#38352C] text-[#E8E4E1] p-7 sm:p-10 flex flex-col justify-between gap-12 overflow-hidden">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+              <div>
+                <h3 className="font-body text-xs font-semibold uppercase tracking-wider text-[#C5BEB4] mb-4">
+                  Navigasi
+                </h3>
+                <ul className="flex flex-col gap-2.5 text-sm">
+                  <li>
+                    <Link href="/properti" className="hover:text-[#FFCA4F] transition-colors">
+                      Koleksi Klaster
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/#alur-kawal" className="hover:text-[#FFCA4F] transition-colors">
+                      Alur Kawal Berkas
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/#komparasi" className="hover:text-[#FFCA4F] transition-colors">
+                      Komparasi Rumah
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/agen" className="hover:text-[#FFCA4F] transition-colors">
+                      Tim Konsultan
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/#pertanyaan" className="hover:text-[#FFCA4F] transition-colors">
+                      Pertanyaan Umum
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="font-body text-xs font-semibold uppercase tracking-wider text-[#C5BEB4] mb-4">
+                  Area Pemasaran
+                </h3>
+                <ul className="flex flex-col gap-2.5 text-sm text-[#E8E4E1]/90">
+                  <li>Sukodono &amp; Anggaswangi</li>
+                  <li>Sedati &amp; Bypass Juanda</li>
+                  <li>Waru &amp; Gedangan</li>
+                  <li>MERR, Rungkut &amp; Wiyung</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="font-body text-xs font-semibold uppercase tracking-wider text-[#C5BEB4] mb-4">
+                  Layanan Konsultan
+                </h3>
+                <ul className="flex flex-col gap-2.5 text-sm text-[#E8E4E1]/90">
+                  <li>Mbak Ningsih (PIC Utama)</li>
+                  <li className="mono-num text-[#FFCA4F]">0821-4219-3231</li>
+                  <li className="num-clean">Senin–Minggu, 08.00–20.00 WIB</li>
+                  <li>Partner Resmi Bank BTN, BRI, BSI, Mandiri, BNI</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-5">
+              <div
+                aria-hidden="true"
+                className="font-display font-medium text-[clamp(2.65rem,7.8vw,6.8rem)] leading-[0.86] tracking-[-0.03em] text-[#E8E4E1] pt-5 border-t border-[#E8E4E1]/15 whitespace-nowrap"
+              >
+                tiar property
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-[#C5BEB4]">
+                <p className="num-clean">
+                  © {currentYear} Tiar Property · Surabaya &amp; Sidoarjo, Jawa Timur
+                </p>
+                <Link
+                  href="/admin"
+                  className="text-[#C5BEB4]/70 hover:text-[#E8E4E1] transition-colors"
+                >
+                  Portal Admin
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

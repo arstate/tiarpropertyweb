@@ -1,73 +1,153 @@
 import React from 'react';
+import { ShieldCheck } from 'lucide-react';
+
+const VALUE_CARDS = [
+  {
+    index: '.01',
+    title: 'SHM & IMB pecah per kavling',
+    text: 'Sertifikat Hak Milik dan PBG setiap unit siap diproses sampai akad notaris.',
+  },
+  {
+    index: '.02',
+    title: (
+      <>
+        <span className="num-clean">5</span> Bank BUMN Rekanan Resmi
+      </>
+    ),
+    text: 'Didukung BTN, BRI, BSI syariah, Mandiri, dan BNI dengan bunga promo ringan.',
+  },
+  {
+    index: '.03',
+    title: 'Gratis BPHTB, AJB & Notaris',
+    text: (
+      <>
+        Bebas biaya balik nama dan subsidi angsuran hingga{' '}
+        <span className="num-clean font-medium text-[#38352C]">Rp 20</span> juta.
+      </>
+    ),
+  },
+  {
+    index: '.04',
+    title: 'Ditemani hingga serah terima',
+    text: 'Satu konsultan mendampingi dari survei lokasi hingga kunci rumah diserahkan.',
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    name: 'Aditya & Rina',
+    profile: 'Karyawan Swasta, Rungkut',
+    badge: 'ACC Bank BTN',
+    quote: (
+      <>
+        Awalnya ragu ada rumah tanpa DP beneran. Pas ketemu tim Tiar Property memang cuma siapkan UTJ{' '}
+        <span className="num-clean font-medium text-[#38352C]">Rp 1</span> juta. Semua biaya pajak dan notaris gratis.
+      </>
+    ),
+    unit: 'Klaster Sukodono',
+  },
+  {
+    name: 'Dimas Pratama',
+    profile: 'PNS, Surabaya Timur',
+    badge: 'ACC Bank BSI',
+    quote: (
+      <>
+        Program subsidi angsuran <span className="num-clean font-medium text-[#38352C]">Rp 1,4</span> juta sangat
+        membantu di bulan awal. Respon Mbak Ningsih di WhatsApp ramah dan menemani survei langsung.
+      </>
+    ),
+    unit: 'Klaster Sedati Juanda',
+  },
+  {
+    name: 'Bagus & Maya',
+    profile: 'Pasangan Baru Menikah',
+    badge: 'ACC Bank Mandiri',
+    quote:
+      'Daripada bayar sewa tahunan yang uangnya hangus, lebih baik ambil rumah sendiri. Angsuran setara kontrakan namun sertifikat SHM atas nama sendiri.',
+    unit: 'Klaster Waru Gateway',
+  },
+];
 
 export function Testimonials() {
-  const testimonials = [
-    {
-      name: 'Aditya & Rina',
-      profile: 'Karyawan Swasta Rungkut',
-      badge: 'ACC Bank BTN',
-      quote:
-        'Awalnya ragu ada rumah tanpa DP beneran. Ternyata pas ketemu tim Tiar Property beneran cuma keluar uang UTJ 1 Juta. Semua biaya pajak & notaris gratis!',
-      unit: 'Cluster Sukodono',
-    },
-    {
-      name: 'Dimas Pratama',
-      profile: 'PNS Surabaya Timur',
-      badge: 'ACC Bank BSI',
-      quote:
-        'Program subsidi angsuran 1,4 juta sangat membantu di bulan-bulan awal. Respon Mbak Ningsih di WhatsApp ramah dan nemenin survei langsung.',
-      unit: 'Cluster Sedati Juanda',
-    },
-    {
-      name: 'Bagus & Maya',
-      profile: 'Pasangan Baru Menikah',
-      badge: 'ACC Bank Mandiri',
-      quote:
-        'Daripada bayar sewa tahunan yang uangnya hangus, mending ambil rumah di Tiar Property. Angsuran mirip sewa kontrakan tapi statusnya SHM milik sendiri.',
-      unit: 'Cluster Waru Gateway',
-    },
-  ];
-
   return (
-    <section className="py-16 md:py-24 bg-white border-t border-[#dde8e2]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-2xl sm:text-4xl font-black text-[#081613] tracking-tight">
-            Keluarga yang Sudah ACC KPR
+    <section
+      aria-labelledby="value-heading"
+      className="py-16 sm:py-24 bg-[#FAF8F5] border-t border-[#C5BEB4]"
+    >
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
+        {/* 4-Column Legal & Guarantee Cards (.01-.04 Clean Numerals) */}
+        <div className="max-w-[54ch] mb-10 sm:mb-12">
+          <h2
+            id="value-heading"
+            className="font-display font-medium text-[clamp(2.1rem,4vw,3.5rem)] leading-[1.06] tracking-[-0.025em] text-[#38352C]"
+          >
+            Kepastian legalitas dan biaya dari awal hingga akad.
           </h2>
-          <p className="text-[#477769] mt-2 text-xs sm:text-sm font-normal">
-            Pendampingan berkas 100% ke 5 bank rekanan BUMN sampai serah terima kunci.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-          {testimonials.map((item, idx) => (
-            <div
-              key={idx}
-              className="p-5 sm:p-6 lg:p-7 rounded-2xl sm:rounded-3xl bg-[#f7faf8] border border-[#dde8e2] hover:border-[#3a6356]/40 hover:-translate-y-0.5 hover:shadow-xs transition-all flex flex-col justify-between"
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16 sm:mb-20">
+          {VALUE_CARDS.map((card) => (
+            <article
+              key={card.index}
+              className="rounded-2xl bg-[#E8E4E1] p-6 min-h-[220px] flex flex-col justify-between gap-6 ring-1 ring-inset ring-[#38352C]/14"
             >
+              <span className="num-clean text-2xl font-semibold leading-none text-[#57534A]">
+                {card.index}
+              </span>
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#081613] text-[#dde8e2]">
-                    {item.badge}
+                <h3 className="font-display font-medium text-2xl leading-[1.2] text-[#38352C] mb-2">
+                  {card.title}
+                </h3>
+                <p className="font-body text-sm leading-[1.55] text-[#57534A]">
+                  {card.text}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* Client ACC Testimonials (Upright Serif/Body, 0 Italic Slop) */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pt-10 border-t border-[#C5BEB4]">
+          <div>
+            <h3 className="font-display font-medium text-[clamp(1.75rem,3vw,2.65rem)] leading-[1.1] text-[#38352C]">
+              Keluarga yang sudah serah terima kunci.
+            </h3>
+            <p className="text-sm text-[#57534A] mt-1.5">
+              Pendampingan berkas penuh ke <span className="num-clean">5</span> bank rekanan BUMN hingga SP<span className="num-clean">3</span>K terbit.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {TESTIMONIALS.map((item) => (
+            <article
+              key={item.name}
+              className="rounded-2xl bg-[#E8E4E1] p-6 ring-1 ring-inset ring-[#38352C]/14 flex flex-col justify-between gap-6"
+            >
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#38352C] text-[#E8E4E1] text-xs font-medium whitespace-nowrap">
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#FFCA4F]" strokeWidth={1.75} aria-hidden="true" />
+                    <span>{item.badge}</span>
                   </span>
-                  <span className="text-[11px] font-bold text-[#477769]">{item.unit}</span>
+                  <span className="text-xs font-medium text-[#57534A]">{item.unit}</span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#16362f] leading-relaxed font-normal italic">
-                  "{item.quote}"
+
+                <p className="font-body text-[15px] leading-[1.6] text-[#38352C]">
+                  “{item.quote}”
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-[#dde8e2] flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-[#081613] text-[#dde8e2] flex items-center justify-center font-black text-xs">
+              <div className="pt-4 border-t border-[#C5BEB4] flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-[#38352C] text-[#E8E4E1] flex items-center justify-center font-display font-semibold text-base shrink-0">
                   {item.name.charAt(0)}
                 </div>
                 <div>
-                  <p className="text-xs font-black text-[#081613]">{item.name}</p>
-                  <p className="text-[10px] text-[#477769] font-medium">{item.profile}</p>
+                  <p className="text-sm font-semibold text-[#38352C]">{item.name}</p>
+                  <p className="text-xs text-[#57534A]">{item.profile}</p>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

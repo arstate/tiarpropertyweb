@@ -1,40 +1,35 @@
 # 👁️ 14-PASS VISION QA & DESIGN CRITIQUE SCORECARD (`DESIGN-CRITIQUE.md`)
 
-## 1. Pre-Emit 6-Axis Critique (`P-H-E-S-R-V`) & Hallmark Gates Target
-- **Target CSS Stamp (Milestone 1):** `/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 · macrostructure: editorial-lookbook-sticky-spine · nav: N5-top-right-drawer · footer: Ft2-split-bleed · theme: mejuma-warm-stone · contrast: pass (40-41) · numerals: 0%-serif-lining-tabular · signature: bottom-bleed-wordmark + dual-pill-gold-cta · slop: pending-qa */`
+## 1. Pre-Emit 6-Axis Critique (`P-H-E-S-R-V`) & Hallmark Gates
+- **Applied CSS Stamp (`src/app/globals.css:1`):** `/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 · macrostructure: editorial-lookbook-sticky-spine · nav: N5-top-right-drawer · footer: Ft2-split-bleed · theme: mejuma-warm-stone · contrast: pass (40-41) · numerals: 0%-serif-lining-tabular · signature: bottom-bleed-wordmark + dual-pill-gold-cta · slop: 58/58 */`
 - **Signature (`Gate 82`):** Giant bottom-bleed `tiar property` serif wordmark + `Button-040` Dual-Pill Sun Gold CTA (`#FFCA4F`) yang mengarahkan langsung ke katalog klaster DP 0% Surabaya & Sidoarjo.
-- **Picture Deletion Test (`Gate 83`):** Setiap foto pada Hero, Diptych Section 1, Lookbook, Footer, dan Split Detail Page menampilkan wujud nyata arsitektur hunian tropis yang telah di-upscale 4K lokal di `public/images/properties/*.webp`.
+- **Picture Deletion Test (`Gate 83`):** Seluruh foto pada Hero, Diptych Section 1, Lookbook, Footer, Split Detail Page, dan Direktori Konsultan menggunakan aset lokal WebP yang telah di-upscale 4K via CUDA (`upscale-img -m nmkd -t 256`) di `public/images/properties/*.webp` dan `public/images/agents/*.webp`.
 - **Competitor Swap Test:** Seluruh copywriting memakai noun & metrik spesifik Tiar Property (*Sukodono, Sedati Juanda, MERR Rungkut, UTJ Rp 1–5 Jt, Subsidi Rp 1,4 Jt/bln, Kawal 5 Bank BUMN BTN/BRI/BSI/Mandiri/BNI, "Mau saya temenin cek lokasinya kak?"*).
 
 ---
 
-## 2. Pre-Redesign Baseline vs `Mejuma Warm Stone` Target Audit
+## 2. Pre-Redesign Baseline vs `Mejuma Warm Stone` Final Build (`v2.0.0`)
 
-| Area / Komponen | Kondisi Lama (`v1.0` Dark Luxury Pine) | Target Terkunci (`v2.0` Mejuma Warm Stone) | Dampak UX & Konversi |
+| Area / Komponen | Kondisi Lama (`v1.0` Dark Luxury Pine) | Implementasi Final (`v2.0` Mejuma Warm Stone) | Verifikasi Aktual |
 |---|---|---|---|
-| **Palet & Kanvas** | `#f7faf8` + `#ffffff` + `#081613` pine | `#F1F1F1` Warm Stone + `#E8E4E1` Travertine + `#38352C` Olive-Umber Ink (`#57534A` muted accessible) + `#FFCA4F` Sun Gold CTA | Hangat, *tactile*, bebas silau, kontras OKLCH `>= 50%`. |
-| **Tipografi Angka** | `Cormorant` oldstyle numerals (`.01–.05` terlihat kecil naik-turun) | **0% Serif Numerals:** 100% angka pakai `Golos Text` / `JetBrains Mono` (`.num-clean` `lining-nums tabular-nums`) | Indeks `.01–.05`, harga, cicilan, & metrik `m²` terbaca tajam dan sejajar. |
-| **Kalkulator KPR** | Ada di Homepage & Detail Unit | **Dihapus Total** (`KprCalculator.tsx` & `#simulasi-kpr` dihapus), diganti CTA langsung *"Hitung Cicilan & Cek SLIK via WhatsApp"* | Mencegah *price shock* dini dan mengarahkan konsultasi personal via WA PIC. |
-| **Navbar & Drawer** | Sticky topbar standar | **Detached Top-Right Pills (`Menu =` + `Konsultasi WA`)** + **Top-Right Dark `#38352C` Floating Drawer** (`.01–.04` `.num-clean`, tanpa `#kalkulator`) | Navigasi bersih di hero tanpa memakan ruang vertikal. |
-| **Hero Section (`/`)** | Banner terpotong `340px–440px` | **100svh Fullscreen Architectural Hero** + Giant Bleed Wordmark `tiar property` + Dual-Pill Gold CTA + flex guard anti-overlap | First impression editorial berkelas di layar `1280x800` & `375x812`. |
-| **Katalog & Journey** | Grid 3-kolom berurutan | **Editorial Serif Marquee** + **Asymmetric Staggered Lookbook** + **Sticky Left Headline + `.01–.05` Travertine Cards** | Bebas *Adjacent Layout Clone* dan alur *Turnkey* terasa jelas. |
-| **Footer** | 3 kolom teks biasa | **Split Architectural Footer (`Ft2`)**: Foto Portrait `3:4` Kiri + Panel Gelap `#38352C` & Giant Wordmark `tiar property` Kanan | Memenuhi *Peak-End Rule*, `0` tech-stack leak. |
+| **Palet & Kanvas** | `#f7faf8` + `#ffffff` + `#081613` pine | `#F1F1F1` Warm Stone + `#E8E4E1` Travertine + `#38352C` Olive-Umber Ink + `#57534A` muted accessible + `#FFCA4F` Sun Gold CTA | Diterapkan di seluruh rute publik (`globals.css`, komponen utama & subpage). |
+| **Tipografi Angka** | `Cormorant` oldstyle numerals | **0% Serif Numerals:** 100% angka pakai `Golos Text` (`.num-clean`) / `JetBrains Mono` (`.mono-num`) dengan `lining-nums tabular-nums` | Terverifikasi DOM TreeWalker CDP: `serifNums = 0` di seluruh 7 viewport & 5 rute. |
+| **Kalkulator KPR** | Ada di Homepage & Detail Unit | **Dihapus Total** (`KprCalculator.tsx`, `#kalkulator`, `#simulasi-kpr` dihapus), diganti CTA langsung *"Hitung Cicilan & Cek SLIK via WhatsApp"* | Terverifikasi via grep & DOM CDP (`has_simulasi=False`, `has_wa_cta=True`). |
+| **Navbar & Drawer** | Sticky topbar standar | **Detached Top-Right Pills (`Menu` + `Konsultasi WA`)** + **Top-Right Dark `#38352C` Floating Drawer** (`.01–.04` `.num-clean`), hidden di `/admin` | Terverifikasi klik buka/tutup drawer & link valid di CDP (`1280x800`). |
+| **Hero Section (`/`)** | Banner terpotong | **100svh Fullscreen Architectural Hero** + Giant Wordmark `tiar property` + Dual-Pill Gold CTA | Terverifikasi bounding-box anti-overlap & fold fit (`heroOk=True`) di 7 viewport. |
+| **Subpages & Keamanan** | `Partner PT TMJ` & emoji literal `🧍📍✨` | `Partner Resmi`, `100%` `lucide-react` (0 emoji), Peta Statis + Locked Shareloc Modal + Lightbox utuh, `/admin` utuh | Terverifikasi zero-leak scan (`0` leak publik) & modal/lightbox toggle CDP. |
 
 ---
 
-## 3. 14-Pass Rubric Checklist (Verified in Milestone 6 Across 7 Viewports)
-- [ ] **Pass 1:** 5-Second Stranger Test
-- [ ] **Pass 2:** 2-Line Headline Law (`text-balance`, upright roman, anti two-fragment cliché)
-- [ ] **Pass 3:** 4.3x Scale Contrast
-- [ ] **Pass 4:** Equal Outer Frame & No Void
-- [ ] **Pass 5:** Zero Adjacent Layout Clones
-- [ ] **Pass 6:** 14-Point Anti-Slop Sweep (`0` emoji di UI, `0` kata terlarang, `0` `//` divider, `0%` serif numerals)
-- [ ] **Pass 7:** Streamlined Funnel Check (Quick Filter Lookbook + Locked Shareloc Modal + Direct WA Credit/SLIK CTA)
-- [ ] **Pass 8:** Mobile 1-Line Ergonomics (`360x800` & `390x844`, `overflow-x: clip`)
-- [ ] **Pass 9:** 7 Interactive States Pass
-- [ ] **Pass 10:** Motion & Physics Discipline (`cubic-bezier(0.625, 0.05, 0, 1)`)
-- [ ] **Pass 11:** Optical Details & `.num-clean` (`lining-nums tabular-nums`)
-- [ ] **Pass 12:** Honest Imagery & Aspect Ratio (Aset lokal 4K di `public/images/properties/*.webp` ter-upscale via `/boost`)
-- [ ] **Pass 13:** 35–42% Breathing Room
-- [ ] **Pass 14:** Zero-Leak Conversion Funnel (Locked Shareloc Modal + Direct WA PIC + Fix `Partner PT TMJ` -> `Partner Resmi`)
-- [ ] **Pass 15:** Studio Footer Craft & Zero Tech-Stack Bleed
+## 3. Hasil Audit 7-Viewport Chrome CDP Port `9223` (Rute Statis `out/`)
+
+- **Viewport yang Diuji:** `360x800`, `390x844`, `412x915`, `768x1024`, `1024x768`, `1280x800`, `1920x1080`
+- **Rute yang Diuji:** `/`, `/properti`, `/properti/sukodono-cluster-1`, `/agen`, `/admin` (`360x800` & `1280x800`) + `/produk`
+- **Hasil Terukur:**
+  - `overflow`: `False` (`scrollWidth <= innerWidth`) di seluruh 7 viewport.
+  - `serifNums`: `0` di seluruh 7 viewport × 5 rute.
+  - `italicHeadings`: `[]` (`0` heading miring).
+  - `brokenImgs`: `0` (seluruh gambar lokal WebP terdekode `naturalWidth > 0` setelah scroll penuh).
+  - `smallTargets (< 42px)`: `0` pada mobile/tablet & `0` button wrap.
+  - `Console/JS errors`: `0` | `Failed network requests`: `0` (termasuk favicon via `src/app/icon.svg`).
+- **Catatan Transparansi Verifikasi:** Inspeksi DOM, computed font, bounding-box anti-overlap, gambar termuat, zero-leak, dan interaksi klik dijalankan langsung via Chrome CDP port `9223`; namun inspeksi visual piksel screenshot secara manusiawi/multimodal belum dapat dievaluasi langsung di sesi subagent ini karena attachment gambar pada tool baca file tidak dirender sebagai citra di konteks. Disarankan reviewer membuka langsung `out/` di browser untuk spot-check estetika akhir.
