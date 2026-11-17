@@ -1,0 +1,116 @@
+[
+  {
+    "id": "mbak-ningsih",
+    "name": "Mbak Ningsih",
+    "role": "Lead Consultant & CS Closer",
+    "photoUrl": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
+    "phone": "6282142193231",
+    "citySpecialist": "Surabaya & Sidoarjo",
+    "areaFocus": [
+      "Surabaya & Sidoarjo",
+      "Semua Klaster",
+      "Fast Inbound Closer"
+    ],
+    "rating": 5,
+    "totalDealsAssisted": 184,
+    "badges": [
+      "Lead Consultant",
+      "CS Closer #1",
+      "Fast Response < 60s",
+      "Pakar DP 0%"
+    ],
+    "bio": "Konsultan senior dan PIC CS utama Tiar Property. Memandu ratusan pembeli pertama mewujudkan rumah impian dengan program DP 0%, cicilan ringan 1-2 Jt-an, dan bebas biaya akad.",
+    "assignedProperties": [
+      "sukodono-cluster-1",
+      "rungkut-surabaya-cluster-7"
+    ],
+    "isActive": true,
+    "orderPriority": 1
+  },
+  {
+    "id": "dimas-prasetyo",
+    "name": "Dimas Prasetyo",
+    "role": "Senior Property Consultant (Spesialis Sidoarjo)",
+    "photoUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80",
+    "phone": "6282142193231",
+    "citySpecialist": "Sidoarjo",
+    "areaFocus": [
+      "Sukodono",
+      "Sedati Juanda",
+      "Masangan",
+      "Anggaswangi",
+      "Waru"
+    ],
+    "rating": 4.9,
+    "totalDealsAssisted": 112,
+    "badges": [
+      "Spesialis Sidoarjo",
+      "Survey Master",
+      "Row 8m Expert"
+    ],
+    "bio": "Spesialis perumahan koridor Sidoarjo dan akses Bandara Juanda. Siap mendampingi survei langsung setiap akhir pekan untuk cek kualitas bangunan fisik dan kelayakan lingkungan.",
+    "assignedProperties": [
+      "juanda-sedati-cluster-2",
+      "anggaswangi-cluster-4",
+      "masangan-cluster-5",
+      "sedati-juanda-cluster-9"
+    ],
+    "isActive": true,
+    "orderPriority": 2
+  },
+  {
+    "id": "rizky-pratama",
+    "name": "Rizky Pratama",
+    "role": "Senior Property Consultant (Spesialis Surabaya)",
+    "photoUrl": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80",
+    "phone": "6282142193231",
+    "citySpecialist": "Surabaya",
+    "areaFocus": [
+      "MERR Rungkut",
+      "Surabaya Timur",
+      "Wiyung",
+      "Surabaya Barat"
+    ],
+    "rating": 4.9,
+    "totalDealsAssisted": 96,
+    "badges": [
+      "Spesialis Surabaya",
+      "Urban Modern Living",
+      "Rumah 2 Lantai"
+    ],
+    "bio": "Fokus pada klaster premium Surabaya Timur (MERR & Rungkut) dan Surabaya Barat. Berpengalaman merekomendasikan unit modern strategis dekat sentra bisnis dan kampus unggulan.",
+    "assignedProperties": [
+      "merr-surabaya-cluster-3",
+      "wiyung-surabaya-cluster-8"
+    ],
+    "isActive": true,
+    "orderPriority": 3
+  },
+  {
+    "id": "maya-anggraini",
+    "name": "Maya Anggraini, S.H.",
+    "role": "KPR & Legal Specialist (Konsultan Akad & Berkas)",
+    "photoUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
+    "phone": "6282142193231",
+    "citySpecialist": "Surabaya & Sidoarjo",
+    "areaFocus": [
+      "KPR BTN / BRI / BSI",
+      "Legalitas SHM / IMB",
+      "Waru Gateway",
+      "Bebas Biaya Notaris"
+    ],
+    "rating": 5,
+    "totalDealsAssisted": 138,
+    "badges": [
+      "KPR 100% ACC",
+      "Legal Specialist S.H.",
+      "Bank Liaison 5 BUMN"
+    ],
+    "bio": "Pakar legalitas dan analis pembiayaan 5 bank rekanan BUMN. Mengawal berkas KPR dari awal validasi BI checking/SLIK sampai penerbitan SP3K dan tanda tangan akad notaris.",
+    "assignedProperties": [
+      "waru-gedangan-cluster-6"
+    ],
+    "isActive": true,
+    "orderPriority": 4
+  }
+]

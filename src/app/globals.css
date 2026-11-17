@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+:root {
+  --pine-950: #081613;
+  --spruce-900: #0e241f;
+  --forest-800: #16362f;
+  --moss-600: #3a6356;
+  --sage-500: #5d8b7b;
+  --sage-300: #8baf9f;
+  --celadon-150: #dde8e2;
+  --canvas-sage: #f7faf8;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  background-color: var(--canvas-sage);
+  color: var(--pine-950);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+
+
+::selection {
+  background-color: #081613;
+  color: #f7faf8;
+}
+
+/* Reome Luxury Shadows */
+.shadow-reome-pill {
+  box-shadow: 0 10px 30px -5px rgba(8, 22, 19, 0.12),
+              0 4px 12px -2px rgba(8, 22, 19, 0.06);
+}
+
+.shadow-reome-card {
+  box-shadow: 0 12px 36px -8px rgba(8, 22, 19, 0.08);
+}
+
+/* Responsive adjustments for landscape tablets and short viewports (Above-the-fold guarantee) */
+@media (max-height: 720px) and (min-width: 640px) {
+  .hero-visual-frame {
+    height: 330px !important;
+  }
+}
+
+@media (max-height: 600px) {
+  .hero-visual-frame {
+    height: 275px !important;
+  }
+}
+
+/* Sembunyikan scrollbar native pada carousel mobile namun scroll gesture tetap aktif */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

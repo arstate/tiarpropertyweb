@@ -1,0 +1,115 @@
+{
+  "meta": {
+    "source_url": "https://www.mejuma-tuscany.com/",
+    "inspected_via": "Chrome CDP Port 9223 Fullscreen (1920x1080) + Mobile Emulation (390x844)",
+    "approved_option": "Opsi 1 — Mejuma Warm Stone (User Locked 2026-11-17)",
+    "inspected_routes": [
+      "/",
+      "/properties",
+      "/properties/la-valle-di-semifonte",
+      "Menu Overlay Drawer (#38352C)"
+    ],
+    "inspected_at": "2026-11-17",
+    "archetype": "Warm Editorial Turnkey Real Estate & Curated Lookbook (No Calculator)",
+    "target_adaptation": "Tiar Property Surabaya-Sidoarjo (DP 0% · All-In Free · Saya Temenin Rule)"
+  },
+  "design_system": {
+    "color": {
+      "reference_exact_tokens": {
+        "--sand--50": "#F1F1F1",
+        "--sand--100": "#E8E4E1",
+        "--sand--300": "#C5BEB4",
+        "--green--950": "#38352C",
+        "--green--600": "#82886E",
+        "--yellow": "#FFCA4F",
+        "--yellow-hover": "#E8B53D"
+      },
+      "tiar_adapted_tokens": {
+        "surface": {
+          "background_paper": "#F1F1F1",
+          "card_travertine": "#E8E4E1",
+          "elevated_white": "#FAF8F5",
+          "dark_structural": "#38352C",
+          "glass_pill": "rgba(232, 228, 225, 0.90)"
+        },
+        "text": {
+          "primary": "#38352C",
+          "secondary_accessible": "#57534A",
+          "on_dark": "#E8E4E1",
+          "on_dark_muted": "#C5BEB4"
+        },
+        "border": {
+          "hairline": "#C5BEB4",
+          "subtle": "rgba(56, 53, 44, 0.14)"
+        },
+        "accent": {
+          "primary_cta_bg": "#FFCA4F",
+          "primary_cta_hover": "#E8B53D",
+          "primary_cta_ink": "#38352C",
+          "secondary_sage_decorative": "#82886E",
+          "max_per_viewport": 2
+        }
+      },
+      "measured_palette_coverage": [
+        { "hex": "#F1F1F1", "coverage": 0.58, "role": "dominant-paper-canvas" },
+        { "hex": "#E8E4E1", "coverage": 0.18, "role": "travertine-cards-and-pills" },
+        { "hex": "#38352C", "coverage": 0.18, "role": "deep-olive-umber-ink-drawer-and-footer" },
+        { "hex": "#FFCA4F", "coverage": 0.04, "role": "sun-gold-dual-pill-cta" },
+        { "hex": "#82886E", "coverage": 0.02, "role": "sage-olive-decorative-dividers-and-indicators" }
+      ]
+    },
+    "typography": {
+      "numeric_rule": "ZERO_SERIF_NUMERALS — 100% numerals (.01-.05, .01-.04, prices, dimensions, ratings, stats) MUST use Golos Text (--font-body) or JetBrains Mono (--font-mono) with font-variant-numeric: lining-nums tabular-nums (.num-clean). Never render Cormorant Garamond oldstyle numerals.",
+      "nextjs_google_fonts_mapping": {
+        "display_font": "Cormorant Garamond (Upright Roman 400/500/600, letters ONLY, 0 italic headings, 0 numerals)",
+        "body_font": "Golos Text (400/500/600/700 — body copy & .num-clean lining tabular numerals)",
+        "mono_font": "JetBrains Mono (400/500 — tabular-nums price/code badges)"
+      },
+      "scale_1920": {
+        "hero_bleed_wordmark": "clamp(3.3rem, 14.2vw, 14.5rem)",
+        "h1_statement": "clamp(2.2rem, 4.5vw, 4.35rem)",
+        "h2_narrative": "clamp(2.0rem, 3.8vw, 3.6rem)",
+        "h3_card": "clamp(1.35rem, 2vw, 2rem)",
+        "body": "16px (1rem, line-height 1.55)",
+        "eyebrow": "12px (0.75rem, uppercase, letter-spacing 0.08em)"
+      }
+    },
+    "layout": {
+      "macrostructure": "Monumental Wordmark Hero -> Asymmetric Diptych Intro + Quick Filter -> Serif Marquee -> Asymmetric Staggered Property Lookbook -> Sticky Left Title + .01-.05 Turnkey Journey -> Editorial Story + Ngontrak vs Beli Comparison (Direct WA CTA, No Calculator) -> 4-Col Travertine Value/Proof Grid + FAQ -> Split Portrait + Dark #38352C Panel Footer",
+      "detail_page_structure": "Split 40/60 Editorial Hero (Meta + H1 + Dual-Pill CTA + Price Range vs Gallery 16:10) -> Clean Hairline Spec Matrix + .01-.08 All-In Free + Locked Shareloc Maps + Direct WA Credit Consultation CTA (No Mini-Calculator) -> Sticky Concierge Sidebar",
+      "max_width": "1440px (fluid 16px mobile / 40px desktop outer frame padding)",
+      "grid_columns": 12,
+      "section_vertical_rhythm_desktop": "140px",
+      "section_vertical_rhythm_mobile": "64px - 88px"
+    },
+    "shape": {
+      "button_radius": "9999px (full pill + detached circular arrow button)",
+      "card_radius": "16px (1rem tactile travertine cards)",
+      "image_radius": "12px (architectural frames, ring-1 ring-inset ring-black/10)"
+    },
+    "motion": {
+      "button_hover_ease": "cubic-bezier(0.625, 0.05, 0, 1)",
+      "focus_ease": "cubic-bezier(0.23, 1, 0.32, 1)",
+      "marquee": "Infinite smooth horizontal CSS ticker (prefers-reduced-motion aware)"
+    }
+  },
+  "design_style": {
+    "mood": "Warm Architectural Editorial & Personal Turnkey Concierge",
+    "ornamentation_level": "restrained-craft",
+    "whitespace_philosophy": "Generous warm stone canvas (>= 42% open space) framing monumental upright serif statements and curated 4K architectural photography"
+  },
+  "visual_effects": {
+    "overview": {
+      "effect_intensity": "moderate",
+      "performance_tier": "Lightweight (Pure CSS GPU Transforms + position: sticky + CSS Marquee, < 90 KB JS)"
+    },
+    "signature_gate_82": "Monumental bottom-bleed 'tiar property' serif wordmark + Dual-Pill Sun-Gold CTA (#FFCA4F) paired with real Surabaya-Sidoarjo DP 0% offer",
+    "signature_devices": [
+      "1. Giant bottom-anchored bleed wordmark across Hero & Footer",
+      "2. Dual-Pill Button040 Pattern: [Label Pill in #FFCA4F] + [Circular Arrow Pill in #FFCA4F]",
+      "3. Floating Top-Right Detached Pill Navbar (Menu = + Konsultasi WA) opening Top-Right Dark #38352C Overlay Card Drawer with .01-.04 sans numerals",
+      "4. Sticky 5-Col Left Headline paired with .01-.05 Stacked Travertine Process Cards (.num-clean sans numerals)",
+      "5. Asymmetric Staggered Property Lookbook with clean metadata underneath"
+    ]
+  }
+}

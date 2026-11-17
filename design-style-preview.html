@@ -1,0 +1,2983 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="mejuma-stone">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiar Property | Hunian Pilihan Surabaya dan Sidoarjo tanpa DP</title>
+  <meta name="description" content="Kurasi hunian strategis Surabaya dan Sidoarjo tanpa DP. Cukup UTJ Rp 1 sampai 5 juta, bebas biaya akad, dan pendampingan penuh hingga serah terima kunci." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 · weakest: V, separated 5 themes across paper band, display weight/face, accent hue, radius, and hero posture · macrostructure: Editorial Lookbook + Sticky Spine · nav: N5 · footer: Ft2 · theme: Mejuma Warm Stone (5-style interactive preview) · signature: Monumental bottom-bleed wordmark + Dual-Pill Sun-Gold CTA + Live KPR Subsidi Simulator · contrast: pass (40-41) · slop: pass */
+
+:root {
+  --space-3xs: 2px;
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+  --space-4xl: 140px;
+
+  --container-max: 1440px;
+  --grid-gap: 24px;
+  --banner-height: 88px;
+  --preview-bar-height: 52px;
+
+  --ease-mejuma: cubic-bezier(0.625, 0.05, 0, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  --z-base: 1;
+  --z-raised: 10;
+  --z-sticky: 200;
+  --z-sticky-nav: 300;
+  --z-drawer: 350;
+  --z-modal: 450;
+  --z-preview-bar: 900;
+
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-bar: "Golos Text", system-ui, sans-serif;
+
+  /* Fixed Studio Bar & Overlay Tokens */
+  --bar-bg: #181816;
+  --bar-ink: #F4EFEA;
+  --bar-muted: #D6D0C6;
+  --bar-border: rgba(244, 239, 234, 0.16);
+  --bar-hover: rgba(255, 255, 255, 0.1);
+  --bar-gold: #FFCA4F;
+  --bar-gold-ink: #1F1D18;
+  --bar-gold-soft: rgba(255, 202, 79, 0.14);
+  --bar-gold-border: rgba(255, 202, 79, 0.45);
+  --hero-ink: #FAF8F5;
+  --hero-ink-soft: rgba(250, 248, 245, 0.92);
+  --scrim-top: rgba(24, 22, 18, 0.36);
+  --scrim-mid: rgba(24, 22, 18, 0.42);
+  --scrim-bot: rgba(24, 22, 18, 0.8);
+  --shadow-soft: rgba(20, 18, 14, 0.09);
+  --shadow-deep: rgba(20, 18, 14, 0.28);
+  --backdrop-dark: rgba(20, 19, 16, 0.72);
+  --lock-scrim: rgba(24, 22, 18, 0.52);
+  --on-dark-rule: rgba(232, 228, 225, 0.16);
+  --swatch-stone: #FFCA4F;
+  --swatch-studio: #1E4D2B;
+  --swatch-vellum: #9C422B;
+  --swatch-midnight: #E2A04A;
+  --swatch-parchment: #B45309;
+}
+
+/* THEME 01 · MEJUMA WARM STONE (FLAGSHIP REFERENCE) */
+html[data-theme="mejuma-stone"] {
+  --color-paper: #F1F1F1;
+  --color-surface: #E8E4E1;
+  --color-surface-alt: #FAF8F5;
+  --color-border: #C5BEB4;
+  --color-ink: #38352C;
+  --color-ink-muted: #57534A;
+  --color-dark-panel: #38352C;
+  --color-on-dark: #E8E4E1;
+  --color-on-dark-muted: #C5BEB4;
+  --color-accent: #FFCA4F;
+  --color-accent-hover: #E8B53D;
+  --color-accent-ink: #38352C;
+  --color-sage: #82886E;
+  --color-focus: #38352C;
+  --color-ring: rgba(56, 53, 44, 0.14);
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Golos Text", system-ui, sans-serif;
+  --display-weight: 500;
+  --display-tracking: -0.025em;
+  --radius-card: 16px;
+  --radius-image: 12px;
+  --radius-button: 9999px;
+}
+
+/* THEME 02 · STUDIO ALABASTER (SANCTUARY EDITORIAL) */
+html[data-theme="studio-alabaster"] {
+  --color-paper: #F6F5F0;
+  --color-surface: #EFECE4;
+  --color-surface-alt: #FAF9F5;
+  --color-border: #D4CFC5;
+  --color-ink: #161816;
+  --color-ink-muted: #4A4D48;
+  --color-dark-panel: #161816;
+  --color-on-dark: #F6F5F0;
+  --color-on-dark-muted: #C2C5BC;
+  --color-accent: #1E4D2B;
+  --color-accent-hover: #15391F;
+  --color-accent-ink: #FAF8F5;
+  --color-sage: #5A7058;
+  --color-focus: #1E4D2B;
+  --color-ring: rgba(22, 24, 22, 0.12);
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Golos Text", system-ui, sans-serif;
+  --display-weight: 600;
+  --display-tracking: -0.03em;
+  --radius-card: 12px;
+  --radius-image: 8px;
+  --radius-button: 9999px;
+}
+
+/* THEME 03 · VELLUM TERRACOTTA (COURTYARD LIVING) */
+html[data-theme="vellum-terracotta"] {
+  --color-paper: #FAF6F0;
+  --color-surface: #F1E9DF;
+  --color-surface-alt: #FDFBF7;
+  --color-border: #D9CBBF;
+  --color-ink: #1F1A17;
+  --color-ink-muted: #5C4F47;
+  --color-dark-panel: #2B211C;
+  --color-on-dark: #FAF6F0;
+  --color-on-dark-muted: #D9CBBF;
+  --color-accent: #9C422B;
+  --color-accent-hover: #7F3421;
+  --color-accent-ink: #FAF6F0;
+  --color-sage: #8A6B5C;
+  --color-focus: #9C422B;
+  --color-ring: rgba(31, 26, 23, 0.12);
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Golos Text", system-ui, sans-serif;
+  --display-weight: 500;
+  --display-tracking: -0.02em;
+  --radius-card: 20px;
+  --radius-image: 16px;
+  --radius-button: 9999px;
+}
+
+/* THEME 04 · MIDNIGHT PAVILION (NOCTURNAL ARCHITECTURAL) */
+html[data-theme="midnight-pavilion"] {
+  --color-paper: #13161C;
+  --color-surface: #1C2029;
+  --color-surface-alt: #232833;
+  --color-border: #323947;
+  --color-ink: #F1F5F9;
+  --color-ink-muted: #B8C0CC;
+  --color-dark-panel: #0B0D11;
+  --color-on-dark: #F1F5F9;
+  --color-on-dark-muted: #9CA6B5;
+  --color-accent: #E2A04A;
+  --color-accent-hover: #CC8D38;
+  --color-accent-ink: #13161C;
+  --color-sage: #6B768A;
+  --color-focus: #E2A04A;
+  --color-ring: rgba(241, 245, 249, 0.14);
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Golos Text", system-ui, sans-serif;
+  --display-weight: 400;
+  --display-tracking: -0.025em;
+  --radius-card: 16px;
+  --radius-image: 12px;
+  --radius-button: 9999px;
+}
+
+/* THEME 05 · PARCHMENT PRECISION (SWISS ARCHITECTURAL GRID) */
+html[data-theme="parchment-precision"] {
+  --color-paper: #F4EFEA;
+  --color-surface: #E9E2D8;
+  --color-surface-alt: #FBF9F6;
+  --color-border: #CBBFAE;
+  --color-ink: #1C2826;
+  --color-ink-muted: #495754;
+  --color-dark-panel: #1C2826;
+  --color-on-dark: #F4EFEA;
+  --color-on-dark-muted: #B9C4C0;
+  --color-accent: #B45309;
+  --color-accent-hover: #92400E;
+  --color-accent-ink: #FAF8F5;
+  --color-sage: #5E706B;
+  --color-focus: #B45309;
+  --color-ring: rgba(28, 40, 38, 0.14);
+  --font-display: "Golos Text", system-ui, sans-serif;
+  --font-body: "Golos Text", system-ui, sans-serif;
+  --display-weight: 600;
+  --display-tracking: -0.035em;
+  --radius-card: 4px;
+  --radius-image: 4px;
+  --radius-button: 2px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  caret-color: var(--color-accent);
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--preview-bar-height) + var(--banner-height));
+  transition: background-color 280ms var(--ease-out), color 280ms var(--ease-out);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: var(--display-weight, 500);
+  letter-spacing: var(--display-tracking, -0.025em);
+  color: inherit;
+  overflow-wrap: break-word;
+  min-width: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled, input:disabled, select:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* =========================================================
+   PREVIEW STUDIO BAR
+   ========================================================= */
+.preview-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: var(--preview-bar-height);
+  z-index: var(--z-preview-bar);
+  background: var(--bar-bg);
+  color: var(--bar-ink);
+  border-bottom: 1px solid var(--bar-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-md);
+  font-family: var(--font-bar);
+  font-size: 13px;
+}
+
+.preview-bar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.preview-bar__dot {
+  width: var(--space-xs);
+  height: var(--space-xs);
+  border-radius: 9999px;
+  background: var(--bar-gold);
+  flex-shrink: 0;
+}
+
+.preview-bar__themes {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: var(--space-3xs) 0;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --preview-bar-height: 92px;
+  }
+  .preview-bar {
+    flex-wrap: wrap;
+    row-gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+  }
+  .preview-bar__themes {
+    order: 3;
+    flex: 1 0 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 639px) {
+  #toggleWidthBtn {
+    display: none;
+  }
+}
+
+.preview-bar__themes::-webkit-scrollbar {
+  display: none;
+}
+
+.preview-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  height: 32px;
+  padding: 0 var(--space-sm);
+  border-radius: 9999px;
+  border: 1px solid var(--bar-border);
+  background: transparent;
+  color: var(--bar-muted);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 180ms var(--ease-out), color 180ms var(--ease-out), border-color 180ms var(--ease-out), transform 150ms var(--ease-out);
+}
+
+.preview-pill:hover {
+  background: var(--bar-hover);
+  color: var(--hero-ink);
+}
+
+.preview-pill:active {
+  transform: scale(0.97);
+}
+
+.preview-pill.is-active {
+  background: var(--bar-gold);
+  color: var(--bar-gold-ink);
+  border-color: var(--bar-gold);
+  font-weight: 600;
+}
+
+.preview-pill__swatch {
+  width: var(--space-xs);
+  height: var(--space-xs);
+  border-radius: 9999px;
+  border: 1px solid var(--bar-border);
+  flex-shrink: 0;
+}
+
+.swatch--stone { background: var(--swatch-stone); }
+.swatch--studio { background: var(--swatch-studio); }
+.swatch--vellum { background: var(--swatch-vellum); }
+.swatch--midnight { background: var(--swatch-midnight); }
+.swatch--parchment { background: var(--swatch-parchment); }
+
+.preview-bar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-shrink: 0;
+}
+
+.preview-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  height: 32px;
+  padding: 0 var(--space-sm);
+  border-radius: 9999px;
+  border: 1px solid var(--bar-gold-border);
+  background: var(--bar-gold-soft);
+  color: var(--bar-gold);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 180ms var(--ease-out), color 180ms var(--ease-out), transform 150ms var(--ease-out);
+}
+
+.preview-mode-btn:hover,
+.preview-mode-btn.is-active {
+  background: var(--bar-gold);
+  color: var(--bar-gold-ink);
+}
+
+/* =========================================================
+   APP SHELL & MOBILE WIDTH SIMULATOR
+   ========================================================= */
+.stage-shell {
+  padding-top: var(--preview-bar-height);
+  min-height: 100svh;
+  transition: max-width 280ms var(--ease-out);
+}
+
+.stage-shell.is-mobile-sim {
+  max-width: 390px;
+  margin: var(--space-lg) auto;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  overflow-x: clip;
+  background: var(--color-paper);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-inline: var(--space-lg);
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-inline: var(--space-xl);
+  }
+}
+
+.stage-shell.is-mobile-sim .container {
+  padding-inline: var(--space-md);
+}
+
+/* =========================================================
+   DUAL-PILL BUTTON SYSTEM (SIGNATURE BUTTON-040)
+   ========================================================= */
+.dual-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  border: none;
+  background: transparent;
+  padding: 0;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.dual-cta__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 var(--space-lg);
+  border-radius: var(--radius-button);
+  background-color: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color 240ms var(--ease-mejuma), transform 180ms var(--ease-out);
+}
+
+.dual-cta__circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-button);
+  background-color: var(--color-accent);
+  color: var(--color-accent-ink);
+  flex-shrink: 0;
+  transition: background-color 240ms var(--ease-mejuma), transform 240ms var(--ease-mejuma);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dual-cta:hover .dual-cta__label,
+  .dual-cta:hover .dual-cta__circle {
+    background-color: var(--color-accent-hover);
+  }
+  .dual-cta:hover .dual-cta__circle {
+    transform: translateX(3px);
+  }
+}
+
+.dual-cta:active .dual-cta__label,
+.dual-cta:active .dual-cta__circle {
+  transform: scale(0.97);
+}
+
+/* =========================================================
+   DETACHED FLOATING PILL NAVBAR (N5) + TOP-RIGHT DRAWER
+   ========================================================= */
+.site-nav {
+  position: sticky;
+  top: var(--preview-bar-height);
+  z-index: var(--z-sticky-nav);
+  padding: var(--space-md) 0;
+  pointer-events: none;
+}
+
+.stage-shell.is-mobile-sim .site-nav {
+  top: 0;
+}
+
+.site-nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.brand-pill {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  height: 44px;
+  padding: 0 var(--space-md) 0 var(--space-xs);
+  border-radius: var(--radius-button);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border: 1px solid var(--color-ring);
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px var(--shadow-soft);
+  transition: transform 150ms var(--ease-out), background-color 200ms var(--ease-out);
+}
+
+.brand-pill__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-button);
+  background: var(--color-dark-panel);
+  color: var(--color-on-dark);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+
+.nav-actions {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.nav-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  height: 44px;
+  padding: 0 var(--space-md);
+  border-radius: var(--radius-button);
+  border: 1px solid var(--color-ring);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px var(--shadow-soft);
+  transition: background-color 200ms var(--ease-out), transform 150ms var(--ease-out);
+}
+
+.nav-pill-btn--quiet {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  border-color: var(--color-border);
+}
+
+.nav-pill-btn:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 640px) {
+  .nav-pill-btn--hide-sm {
+    display: none;
+  }
+}
+.stage-shell.is-mobile-sim .nav-pill-btn--hide-sm {
+  display: none;
+}
+
+/* Top-Right Floating Dark Drawer */
+.nav-drawer {
+  position: fixed;
+  top: calc(var(--preview-bar-height) + 74px);
+  right: var(--space-xl);
+  width: 100%;
+  max-width: 380px;
+  z-index: var(--z-drawer);
+  background: var(--color-dark-panel);
+  color: var(--color-on-dark);
+  border-radius: var(--radius-card);
+  padding: var(--space-lg);
+  box-shadow: 0 24px 64px var(--shadow-deep);
+  opacity: 0;
+  transform: scale(0.95) translateY(-8px);
+  pointer-events: none;
+  transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out);
+}
+
+body.is-mobile-sim-active .nav-drawer {
+  top: calc(var(--preview-bar-height) + var(--space-lg) + 74px);
+  right: max(16px, calc(50% - 179px));
+  max-width: min(358px, calc(100% - 32px));
+}
+
+body.is-mobile-sim-active .modal-box {
+  max-width: min(358px, calc(100% - 32px));
+  padding: var(--space-lg);
+}
+
+.nav-drawer.is-open {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  .nav-drawer {
+    right: var(--space-md);
+    max-width: calc(100% - 32px);
+  }
+}
+
+.nav-drawer__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-drawer__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--on-dark-rule);
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--color-on-dark);
+  transition: color 180ms var(--ease-out), transform 180ms var(--ease-out);
+}
+
+.nav-drawer__link:hover {
+  color: var(--color-accent);
+  transform: translateX(4px);
+}
+
+.nav-drawer__footer {
+  margin-top: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  font-size: 13px;
+  color: var(--color-on-dark-muted);
+}
+
+/* =========================================================
+   HERO SECTION (COLD-HERO-FIRST, 5 DISTINCT POSTURES)
+   ========================================================= */
+.hero {
+  position: relative;
+  margin-top: -76px;
+  overflow: hidden;
+}
+
+.hero--fullscreen {
+  min-height: 660px;
+  height: calc(100svh - var(--preview-bar-height));
+  max-height: 920px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: var(--hero-ink);
+}
+
+.stage-shell.is-mobile-sim .hero--fullscreen {
+  height: 700px;
+  min-height: 620px;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    var(--scrim-top) 0%,
+    var(--scrim-mid) 45%,
+    var(--scrim-bot) 100%
+  );
+}
+
+.hero__content-wrap {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-md);
+}
+
+.hero__editorial-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: end;
+}
+
+@media (min-width: 900px) {
+  .hero__editorial-block {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+  }
+}
+
+.stage-shell.is-mobile-sim .hero__editorial-block {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.hero__title {
+  font-size: clamp(2.2rem, 4.5vw, 4.35rem);
+  line-height: 1.04;
+  letter-spacing: var(--display-tracking, -0.025em);
+  max-width: 18ch;
+  color: var(--hero-ink);
+}
+
+.hero__right-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+  justify-self: start;
+}
+
+@media (min-width: 900px) {
+  .hero__right-copy {
+    justify-self: end;
+    max-width: 42ch;
+  }
+}
+
+.stage-shell.is-mobile-sim .hero__right-copy {
+  justify-self: start;
+}
+
+.hero__lede {
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.5;
+  color: var(--hero-ink-soft);
+  max-width: 42ch;
+}
+
+.hero__wordmark {
+  width: 100%;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-style: normal;
+  font-size: clamp(3.3rem, 14.2vw, 14.5rem);
+  line-height: 0.84;
+  letter-spacing: -0.035em;
+  color: var(--hero-ink);
+  text-align: center;
+  user-select: none;
+  padding-top: var(--space-xs);
+  white-space: nowrap;
+}
+
+.stage-shell.is-mobile-sim .hero__wordmark {
+  font-size: 3.15rem;
+}
+
+/* Split Editorial Hero (Themes 2, 3, 5) */
+.hero--split {
+  display: none;
+  padding-top: 108px;
+  padding-bottom: var(--space-2xl);
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.hero--split__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .hero--split__grid {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    gap: var(--space-2xl);
+  }
+}
+
+.stage-shell.is-mobile-sim .hero--split__grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.hero--split__title {
+  font-size: clamp(2.25rem, 4.5vw, 4.35rem);
+  line-height: 1.04;
+  letter-spacing: var(--display-tracking, -0.03em);
+  max-width: 18ch;
+  margin-bottom: var(--space-md);
+}
+
+html[data-theme="parchment-precision"] .hero--split__title {
+  font-size: clamp(1.95rem, 3.6vw, 3.6rem);
+  max-width: 19ch;
+}
+
+.hero--split__lede {
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--color-ink-muted);
+  max-width: 44ch;
+  margin-bottom: var(--space-lg);
+}
+
+.hero--split__cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.hero--split__facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.hero--split__fact-val {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+.hero--split__fact-lbl {
+  font-size: 13px;
+  color: var(--color-ink-muted);
+  margin-top: var(--space-2xs);
+}
+
+.hero--split__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-image);
+  aspect-ratio: 4 / 3;
+  box-shadow: 0 0 0 1px var(--color-ring);
+}
+
+.hero--split__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+html[data-theme="vellum-terracotta"] .hero--split__media {
+  border-radius: 180px 180px 16px 16px;
+}
+
+.hero--split__caption {
+  margin-top: var(--space-xs);
+  font-size: 13px;
+  color: var(--color-ink-muted);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+html[data-theme="studio-alabaster"] .hero--fullscreen,
+html[data-theme="vellum-terracotta"] .hero--fullscreen,
+html[data-theme="parchment-precision"] .hero--fullscreen {
+  display: none;
+}
+
+html[data-theme="studio-alabaster"] .hero--split,
+html[data-theme="vellum-terracotta"] .hero--split,
+html[data-theme="parchment-precision"] .hero--split {
+  display: block;
+}
+
+/* =========================================================
+   SECTION 1: EDITORIAL DIPTYCH MISSION + QUICK FILTER
+   ========================================================= */
+.section {
+  padding-block: var(--space-3xl);
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-block: var(--space-4xl);
+  }
+}
+
+.stage-shell.is-mobile-sim .section {
+  padding-block: var(--space-2xl);
+}
+
+.diptych {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .diptych {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-2xl);
+  }
+}
+
+.stage-shell.is-mobile-sim .diptych {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.diptych__photo {
+  border-radius: var(--radius-image);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  box-shadow: 0 0 0 1px var(--color-ring);
+}
+
+.diptych__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.diptych__heading {
+  font-size: clamp(2rem, 3.6vw, 3.3rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  max-width: 20ch;
+  margin-bottom: var(--space-md);
+}
+
+.diptych__copy {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--color-ink-muted);
+  max-width: 58ch;
+  margin-bottom: var(--space-lg);
+}
+
+.filter-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  height: 44px;
+  padding: 0 var(--space-md);
+  border-radius: var(--radius-button);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 180ms var(--ease-out), color 180ms var(--ease-out), border-color 180ms var(--ease-out), transform 150ms var(--ease-out);
+}
+
+.filter-chip:hover {
+  border-color: var(--color-ink);
+}
+
+.filter-chip:active {
+  transform: scale(0.97);
+}
+
+.filter-chip.is-active {
+  background: var(--color-dark-panel);
+  color: var(--color-on-dark);
+  border-color: var(--color-dark-panel);
+}
+
+/* =========================================================
+   SECTION 2: EDITORIAL SERIF MARQUEE
+   ========================================================= */
+.marquee-band {
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  padding-block: var(--space-lg);
+  overflow: hidden;
+  background: var(--color-surface-alt);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 34s linear infinite;
+}
+
+.marquee-band:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  padding-right: var(--space-xl);
+}
+
+.marquee-item {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.1;
+  white-space: nowrap;
+  color: var(--color-ink);
+}
+
+.marquee-dot {
+  width: var(--space-sm);
+  height: var(--space-sm);
+  border-radius: 9999px;
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* =========================================================
+   SECTION 3: ASYMMETRIC STAGGERED PROPERTY LOOKBOOK
+   ========================================================= */
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-2xl);
+  max-width: 56ch;
+}
+
+.section-head__title {
+  font-size: clamp(2.1rem, 4vw, 3.6rem);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  max-width: 20ch;
+}
+
+.section-head__sub {
+  font-size: 16px;
+  color: var(--color-ink-muted);
+  line-height: 1.6;
+}
+
+.lookbook-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-2xl) var(--space-xl);
+}
+
+@media (min-width: 900px) {
+  .lookbook-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+.stage-shell.is-mobile-sim .lookbook-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.prop-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  min-width: 0;
+}
+
+@media (min-width: 900px) {
+  .prop-card--wide {
+    grid-column: span 7;
+  }
+  .prop-card--tall {
+    grid-column: span 5;
+  }
+  .prop-card--tall-offset {
+    grid-column: 2 / span 4;
+  }
+  .prop-card--wide-right {
+    grid-column: 7 / span 6;
+  }
+}
+
+.stage-shell.is-mobile-sim .prop-card--wide,
+.stage-shell.is-mobile-sim .prop-card--tall,
+.stage-shell.is-mobile-sim .prop-card--tall-offset,
+.stage-shell.is-mobile-sim .prop-card--wide-right {
+  grid-column: span 1;
+}
+
+.prop-card__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-image);
+  background: var(--color-surface);
+  box-shadow: 0 0 0 1px var(--color-ring);
+  transition: opacity 220ms var(--ease-out);
+}
+
+.prop-card--wide .prop-card__media,
+.prop-card--wide-right .prop-card__media {
+  aspect-ratio: 16 / 10;
+}
+
+.prop-card--tall .prop-card__media,
+.prop-card--tall-offset .prop-card__media {
+  aspect-ratio: 4 / 5;
+}
+
+.stage-shell.is-mobile-sim .prop-card__media {
+  aspect-ratio: 4 / 3;
+}
+
+.prop-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.prop-card__meta-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.prop-card__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.prop-card__price {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
+.prop-card__specs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-xs) var(--space-md);
+  font-size: 14px;
+  color: var(--color-ink-muted);
+}
+
+.prop-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-2xs);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  height: 44px;
+  padding: 0 var(--space-md);
+  border-radius: var(--radius-button);
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-ink);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 180ms var(--ease-out), border-color 180ms var(--ease-out), transform 150ms var(--ease-out);
+}
+
+.btn-outline--sm {
+  height: 36px;
+  padding: 0 var(--space-sm);
+}
+
+.btn-outline:hover {
+  background: var(--color-surface);
+  border-color: var(--color-ink);
+}
+
+.btn-outline:active {
+  transform: scale(0.97);
+}
+
+/* =========================================================
+   SECTION 4: STICKY LEFT HEADLINE + .01-.05 TURNKEY JOURNEY
+   ========================================================= */
+.journey-section {
+  background: var(--color-surface-alt);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.journey-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .journey-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+}
+
+.stage-shell.is-mobile-sim .journey-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.journey-sticky {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+@media (min-width: 960px) {
+  .journey-sticky {
+    position: sticky;
+    top: calc(var(--preview-bar-height) + var(--banner-height));
+  }
+}
+
+.stage-shell.is-mobile-sim .journey-sticky {
+  position: static;
+}
+
+.journey-sticky__title {
+  font-size: clamp(2.4rem, 4.6vw, 4.5rem);
+  line-height: 1.03;
+  letter-spacing: -0.03em;
+  max-width: 14ch;
+}
+
+.journey-sticky__copy {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-ink-muted);
+  max-width: 42ch;
+}
+
+.journey-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.step-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-lg);
+  align-items: start;
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  padding: var(--space-lg);
+  border: 1px solid var(--color-ring);
+}
+
+.step-card__num {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--color-ink-muted);
+}
+
+.step-card__title {
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  line-height: 1.2;
+  margin-bottom: var(--space-xs);
+}
+
+.step-card__desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-ink-muted);
+}
+
+/* =========================================================
+   SECTION 5: KPR & SUBSIDI RP 1,4 JT INTERACTIVE SIMULATOR
+   ========================================================= */
+.kpr-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-xl);
+  align-items: stretch;
+}
+
+@media (min-width: 960px) {
+  .kpr-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+}
+
+.stage-shell.is-mobile-sim .kpr-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.kpr-controls {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  padding: var(--space-xl);
+  border: 1px solid var(--color-ring);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.kpr-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.kpr-field__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.kpr-field__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.kpr-field__value {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.kpr-range {
+  width: 100%;
+  accent-color: var(--color-ink);
+  cursor: pointer;
+  min-height: 32px;
+}
+
+.kpr-select {
+  height: 44px;
+  padding: 0 var(--space-sm);
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: inherit;
+  font-size: 15px;
+}
+
+.tenor-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.tenor-pill {
+  height: 44px;
+  padding: 0 var(--space-md);
+  border-radius: var(--radius-button);
+  border: 1px solid var(--color-border);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 180ms var(--ease-out), color 180ms var(--ease-out), transform 150ms var(--ease-out);
+}
+
+.tenor-pill.is-active {
+  background: var(--color-dark-panel);
+  color: var(--color-on-dark);
+  border-color: var(--color-dark-panel);
+}
+
+.kpr-result {
+  background: var(--color-dark-panel);
+  color: var(--color-on-dark);
+  border-radius: var(--radius-card);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
+.kpr-result__kicker {
+  font-size: 14px;
+  color: var(--color-on-dark-muted);
+}
+
+.kpr-result__big {
+  font-family: var(--font-mono);
+  font-size: clamp(2rem, 3.4vw, 2.85rem);
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--bar-gold);
+  margin-top: var(--space-2xs);
+}
+
+.kpr-result__note {
+  font-size: 13px;
+  color: var(--color-on-dark-muted);
+  margin-top: var(--space-xs);
+}
+
+.kpr-result__rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  border-top: 1px solid var(--on-dark-rule);
+  border-bottom: 1px solid var(--on-dark-rule);
+  padding-block: var(--space-md);
+}
+
+.kpr-result__row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+  font-size: 14px;
+}
+
+.kpr-result__row span:first-child {
+  color: var(--color-on-dark-muted);
+}
+
+.kpr-result__row span:last-child {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+.kpr-result__free {
+  color: var(--bar-gold);
+}
+
+.dual-cta--fit {
+  width: fit-content;
+}
+
+/* =========================================================
+   SECTION 6: 4-COL VALUE GRID + FAQ ACCORDION
+   ========================================================= */
+.section--flush-top {
+  padding-top: 0;
+}
+
+.section-head--compact {
+  margin-bottom: var(--space-lg);
+}
+
+.value-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-3xl);
+}
+
+@media (min-width: 700px) {
+  .value-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .value-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.stage-shell.is-mobile-sim .value-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.value-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  padding: var(--space-lg);
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  border: 1px solid var(--color-ring);
+}
+
+.value-card__index {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--color-ink-muted);
+  line-height: 1;
+}
+
+.value-card__title {
+  font-size: 24px;
+  line-height: 1.2;
+  margin-bottom: var(--space-xs);
+}
+
+.value-card__text {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--color-ink-muted);
+}
+
+.faq-list {
+  max-width: 780px;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-border);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.faq-btn {
+  list-style: none;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-lg) 0;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.faq-btn::-webkit-details-marker {
+  display: none;
+}
+
+.faq-icon::before {
+  content: "+";
+}
+
+details[open] .faq-icon::before {
+  content: "−";
+}
+
+.faq-panel {
+  padding-bottom: var(--space-lg);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-ink-muted);
+  max-width: 65ch;
+}
+
+/* =========================================================
+   FOOTER: SPLIT PORTRAIT + DARK PANEL + GIANT WORDMARK (Ft2)
+   ========================================================= */
+.site-footer {
+  padding-bottom: var(--space-xl);
+}
+
+.footer-prefooter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding-bottom: var(--space-2xl);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-2xl);
+}
+
+@media (min-width: 900px) {
+  .footer-prefooter {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.stage-shell.is-mobile-sim .footer-prefooter {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-prefooter__title {
+  font-size: clamp(2.1rem, 4vw, 3.6rem);
+  line-height: 1.06;
+  max-width: 18ch;
+}
+
+.footer-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-md);
+}
+
+@media (min-width: 960px) {
+  .footer-split {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  }
+}
+
+.stage-shell.is-mobile-sim .footer-split {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.footer-split__photo {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  box-shadow: 0 0 0 1px var(--color-ring);
+}
+
+.footer-split__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.footer-split__panel {
+  background: var(--color-dark-panel);
+  color: var(--color-on-dark);
+  border-radius: var(--radius-card);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-2xl);
+  overflow: hidden;
+}
+
+.footer-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-xl);
+}
+
+.footer-col__title {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-on-dark-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.footer-col__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  font-size: 14px;
+}
+
+.footer-col__list a:hover {
+  color: var(--bar-gold);
+}
+
+.footer-wordmark {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 8.8vw, 7.2rem);
+  font-weight: 500;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  color: var(--color-on-dark);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--on-dark-rule);
+}
+
+.stage-shell.is-mobile-sim .footer-wordmark {
+  font-size: 2.5rem;
+}
+
+/* =========================================================
+   COMPARE ALL 5 STYLES VIEW (OPENDESIGN SPECIMEN MATRIX)
+   ========================================================= */
+.compare-view {
+  display: none;
+  padding-block: var(--space-2xl);
+}
+
+.compare-view.is-active {
+  display: block;
+}
+
+.single-view.is-hidden {
+  display: none;
+}
+
+.compare-head {
+  margin-bottom: var(--space-xl);
+}
+
+.compare-title {
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-lg);
+}
+
+@media (min-width: 1024px) {
+  .compare-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.stage-shell.is-mobile-sim .compare-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.stage-shell.is-mobile-sim .compare-swatches {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.compare-card {
+  border-radius: 16px;
+  padding: var(--space-lg);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.compare-swatches {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-xs);
+}
+
+.swatch-chip {
+  border-radius: 8px;
+  padding: var(--space-xs);
+  border: 1px solid var(--color-ring);
+  font-size: 12px;
+  font-family: var(--font-body);
+}
+
+.ruler-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 12px;
+  font-family: var(--font-body);
+}
+
+.ruler-bar {
+  height: var(--space-xs);
+  border-radius: var(--space-2xs);
+}
+
+/* =========================================================
+   LOCKED SHARELOC MODAL POPUP
+   ========================================================= */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background: var(--backdrop-dark);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+}
+
+.modal-backdrop.is-open {
+  display: flex;
+}
+
+.modal-box {
+  width: 100%;
+  max-width: 480px;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  border-radius: var(--radius-card);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  box-shadow: 0 24px 64px var(--shadow-deep);
+}
+
+.modal-box__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.modal-box__title {
+  font-size: 24px;
+}
+
+.modal-box__copy {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-ink-muted);
+}
+
+.modal-box__cluster {
+  color: var(--color-ink);
+}
+
+.modal-box__map {
+  position: relative;
+  border-radius: var(--radius-image);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.modal-box__map img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(4px) brightness(0.85);
+}
+
+.modal-box__lock {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  background: var(--lock-scrim);
+  color: var(--hero-ink);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.empty-filter {
+  grid-column: 1 / -1;
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  padding: var(--space-xl);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <!-- TOP PREVIEW STUDIO SWITCHER BAR -->
+  <header class="preview-bar" aria-label="Pengalih Gaya Desain">
+    <div class="preview-bar__brand">
+      <span class="preview-bar__dot" aria-hidden="true"></span>
+      <span>Pratinjau Tiar Property</span>
+    </div>
+
+    <div class="preview-bar__themes" role="tablist" aria-label="Pilih variasi gaya">
+      <button type="button" class="preview-pill is-active" data-set-theme="mejuma-stone" role="tab" aria-selected="true">
+        <span class="preview-pill__swatch swatch--stone"></span>
+        <span>01. Mejuma Warm Stone</span>
+      </button>
+      <button type="button" class="preview-pill" data-set-theme="studio-alabaster" role="tab" aria-selected="false">
+        <span class="preview-pill__swatch swatch--studio"></span>
+        <span>02. Studio Alabaster</span>
+      </button>
+      <button type="button" class="preview-pill" data-set-theme="vellum-terracotta" role="tab" aria-selected="false">
+        <span class="preview-pill__swatch swatch--vellum"></span>
+        <span>03. Vellum Terracotta</span>
+      </button>
+      <button type="button" class="preview-pill" data-set-theme="midnight-pavilion" role="tab" aria-selected="false">
+        <span class="preview-pill__swatch swatch--midnight"></span>
+        <span>04. Midnight Pavilion</span>
+      </button>
+      <button type="button" class="preview-pill" data-set-theme="parchment-precision" role="tab" aria-selected="false">
+        <span class="preview-pill__swatch swatch--parchment"></span>
+        <span>05. Parchment Precision</span>
+      </button>
+    </div>
+
+    <div class="preview-bar__actions">
+      <button type="button" class="preview-mode-btn" id="toggleWidthBtn" title="Simulasi lebar ponsel 390px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+        <span id="toggleWidthLabel">Cek 390px</span>
+      </button>
+      <button type="button" class="preview-mode-btn" id="toggleCompareBtn">
+        <span>Bandingkan 5 Gaya</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN INTERACTIVE STAGE -->
+  <div class="stage-shell" id="stageShell">
+
+    <!-- SINGLE LIVE STYLE VIEW -->
+    <div class="single-view" id="singleView">
+
+      <!-- DETACHED FLOATING PILL NAVBAR (N5) -->
+      <nav class="site-nav" aria-label="Navigasi utama">
+        <div class="container site-nav__inner">
+          <a href="#top" class="brand-pill" aria-label="Tiar Property Beranda">
+            <span class="brand-pill__mark">TP</span>
+            <span>Tiar Property</span>
+          </a>
+
+          <div class="nav-actions">
+            <a href="#kpr-simulator" class="nav-pill-btn nav-pill-btn--quiet nav-pill-btn--hide-sm">Simulasi KPR</a>
+            <a href="https://wa.me/6282142193231?text=Halo%20Mbak%20Ningsih%2C%20saya%20mau%20konsultasi%20unit%20DP%200%25%20Tiar%20Property" target="_blank" rel="noopener" class="nav-pill-btn nav-pill-btn--hide-sm">Konsultasi WA</a>
+            <button type="button" class="nav-pill-btn" id="menuToggleBtn" aria-expanded="false" aria-controls="navDrawer">
+              <span id="menuToggleText">Menu</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></svg>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- TOP-RIGHT FLOATING DARK PANEL DRAWER -->
+      <aside class="nav-drawer" id="navDrawer" aria-label="Menu navigasi cepat">
+        <ul class="nav-drawer__list">
+          <li>
+            <a href="#klaster" class="nav-drawer__link">
+              <span>Koleksi Klaster</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="#alur-kawal" class="nav-drawer__link">
+              <span>Alur Kawal Berkas</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="#kpr-simulator" class="nav-drawer__link">
+              <span>Simulasi KPR 3,4%</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="#pertanyaan" class="nav-drawer__link">
+              <span>Tanya Jawab</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/6282142193231?text=Halo%20Mbak%20Ningsih%2C%20mau%20saya%20jadwalkan%20survei%20lokasi%20akhir%20pekan" target="_blank" rel="noopener" class="nav-drawer__link">
+              <span>Jadwal Survei WA</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </li>
+        </ul>
+        <div class="nav-drawer__footer">
+          <span>Surabaya Timur, Surabaya Barat, Sidoarjo</span>
+          <span class="mono">PIC Utama: Mbak Ningsih (0821-4219-3231)</span>
+        </div>
+      </aside>
+
+      <main id="top">
+        <!-- HERO POSTURE A/D (FULLSCREEN MEJUMA / MIDNIGHT) -->
+        <section class="hero hero--fullscreen" aria-label="Hunian Pilihan Surabaya dan Sidoarjo">
+          <img
+            class="hero__bg"
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=85"
+            alt="Fasad rumah modern dua lantai dengan taman depan asri di kawasan Surabaya Timur"
+            width="1800"
+            height="1080"
+          />
+          <div class="hero__scrim" aria-hidden="true"></div>
+
+          <div class="container hero__content-wrap">
+            <div class="hero__editorial-block">
+              <h1 class="hero__title">Rumah Surabaya dan Sidoarjo tanpa DP.</h1>
+              <div class="hero__right-copy">
+                <p class="hero__lede">UTJ mulai Rp 1 juta, bebas biaya akad, subsidi Rp 1,4 juta.</p>
+                <a href="#klaster" class="dual-cta">
+                  <span class="dual-cta__label">Jelajahi Klaster Pilihan</span>
+                  <span class="dual-cta__circle" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </span>
+                </a>
+              </div>
+            </div>
+
+            <div class="hero__wordmark" aria-hidden="true">tiar property</div>
+          </div>
+        </section>
+
+        <!-- HERO POSTURE B/C/E (SPLIT ARCHITECTURAL) -->
+        <section class="hero hero--split" aria-label="Hunian Pilihan Surabaya dan Sidoarjo">
+          <div class="container">
+            <div class="hero--split__grid">
+              <div>
+                <h1 class="hero--split__title">Rumah Surabaya dan Sidoarjo tanpa DP.</h1>
+                <p class="hero--split__lede">Cukup UTJ Rp 1 sampai 5 juta, bebas biaya akad, dan kami kawal ke lima bank BUMN.</p>
+                <div class="hero--split__cta-row">
+                  <a href="#klaster" class="dual-cta">
+                    <span class="dual-cta__label">Jelajahi Klaster Pilihan</span>
+                    <span class="dual-cta__circle" aria-hidden="true">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </span>
+                  </a>
+                  <a href="#kpr-simulator" class="btn-outline">Hitung Cicilan Promo</a>
+                </div>
+
+                <div class="hero--split__facts">
+                  <div>
+                    <div class="hero--split__fact-val mono">0% DP</div>
+                    <div class="hero--split__fact-lbl">UTJ mulai Rp 1 Jt</div>
+                  </div>
+                  <div>
+                    <div class="hero--split__fact-val mono">Rp 1,7 Jt</div>
+                    <div class="hero--split__fact-lbl">Cicilan awal per bulan</div>
+                  </div>
+                  <div>
+                    <div class="hero--split__fact-val mono">5 Bank</div>
+                    <div class="hero--split__fact-lbl">BTN, BRI, BSI, Mandiri, BNI</div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="hero--split__media">
+                  <img
+                    src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85"
+                    alt="Hunian klaster modern dua lantai dengan tata cahaya natural"
+                    width="1400"
+                    height="1050"
+                  />
+                </div>
+                <div class="hero--split__caption">
+                  <span>Klaster pilihan koridor MERR dan akses Bandara Juanda</span>
+                  <span class="mono">SHM &amp; PBG Siap</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 1: EDITORIAL DIPTYCH MISSION + QUICK FILTER -->
+        <section class="section" aria-labelledby="mission-heading">
+          <div class="container diptych">
+            <div class="diptych__photo">
+              <img
+                src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85"
+                alt="Ruang keluarga hangat dengan pencahayaan alami di unit contoh Sidoarjo"
+                width="1000"
+                height="1250"
+                loading="lazy"
+              />
+            </div>
+
+            <div>
+              <h2 id="mission-heading" class="diptych__heading">Punya rumah pertama tanpa menunggu tabungan DP menumpuk.</h2>
+              <p class="diptych__copy">Klaster bebas banjir berlebar jalan 8 meter di Surabaya dan Sidoarjo. Kami bantu cek SLIK OJK privat hingga akad bebas biaya.</p>
+
+              <div class="filter-strip" role="group" aria-label="Saring klaster cepat">
+                <button type="button" class="filter-chip is-active" data-filter="all">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                  <span>Semua Klaster (6)</span>
+                </button>
+                <button type="button" class="filter-chip" data-filter="sidoarjo">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span>Sidoarjo &amp; Juanda</span>
+                </button>
+                <button type="button" class="filter-chip" data-filter="surabaya">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/></svg>
+                  <span>Surabaya MERR &amp; Barat</span>
+                </button>
+                <button type="button" class="filter-chip" data-filter="under2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                  <span>Cicilan &lt; Rp 2 Jt</span>
+                </button>
+                <button type="button" class="filter-chip" data-filter="2floor">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
+                  <span>Rumah 2 Lantai</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 2: INFINITE EDITORIAL SERIF MARQUEE -->
+        <div class="marquee-band" aria-label="Keunggulan program hunian">
+          <div class="marquee-track">
+            <div class="marquee-group">
+              <span class="marquee-item">DP 0% Cukup UTJ Rp 1 Juta</span>
+              <span class="marquee-dot" aria-hidden="true"></span>
+              <span class="marquee-item">Free BPHTB, AJB, BBN &amp; Notaris</span>
+              <span class="marquee-dot" aria-hidden="true"></span>
+              <span class="marquee-item">Subsidi Angsuran Rp 1,4 Juta per Bulan</span>
+              <span class="marquee-dot" aria-hidden="true"></span>
+              <span class="marquee-item">Kawal Berkas 5 Bank BUMN Sampai ACC</span>
+              <span class="marquee-dot" aria-hidden="true"></span>
+            </div>
+            <div class="marquee-group" aria-hidden="true">
+              <span class="marquee-item">DP 0% Cukup UTJ Rp 1 Juta</span>
+              <span class="marquee-dot"></span>
+              <span class="marquee-item">Free BPHTB, AJB, BBN &amp; Notaris</span>
+              <span class="marquee-dot"></span>
+              <span class="marquee-item">Subsidi Angsuran Rp 1,4 Juta per Bulan</span>
+              <span class="marquee-dot"></span>
+              <span class="marquee-item">Kawal Berkas 5 Bank BUMN Sampai ACC</span>
+              <span class="marquee-dot"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: ASYMMETRIC STAGGERED PROPERTY LOOKBOOK -->
+        <section class="section" id="klaster" aria-labelledby="lookbook-heading">
+          <div class="container">
+            <div class="section-head">
+              <h2 id="lookbook-heading" class="section-head__title">Koleksi klaster pilihan siap huni.</h2>
+              <p class="section-head__sub">Nama klaster memakai kode kurasi resmi. Titik koordinat survei dikirim konsultan pendamping.</p>
+            </div>
+
+            <div class="lookbook-grid" id="lookbookGrid">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 4: STICKY LEFT HEADLINE + .01-.05 TURNKEY KPR JOURNEY -->
+        <section class="section journey-section" id="alur-kawal" aria-labelledby="journey-heading">
+          <div class="container journey-grid">
+            <div class="journey-sticky">
+              <h2 id="journey-heading" class="journey-sticky__title">Urusan berkas sampai akad biar kami yang kawal.</h2>
+              <p class="journey-sticky__copy">Dari cek kelayakan pasangan hingga akta notaris, satu konsultan mendampingi tanpa biaya tambahan.</p>
+              <a href="https://wa.me/6282142193231?text=Halo%20Mbak%20Ningsih%2C%20saya%20mau%20ditemenin%20cek%20kelayakan%20KPR%20dan%20lokasi%20unit" target="_blank" rel="noopener" class="dual-cta">
+                <span class="dual-cta__label">Mau Saya Temenin Cek?</span>
+                <span class="dual-cta__circle" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </span>
+              </a>
+            </div>
+
+            <div class="journey-cards">
+              <article class="step-card">
+                <span class="step-card__num">.01</span>
+                <div>
+                  <h3 class="step-card__title">Konsultasi anggaran dan cek SLIK OJK gratis</h3>
+                  <p class="step-card__desc">Hitung rasio angsuran atau penggabungan penghasilan pasangan sebelum memilih unit.</p>
+                </div>
+              </article>
+
+              <article class="step-card">
+                <span class="step-card__num">.02</span>
+                <div>
+                  <h3 class="step-card__title">Pendampingan survei fisik langsung di lokasi</h3>
+                  <p class="step-card__desc">Tinjau lebar jalan 8 meter, struktur bangunan, serta akses tol dan bandara.</p>
+                </div>
+              </article>
+
+              <article class="step-card">
+                <span class="step-card__num">.03</span>
+                <div>
+                  <h3 class="step-card__title">Kunci kavling cukup UTJ Rp 1 sampai 5 juta</h3>
+                  <p class="step-card__desc">Skema DP 0% tanpa uang muka; nilai UTJ langsung memotong harga jual.</p>
+                </div>
+              </article>
+
+              <article class="step-card">
+                <span class="step-card__num">.04</span>
+                <div>
+                  <h3 class="step-card__title">Pengajuan berkas ke 5 bank BUMN rekanan</h3>
+                  <p class="step-card__desc">Kawal ke BTN, BRI, BSI, Mandiri, dan BNI berbunga promo 3,4% plus subsidi Rp 1,4 juta.</p>
+                </div>
+              </article>
+
+              <article class="step-card">
+                <span class="step-card__num">.05</span>
+                <div>
+                  <h3 class="step-card__title">Akad notaris bebas biaya dan serah terima kunci</h3>
+                  <p class="step-card__desc">Gratis BPHTB, AJB, balik nama, dan notaris, plus bonus pompa air atau IPL 6 bulan.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 5: INTERACTIVE KPR & SUBSIDI RP 1,4 JT SIMULATOR -->
+        <section class="section" id="kpr-simulator" aria-labelledby="kpr-heading">
+          <div class="container">
+            <div class="section-head">
+              <h2 id="kpr-heading" class="section-head__title">Cicilan setara kontrakan, sertifikat SHM milik sendiri.</h2>
+              <p class="section-head__sub">Hitung estimasi angsuran bulanan Anda dengan bunga promo 3,4% dan potongan subsidi angsuran Rp 1,4 juta per bulan.</p>
+            </div>
+
+            <div class="kpr-grid">
+              <div class="kpr-controls">
+                <div class="kpr-field">
+                  <label class="kpr-field__label" for="kprClusterSelect">Pilih klaster referensi</label>
+                  <select id="kprClusterSelect" class="kpr-select">
+                    <option value="290000000">Skyline Juanda Gateway: Rp 290 Jt (UTJ Rp 1 Jt)</option>
+                    <option value="300000000" selected>Tray Modern Sukodono: Rp 300 Jt (UTJ Rp 1 Jt)</option>
+                    <option value="320000000">Trry Netonil Anggaswangi: Rp 320 Jt (UTJ Rp 1 Jt)</option>
+                    <option value="350000000">Narminio Masangan Living: Rp 350 Jt (UTJ Rp 1 Jt)</option>
+                    <option value="390000000">Super Tiscre Juanda: Rp 390 Jt (UTJ Rp 2 Jt)</option>
+                    <option value="420000000">Hgrman Morta Waru: Rp 420 Jt (UTJ Rp 2 Jt)</option>
+                    <option value="450000000">Dian Premiere Wiyung: Rp 450 Jt (UTJ Rp 2 Jt)</option>
+                    <option value="580000000">Grand Botanica Rungkut: Rp 580 Jt (UTJ Rp 2 Jt)</option>
+                    <option value="700000000">Style Hoto MERR: Rp 700 Jt (UTJ Rp 5 Jt)</option>
+                  </select>
+                </div>
+
+                <div class="kpr-field">
+                  <div class="kpr-field__head">
+                    <label class="kpr-field__label" for="kprPriceRange">Harga unit properti</label>
+                    <span class="kpr-field__value" id="kprPriceLabel">Rp 300.000.000</span>
+                  </div>
+                  <input type="range" id="kprPriceRange" class="kpr-range" min="250000000" max="800000000" step="10000000" value="300000000" />
+                </div>
+
+                <div class="kpr-field">
+                  <div class="kpr-field__head">
+                    <label class="kpr-field__label" for="kprDpRange">Uang muka (program DP 0%)</label>
+                    <span class="kpr-field__value" id="kprDpLabel">0% (Rp 0)</span>
+                  </div>
+                  <input type="range" id="kprDpRange" class="kpr-range" min="0" max="20" step="5" value="0" />
+                </div>
+
+                <div class="kpr-field">
+                  <span class="kpr-field__label">Tenor cicilan KPR</span>
+                  <div class="tenor-pills" role="group" aria-label="Pilih tenor cicilan">
+                    <button type="button" class="tenor-pill" data-tenor="10">10 Tahun</button>
+                    <button type="button" class="tenor-pill" data-tenor="15">15 Tahun</button>
+                    <button type="button" class="tenor-pill is-active" data-tenor="20">20 Tahun</button>
+                    <button type="button" class="tenor-pill" data-tenor="25">25 Tahun</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="kpr-result" aria-live="polite">
+                <div>
+                  <span class="kpr-result__kicker">Estimasi angsuran promo 6 sampai 12 bulan awal</span>
+                  <div class="kpr-result__big" id="kprPromoOut">Rp 324.481</div>
+                  <p class="kpr-result__note">Sudah dipotong subsidi angsuran Rp 1.400.000 setiap bulan pada periode promo.</p>
+                </div>
+
+                <div class="kpr-result__rows">
+                  <div class="kpr-result__row">
+                    <span>Pokok pembiayaan bank</span>
+                    <span id="kprPrincipalOut">Rp 300.000.000</span>
+                  </div>
+                  <div class="kpr-result__row">
+                    <span>Bunga acuan promo</span>
+                    <span>3,4% per tahun</span>
+                  </div>
+                  <div class="kpr-result__row">
+                    <span>Angsuran reguler tanpa subsidi</span>
+                    <span id="kprRegularOut">Rp 1.724.481</span>
+                  </div>
+                  <div class="kpr-result__row">
+                    <span>Biaya BPHTB, AJB, BBN &amp; Notaris</span>
+                    <span class="kpr-result__free">Rp 0 (All-In Free)</span>
+                  </div>
+                </div>
+
+                <a id="kprWaLink" href="https://wa.me/6282142193231" target="_blank" rel="noopener" class="dual-cta dual-cta--fit">
+                  <span class="dual-cta__label">Kirim Simulasi ke WA</span>
+                  <span class="dual-cta__circle" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 6: 4-COLUMN VALUE GRID + FAQ ACCORDION -->
+        <section class="section section--flush-top" id="pertanyaan" aria-labelledby="value-heading">
+          <div class="container">
+            <div class="section-head">
+              <h2 id="value-heading" class="section-head__title">Kepastian legalitas dan biaya dari awal hingga akad.</h2>
+            </div>
+
+            <div class="value-grid">
+              <article class="value-card">
+                <span class="value-card__index">.01</span>
+                <div>
+                  <h3 class="value-card__title">SHM &amp; IMB pecah per kavling</h3>
+                  <p class="value-card__text">Sertifikat Hak Milik dan PBG setiap unit siap proses akad.</p>
+                </div>
+              </article>
+
+              <article class="value-card">
+                <span class="value-card__index">.02</span>
+                <div>
+                  <h3 class="value-card__title">5 Bank BUMN Rekanan Resmi</h3>
+                  <p class="value-card__text">Didukung BTN, BRI, BSI syariah, Mandiri, dan BNI.</p>
+                </div>
+              </article>
+
+              <article class="value-card">
+                <span class="value-card__index">.03</span>
+                <div>
+                  <h3 class="value-card__title">Gratis BPHTB, AJB &amp; Notaris</h3>
+                  <p class="value-card__text">Bebas biaya balik nama dan subsidi KPR hingga Rp 20 juta.</p>
+                </div>
+              </article>
+
+              <article class="value-card">
+                <span class="value-card__index">.04</span>
+                <div>
+                  <h3 class="value-card__title">Ditemani hingga serah terima</h3>
+                  <p class="value-card__text">Konsultan mendampingi dari survei lokasi sampai serah terima kunci.</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="section-head section-head--compact">
+              <h2 class="section-head__title">Pertanyaan yang paling sering ditanyakan.</h2>
+            </div>
+
+            <div class="faq-list" id="faqList">
+              <details class="faq-item" open>
+                <summary class="faq-btn">
+                  <span>Apakah benar bisa ambil rumah dengan DP 0% tanpa uang muka?</span>
+                  <span class="mono faq-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-panel">
+                  Benar. Cukup tanda jadi (UTJ) Rp 1 juta hingga Rp 5 juta sesuai klaster untuk mengunci kavling, langsung memotong harga jual.
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary class="faq-btn">
+                  <span>Berapa minimal penghasilan agar pengajuan KPR disetujui bank?</span>
+                  <span class="mono faq-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-panel">
+                  Rasio cicilan maksimal 35% sampai 40% penghasilan bersih, atau bisa digabung melalui skema Joint Income pasangan.
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary class="faq-btn">
+                  <span>Mengapa titik lokasi tepat baru dibagikan saat jadwal survei?</span>
+                  <span class="mono faq-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-panel">
+                  Agar kuota promo DP 0% dan bonus unit Anda terdata resmi bersama konsultan pendamping saat tiba di lokasi.
+                </div>
+              </details>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- FOOTER: SPLIT PORTRAIT + DARK PANEL + GIANT WORDMARK (Ft2) -->
+      <footer class="site-footer">
+        <div class="container">
+          <div class="footer-prefooter">
+            <h2 class="footer-prefooter__title">Siap melihat langsung kondisi unit akhir pekan ini?</h2>
+            <a href="https://wa.me/6282142193231?text=Halo%20Mbak%20Ningsih%2C%20saya%20mau%20booking%20jadwal%20survei%20Sabtu%20atau%20Minggu%20ini" target="_blank" rel="noopener" class="dual-cta">
+              <span class="dual-cta__label">Jadwalkan Survei Bersama</span>
+              <span class="dual-cta__circle" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
+            </a>
+          </div>
+
+          <div class="footer-split">
+            <div class="footer-split__photo">
+              <img
+                src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=900&q=85"
+                alt="Interior ruang tamu hangat rumah siap huni di kawasan Sidoarjo"
+                width="900"
+                height="1200"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="footer-split__panel">
+              <div class="footer-cols">
+                <div>
+                  <h3 class="footer-col__title">Navigasi</h3>
+                  <ul class="footer-col__list">
+                    <li><a href="#klaster">Koleksi Klaster</a></li>
+                    <li><a href="#alur-kawal">Alur Kawal Berkas</a></li>
+                    <li><a href="#kpr-simulator">Simulasi KPR 3,4%</a></li>
+                    <li><a href="#pertanyaan">Pertanyaan Umum</a></li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 class="footer-col__title">Area Pemasaran</h3>
+                  <ul class="footer-col__list">
+                    <li>Sukodono &amp; Anggaswangi</li>
+                    <li>Sedati &amp; Bypass Juanda</li>
+                    <li>Waru &amp; Gedangan</li>
+                    <li>MERR, Rungkut &amp; Wiyung</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 class="footer-col__title">Layanan Konsultan</h3>
+                  <ul class="footer-col__list">
+                    <li>Mbak Ningsih (PIC Utama)</li>
+                    <li class="mono">0821-4219-3231</li>
+                    <li>Senin sampai Minggu, 08.00 sampai 20.00 WIB</li>
+                    <li>Partner Resmi Bank BTN, BRI, BSI, Mandiri, BNI</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="footer-wordmark">tiar property</div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- COMPARE ALL 5 STYLES MATRIX VIEW -->
+    <section class="compare-view" id="compareView" aria-label="Perbandingan 5 Variasi Desain">
+      <div class="container">
+        <div class="section-head compare-head">
+          <h1 class="section-head__title compare-title">Perbandingan 5 variasi visual Tiar Property.</h1>
+          <p class="section-head__sub">Bandingkan palet 60-30-10, karakter font judul, rasio skala, penggaris jarak, dan komponen Dual-Pill CTA. Klik “Aktifkan Gaya Ini” untuk melihat pratinjau penuh satu halaman.</p>
+        </div>
+
+        <div class="compare-grid" id="compareGrid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- LOCKED SHARELOC MODAL POPUP -->
+  <div class="modal-backdrop" id="sharelocModal" role="dialog" aria-modal="true" aria-labelledby="sharelocTitle">
+    <div class="modal-box">
+      <div class="modal-box__head">
+        <h2 id="sharelocTitle" class="modal-box__title">Titik Lokasi Dijaga Privat</h2>
+        <button type="button" class="btn-outline btn-outline--sm" id="closeModalBtn">Tutup</button>
+      </div>
+
+      <div class="modal-box__map">
+        <img id="modalMapImg" src="./public/images/maps/gmaps_sidoarjo.webp" alt="Pratinjau area peta Surabaya dan Sidoarjo" width="600" height="338" />
+        <div class="modal-box__lock">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span id="modalClusterArea">Area Sukodono, Sidoarjo</span>
+        </div>
+      </div>
+
+      <p class="modal-box__copy">
+        Untuk melindungi kuota promo DP 0% dan kenyamanan jadwal kunjungan, titik koordinat Shareloc klaster <strong id="modalClusterName" class="modal-box__cluster">Tray Modern Sukodono</strong> dikirim langsung melalui WhatsApp konsultan kami.
+      </p>
+
+      <a id="modalWaCta" href="https://wa.me/6282142193231" target="_blank" rel="noopener" class="dual-cta">
+        <span class="dual-cta__label">Minta Shareloc ke Mbak Ningsih</span>
+        <span class="dual-cta__circle" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const PROPERTIES = [
+      {
+        id: "sukodono-cluster-1",
+        codeName: "Tray Modern Sukodono",
+        locationAreaShort: "Sukodono, Sidoarjo",
+        city: "Sidoarjo",
+        floors: 1,
+        priceStart: "Rp 300 Jt",
+        cicilanPromo: "Rp 1,9 Jt / bln",
+        cicilanNominal: 1.9,
+        utjAmount: "UTJ Rp 1 Jt",
+        specs: "2 KT, 1 KM, LT 72 m², LB 36 m²",
+        image: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=85",
+        layoutClass: "prop-card--wide"
+      },
+      {
+        id: "juanda-sedati-cluster-2",
+        codeName: "Super Tiscre Juanda",
+        locationAreaShort: "Sedati, 5 Menit Juanda",
+        city: "Sidoarjo",
+        floors: 1,
+        priceStart: "Rp 390 Jt",
+        cicilanPromo: "Rp 2,4 Jt / bln",
+        cicilanNominal: 2.4,
+        utjAmount: "UTJ Rp 2 Jt",
+        specs: "2 KT, 1 KM, LT 75 m², LB 42 m²",
+        image: "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=900&q=85",
+        layoutClass: "prop-card--tall"
+      },
+      {
+        id: "merr-surabaya-cluster-3",
+        codeName: "Style Hoto MERR",
+        locationAreaShort: "MERR, Surabaya Timur",
+        city: "Surabaya",
+        floors: 2,
+        priceStart: "Rp 700 Jt",
+        cicilanPromo: "Rp 4,5 Jt / bln",
+        cicilanNominal: 4.5,
+        utjAmount: "UTJ Rp 5 Jt",
+        specs: "3 KT, 2 KM, LT 84 m², LB 68 m²",
+        image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1100&q=85",
+        layoutClass: "prop-card--tall-offset"
+      },
+      {
+        id: "rungkut-surabaya-cluster-7",
+        codeName: "Grand Botanica Rungkut",
+        locationAreaShort: "Rungkut, Surabaya Timur",
+        city: "Surabaya",
+        floors: 2,
+        priceStart: "Rp 580 Jt",
+        cicilanPromo: "Rp 3,4 Jt / bln",
+        cicilanNominal: 3.4,
+        utjAmount: "UTJ Rp 2 Jt",
+        specs: "3 KT, 2 KM, LT 75 m², LB 60 m²",
+        image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=85",
+        layoutClass: "prop-card--wide-right"
+      },
+      {
+        id: "sedati-juanda-cluster-9",
+        codeName: "Skyline Juanda Gateway",
+        locationAreaShort: "Sedati, Bypass Juanda",
+        city: "Sidoarjo",
+        floors: 1,
+        priceStart: "Rp 290 Jt",
+        cicilanPromo: "Rp 1,7 Jt / bln",
+        cicilanNominal: 1.7,
+        utjAmount: "UTJ Rp 1 Jt",
+        specs: "2 KT, 1 KM, LT 72 m², LB 36 m²",
+        image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=85",
+        layoutClass: "prop-card--wide"
+      },
+      {
+        id: "wiyung-surabaya-cluster-8",
+        codeName: "Dian Premiere Wiyung",
+        locationAreaShort: "Wiyung, Surabaya Barat",
+        city: "Surabaya",
+        floors: 1,
+        priceStart: "Rp 450 Jt",
+        cicilanPromo: "Rp 2,8 Jt / bln",
+        cicilanNominal: 2.8,
+        utjAmount: "UTJ Rp 2 Jt",
+        specs: "2 KT, 1 KM, LT 70 m², LB 42 m²",
+        image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=900&q=85",
+        layoutClass: "prop-card--tall"
+      }
+    ];
+
+    const THEMES_META = [
+      {
+        id: "mejuma-stone",
+        name: "01. Mejuma Warm Stone",
+        tag: "Referensi Utama mejuma-tuscany.com",
+        posture: "Hero Fullscreen + Giant Bottom-Bleed Wordmark",
+        paper: "#F1F1F1",
+        surface: "#E8E4E1",
+        ink: "#38352C",
+        accent: "#FFCA4F",
+        accentInk: "#38352C",
+        displayFont: "Cormorant Garamond",
+        bodyFont: "Golos Text",
+        ratio: "4.35x (70px / 16px)",
+        note: "Hangat, editorial Eropa, sangat kontras di CTA Dual-Pill emas dan panel gelap #38352C."
+      },
+      {
+        id: "studio-alabaster",
+        name: "02. Studio Alabaster",
+        tag: "Sanctuary Editorial | Studio Style",
+        posture: "Split 50/50 Architectural Hero + Fakta Tabular",
+        paper: "#F6F5F0",
+        surface: "#EFECE4",
+        ink: "#161816",
+        accent: "#1E4D2B",
+        accentInk: "#FAF8F5",
+        displayFont: "Cormorant Garamond",
+        bodyFont: "Golos Text",
+        ratio: "4.35x (70px / 16px)",
+        note: "Tenang, berwibawa, hijau hutan studio untuk audiens keluarga mapan Surabaya Timur."
+      },
+      {
+        id: "vellum-terracotta",
+        name: "03. Vellum Terracotta",
+        tag: "Courtyard Living | Atelier Style",
+        posture: "Split Hero + Lengkungan Arsitektur Tropis",
+        paper: "#FAF6F0",
+        surface: "#F1E9DF",
+        ink: "#1F1A17",
+        accent: "#9C422B",
+        accentInk: "#FAF6F0",
+        displayFont: "Cormorant Garamond",
+        bodyFont: "Golos Text",
+        ratio: "4.35x (70px / 16px)",
+        note: "Krem hangat dan aksen bata terakota yang ramah serta terasa dekat untuk pembeli rumah pertama."
+      },
+      {
+        id: "midnight-pavilion",
+        name: "04. Midnight Pavilion",
+        tag: "Nocturnal Architectural | Dusk Style",
+        posture: "Hero Fullscreen Gelap + Aksen Brass Hangat",
+        paper: "#13161C",
+        surface: "#1C2029",
+        ink: "#F1F5F9",
+        accent: "#E2A04A",
+        accentInk: "#13161C",
+        displayFont: "Cormorant Garamond",
+        bodyFont: "Golos Text",
+        ratio: "4.35x (70px / 16px)",
+        note: "Nuansa malam eksklusif dan tegas untuk unit premium 2 lantai MERR dan Rungkut."
+      },
+      {
+        id: "parchment-precision",
+        name: "05. Parchment Precision",
+        tag: "Swiss Architectural Grid | Furrow Style",
+        posture: "Split Hero + Garis Teknis Presisi 2px",
+        paper: "#F4EFEA",
+        surface: "#E9E2D8",
+        ink: "#1C2826",
+        accent: "#B45309",
+        accentInk: "#FAF8F5",
+        displayFont: "Golos Text",
+        bodyFont: "Golos Text",
+        ratio: "3.6x (58px / 16px)",
+        note: "Modern tegas berbasis tipografi geometris dan garis presisi untuk keterbacaan spesifikasi cepat."
+      }
+    ];
+
+    const lookbookGrid = document.getElementById("lookbookGrid");
+    function renderProperties(filterKey) {
+      const filtered = PROPERTIES.filter((p) => {
+        if (filterKey === "sidoarjo") return p.city === "Sidoarjo";
+        if (filterKey === "surabaya") return p.city === "Surabaya";
+        if (filterKey === "under2") return p.cicilanNominal <= 2.0;
+        if (filterKey === "2floor") return p.floors === 2;
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        lookbookGrid.innerHTML = `
+          <div class="empty-filter">
+            <h3 style="font-size:24px;">Belum ada klaster pada saringan ini.</h3>
+            <p style="color:var(--color-ink-muted); max-width:50ch;">Tampilkan seluruh koleksi Surabaya dan Sidoarjo untuk melihat pilihan unit DP 0% yang tersedia.</p>
+            <button type="button" class="btn-outline" onclick="applyFilter('all')">Tampilkan Semua Klaster</button>
+          </div>`;
+        return;
+      }
+
+      lookbookGrid.innerHTML = filtered.map((p, idx) => {
+        const cls = filterKey === "all" ? p.layoutClass : (idx % 2 === 0 ? "prop-card--wide" : "prop-card--tall");
+        const waMsg = encodeURIComponent(`Halo Mbak Ningsih, saya tertarik dengan ${p.codeName} (${p.locationAreaShort}, ${p.cicilanPromo}). Mau saya dijadwalkan survei?`);
+        return `
+          <article class="prop-card ${cls}">
+            <div class="prop-card__media">
+              <img src="${p.image}" alt="${p.codeName} di ${p.locationAreaShort}" width="1200" height="900" loading="lazy" />
+            </div>
+            <div class="prop-card__meta-top">
+              <h3 class="prop-card__title">${p.codeName}</h3>
+              <span class="prop-card__price">${p.priceStart}</span>
+            </div>
+            <div class="prop-card__specs">
+              <span>${p.locationAreaShort} (${p.specs})</span>
+              <span class="mono">${p.cicilanPromo} | ${p.utjAmount}</span>
+            </div>
+            <div class="prop-card__actions">
+              <a href="https://wa.me/6282142193231?text=${waMsg}" target="_blank" rel="noopener" class="dual-cta">
+                <span class="dual-cta__label">Mau Saya Temenin?</span>
+                <span class="dual-cta__circle" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </span>
+              </a>
+              <button type="button" class="btn-outline" data-shareloc-id="${p.id}">Cek Titik Lokasi</button>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function applyFilter(key) {
+      document.querySelectorAll(".filter-chip").forEach((btn) => {
+        btn.classList.toggle("is-active", btn.dataset.filter === key);
+      });
+      renderProperties(key);
+    }
+
+    document.querySelectorAll(".filter-chip").forEach((btn) => {
+      btn.addEventListener("click", () => applyFilter(btn.dataset.filter));
+    });
+    renderProperties("all");
+
+    const htmlEl = document.documentElement;
+    const singleView = document.getElementById("singleView");
+    const compareView = document.getElementById("compareView");
+    const toggleCompareBtn = document.getElementById("toggleCompareBtn");
+    const stageShell = document.getElementById("stageShell");
+    const toggleWidthBtn = document.getElementById("toggleWidthBtn");
+    const toggleWidthLabel = document.getElementById("toggleWidthLabel");
+
+    function setTheme(themeId) {
+      htmlEl.setAttribute("data-theme", themeId);
+      document.querySelectorAll("[data-set-theme]").forEach((pill) => {
+        const active = pill.dataset.setTheme === themeId;
+        pill.classList.toggle("is-active", active);
+        pill.setAttribute("aria-selected", active ? "true" : "false");
+      });
+      if (compareView.classList.contains("is-active")) {
+        setCompareMode(false);
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    document.querySelectorAll("[data-set-theme]").forEach((pill) => {
+      pill.addEventListener("click", () => setTheme(pill.dataset.setTheme));
+    });
+
+    function setCompareMode(active) {
+      compareView.classList.toggle("is-active", active);
+      singleView.classList.toggle("is-hidden", active);
+      toggleCompareBtn.classList.toggle("is-active", active);
+      toggleCompareBtn.textContent = active ? "Kembali ke Pratinjau Penuh" : "Bandingkan 5 Gaya";
+      if (active) window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    toggleCompareBtn.addEventListener("click", () => {
+      setCompareMode(!compareView.classList.contains("is-active"));
+    });
+
+    toggleWidthBtn.addEventListener("click", () => {
+      const isSim = stageShell.classList.toggle("is-mobile-sim");
+      document.body.classList.toggle("is-mobile-sim-active", isSim);
+      toggleWidthBtn.classList.toggle("is-active", isSim);
+      toggleWidthLabel.textContent = isSim ? "Lebar Penuh" : "Cek 390px";
+    });
+
+    const compareGrid = document.getElementById("compareGrid");
+    compareGrid.innerHTML = THEMES_META.map((t) => `
+      <article class="compare-card" style="background:${t.paper}; color:${t.ink}; border-color:${t.ink}22;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px;">
+          <div>
+            <div style="font-size:12px; opacity:0.75;">${t.tag}</div>
+            <h2 style="font-family:'${t.displayFont}', Georgia, serif; font-size:32px; line-height:1.1; margin-top:4px;">${t.name}</h2>
+          </div>
+          <button type="button" class="preview-pill is-active" style="background:${t.accent}; color:${t.accentInk}; border-color:transparent;" onclick="setTheme('${t.id}')">Aktifkan Gaya Ini</button>
+        </div>
+
+        <p style="font-family:'${t.bodyFont}', sans-serif; font-size:14px; line-height:1.55; opacity:0.86;">${t.posture}: ${t.note}</p>
+
+        <div class="compare-swatches">
+          <div class="swatch-chip" style="background:${t.paper}; color:${t.ink};">
+            <div>60% Paper</div>
+            <div>${t.paper}</div>
+          </div>
+          <div class="swatch-chip" style="background:${t.surface}; color:${t.ink};">
+            <div>Surface</div>
+            <div>${t.surface}</div>
+          </div>
+          <div class="swatch-chip" style="background:${t.ink}; color:${t.paper};">
+            <div>30% Ink</div>
+            <div>${t.ink}</div>
+          </div>
+          <div class="swatch-chip" style="background:${t.accent}; color:${t.accentInk};">
+            <div>10% CTA</div>
+            <div>${t.accent}</div>
+          </div>
+        </div>
+
+        <div style="padding:12px; border-radius:8px; background:${t.surface}; display:flex; flex-direction:column; gap:8px;">
+          <div style="font-family:'${t.displayFont}', Georgia, serif; font-size:28px; line-height:1.08;">Rumah siap huni tanpa DP.</div>
+          <div style="font-family:'${t.bodyFont}', sans-serif; font-size:14px; opacity:0.82;">${t.displayFont} + ${t.bodyFont} | Skala ${t.ratio}</div>
+          <div class="mono" style="font-size:14px; font-weight:600;">Rp 1.724.481 / bln | UTJ Rp 1.000.000</div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <div class="ruler-row"><span style="width:76px;">Card 24px</span><span class="ruler-bar" style="width:48px; background:${t.ink}; opacity:0.4;"></span></div>
+          <div class="ruler-row"><span style="width:76px;">Gap 140px</span><span class="ruler-bar" style="width:160px; background:${t.accent};"></span></div>
+        </div>
+
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; padding-top:8px;">
+          <span class="dual-cta" style="pointer-events:none;">
+            <span class="dual-cta__label" style="background:${t.accent}; color:${t.accentInk}; height:40px; padding:0 16px; font-size:13px;">Jelajahi Klaster</span>
+            <span class="dual-cta__circle" style="background:${t.accent}; color:${t.accentInk}; width:40px; height:40px;">→</span>
+          </span>
+          <span style="font-size:12px; opacity:0.75;">Kontras Gate 40 dan 41 Lolos</span>
+        </div>
+      </article>
+    `).join("");
+
+    const menuToggleBtn = document.getElementById("menuToggleBtn");
+    const menuToggleText = document.getElementById("menuToggleText");
+    const navDrawer = document.getElementById("navDrawer");
+
+    function setDrawer(open) {
+      navDrawer.classList.toggle("is-open", open);
+      menuToggleBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      menuToggleText.textContent = open ? "Tutup" : "Menu";
+    }
+
+    menuToggleBtn.addEventListener("click", () => {
+      setDrawer(!navDrawer.classList.contains("is-open"));
+    });
+
+    navDrawer.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setDrawer(false));
+    });
+
+    const clusterSelect = document.getElementById("kprClusterSelect");
+    const priceRange = document.getElementById("kprPriceRange");
+    const dpRange = document.getElementById("kprDpRange");
+    const priceLabel = document.getElementById("kprPriceLabel");
+    const dpLabel = document.getElementById("kprDpLabel");
+    const promoOut = document.getElementById("kprPromoOut");
+    const principalOut = document.getElementById("kprPrincipalOut");
+    const regularOut = document.getElementById("kprRegularOut");
+    const kprWaLink = document.getElementById("kprWaLink");
+
+    let activeTenor = 20;
+
+    function formatRupiah(val) {
+      return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+        maximumFractionDigits: 0
+      }).format(val);
+    }
+
+    function updateKpr() {
+      const price = Number(priceRange.value);
+      const dpPercent = Number(dpRange.value);
+      const dpAmount = (price * dpPercent) / 100;
+      const principal = price - dpAmount;
+      const monthlyRate = 3.4 / 100 / 12;
+      const months = activeTenor * 12;
+
+      const regular = principal <= 0 ? 0 : Math.round(
+        (principal * (monthlyRate * Math.pow(1 + monthlyRate, months))) /
+        (Math.pow(1 + monthlyRate, months) - 1)
+      );
+      const promo = Math.max(0, regular - 1400000);
+
+      priceLabel.textContent = formatRupiah(price);
+      dpLabel.textContent = `${dpPercent}% (${formatRupiah(dpAmount)})`;
+      principalOut.textContent = formatRupiah(principal);
+      regularOut.textContent = formatRupiah(regular);
+      promoOut.textContent = formatRupiah(promo);
+
+      const waText = encodeURIComponent(
+        `Halo Mbak Ningsih, saya habis hitung KPR di web Tiar Property: Harga ${formatRupiah(price)}, DP ${dpPercent}%, Tenor ${activeTenor} thn. Estimasi angsuran promo ${formatRupiah(promo)}/bln. Boleh dibantu cek kelayakan berkas?`
+      );
+      kprWaLink.href = `https://wa.me/6282142193231?text=${waText}`;
+    }
+
+    clusterSelect.addEventListener("change", () => {
+      priceRange.value = clusterSelect.value;
+      updateKpr();
+    });
+    priceRange.addEventListener("input", updateKpr);
+    dpRange.addEventListener("input", updateKpr);
+    document.querySelectorAll(".tenor-pill").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        activeTenor = Number(btn.dataset.tenor);
+        document.querySelectorAll(".tenor-pill").forEach((b) => b.classList.toggle("is-active", b === btn));
+        updateKpr();
+      });
+    });
+    updateKpr();
+
+    const sharelocModal = document.getElementById("sharelocModal");
+    const modalClusterName = document.getElementById("modalClusterName");
+    const modalClusterArea = document.getElementById("modalClusterArea");
+    const modalMapImg = document.getElementById("modalMapImg");
+    const modalWaCta = document.getElementById("modalWaCta");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+
+    lookbookGrid.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-shareloc-id]");
+      if (!btn) return;
+      const prop = PROPERTIES.find((p) => p.id === btn.dataset.sharelocId);
+      if (!prop) return;
+
+      modalClusterName.textContent = prop.codeName;
+      modalClusterArea.textContent = prop.locationAreaShort;
+      modalMapImg.src = prop.city === "Surabaya" ? "./public/images/maps/gmaps_surabaya.webp" : "./public/images/maps/gmaps_sidoarjo.webp";
+      modalWaCta.href = `https://wa.me/6282142193231?text=${encodeURIComponent(`Halo Mbak Ningsih, boleh minta Shareloc titik survei untuk klaster ${prop.codeName} (${prop.locationAreaShort})?`)}`;
+      sharelocModal.classList.add("is-open");
+    });
+
+    closeModalBtn.addEventListener("click", () => sharelocModal.classList.remove("is-open"));
+    sharelocModal.addEventListener("click", (e) => {
+      if (e.target === sharelocModal) sharelocModal.classList.remove("is-open");
+    });
+  </script>
+</body>
+</html>

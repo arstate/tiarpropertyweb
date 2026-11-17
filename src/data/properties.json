@@ -1,0 +1,317 @@
+[
+  {
+    "id": "sukodono-cluster-1",
+    "codeName": "Tray Modern Sukodono",
+    "locationArea": "Sukodono, Sidoarjo (10 Menit ke Waru / Cito)",
+    "locationAreaShort": "Sukodono, Sidoarjo",
+    "city": "Sidoarjo",
+    "floors": 1,
+    "priceStart": "Rp 300 Jt",
+    "priceStrikethrough": "Rp 360 Jt",
+    "cicilanPromo": "Rp 1,9 Jt / bln",
+    "cicilanNominal": 1.9,
+    "subsidiInfo": "Subsidi Angsuran Rp 1,4 Juta x 6 Bulan",
+    "utjAmount": "UTJ Rp 1 Jt",
+    "rating": 5,
+    "specs": {
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "luasTanah": "72 m²",
+      "luasBangunan": "36 m²"
+    },
+    "features": [
+      "DP 0% (Tanpa DP Sepeserpun)",
+      "Free BPHTB, AJB, BBN, Notaris, & KPR",
+      "Row Jalan Paving 8 Meter (Bisa 2 Mobil)",
+      "Bebas Banjir & Air Bersih Jernih"
+    ],
+    "imageUrl": "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80",
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80"
+    ],
+    "assignedAgentId": "mbak-ningsih",
+    "status": "available"
+  },
+  {
+    "id": "juanda-sedati-cluster-2",
+    "codeName": "Super Tiscre Juanda",
+    "locationArea": "Sedati / Kwangsan, Sidoarjo Utara",
+    "locationAreaShort": "Sedati, Juanda",
+    "city": "Sidoarjo",
+    "floors": 1,
+    "priceStart": "Rp 390 Jt",
+    "priceStrikethrough": "Rp 450 Jt",
+    "cicilanPromo": "Rp 2,4 Jt / bln",
+    "cicilanNominal": 2.4,
+    "subsidiInfo": "Bunga Promo KPR 3,4% Fixed 1 Tahun",
+    "utjAmount": "UTJ Rp 2 Jt",
+    "rating": 5,
+    "specs": {
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "luasTanah": "75 m²",
+      "luasBangunan": "42 m²"
+    },
+    "features": [
+      "Sertifikat SHM Siap Splitz",
+      "5 Menit ke Bandara Juanda T1 & T2",
+      "12 Menit ke Kampus UPN & MERR Rungkut",
+      "One Gate System + Keamanan CCTV 24 Jam"
+    ],
+    "imageUrl": "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80",
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80"
+    ],
+    "assignedAgentId": "dimas-prasetyo",
+    "status": "available"
+  },
+  {
+    "id": "merr-surabaya-cluster-3",
+    "codeName": "Style Hoto MERR",
+    "locationArea": "Jalur MERR / Rungkut, Surabaya",
+    "locationAreaShort": "MERR, Surabaya Timur",
+    "city": "Surabaya",
+    "floors": 2,
+    "priceStart": "Rp 700 Jt",
+    "priceStrikethrough": "Rp 820 Jt",
+    "cicilanPromo": "Rp 4,5 Jt / bln",
+    "cicilanNominal": 4.5,
+    "subsidiInfo": "Free Smart Door Lock & Kanopi Kaca",
+    "utjAmount": "UTJ Rp 5 Jt",
+    "rating": 4,
+    "specs": {
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "luasTanah": "84 m²",
+      "luasBangunan": "68 m²"
+    },
+    "features": [
+      "Arsitektur 2 Lantai Scandinavian Modern",
+      "Clubhouse Eksklusif & Kolam Renang",
+      "5 Menit ke Galaxy Mall & Kampus ITS",
+      "Akses Jalan Kembar Row 10 Meter"
+    ],
+    "imageUrl": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80"
+    ],
+    "assignedAgentId": "rizky-pratama",
+    "status": "available"
+  },
+  {
+    "id": "anggaswangi-cluster-4",
+    "codeName": "Trry Netonil Anggaswangi",
+    "locationArea": "Anggaswangi, Sukodono, Sidoarjo",
+    "locationAreaShort": "Anggaswangi, Sidoarjo",
+    "city": "Sidoarjo",
+    "floors": 1,
+    "priceStart": "Rp 320 Jt",
+    "priceStrikethrough": "Rp 380 Jt",
+    "cicilanPromo": "Rp 1,8 Jt / bln",
+    "cicilanNominal": 1.8,
+    "subsidiInfo": "Subsidi Angsuran Rp 1,4 Juta x 6 Bulan",
+    "utjAmount": "UTJ Rp 1 Jt",
+    "rating": 5,
+    "specs": {
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "luasTanah": "72 m²",
+      "luasBangunan": "38 m²"
+    },
+    "features": [
+      "DP 0% Tanpa Beban Biaya Tambahan",
+      "All-In Free KPR, Pajak, AJB, Notaris",
+      "Lingkungan Sejuk Dekat Stasiun Sidoarjo",
+      "One Gate System & Row Jalan 8 Meter"
+    ],
+    "imageUrl": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80",
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80"
+    ],
+    "assignedAgentId": "dimas-prasetyo",
+    "status": "available"
+  },
+  {
+    "id": "masangan-cluster-5",
+    "codeName": "Narminio Masangan Living",
+    "locationArea": "Masangan Kulon, Sidoarjo",
+    "locationAreaShort": "Masangan, Sidoarjo",
+    "city": "Sidoarjo",
+    "floors": 1,
+    "priceStart": "Rp 350 Jt",
+    "priceStrikethrough": "Rp 410 Jt",
+    "cicilanPromo": "Rp 2,1 Jt / bln",
+    "cicilanNominal": 2.1,
+    "subsidiInfo": "Subsidi Angsuran Rp 1,4 Juta x 6 Bulan",
+    "utjAmount": "UTJ Rp 1 Jt",
+    "rating": 5,
+    "specs": {
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "luasTanah": "78 m²",
+      "luasBangunan": "40 m²"
+    },
+    "features": [
+      "Desain Scandinavian Estetik",
+      "Free Pompa Air & Meja Dapur",
+      "7 Menit ke Akses Tol Sepanjang & Waru",
+      "Row Jalan Paving Lebar 8 Meter"
+    ],
+    "imageUrl": "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80",
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=800&q=80"
+    ],
+    "assignedAgentId": "dimas-prasetyo",
+    "status": "available"
+  },
+  {
+    "id": "waru-gedangan-cluster-6",
+    "codeName": "Hgrman Morta Waru",
+    "locationArea": "Waru / Gedangan, Sidoarjo",
+    "locationAreaShort": "Waru Gateway, Sidoarjo",
+    "city": "Sidoarjo",
+    "floors": 2,
+    "priceStart": "Rp 420 Jt",
+    "priceStrikethrough": "Rp 500 Jt",
+    "cicilanPromo": "Rp 2,6 Jt / bln",
+    "cicilanNominal": 2.6,
+    "subsidiInfo": "Bunga Promo KPR 3,4% Fixed 1 Tahun",
+    "utjAmount": "UTJ Rp 2 Jt",
+    "rating": 4,
+    "specs": {
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "luasTanah": "80 m²",
+      "luasBangunan": "50 m²"
+    },
+    "features": [
+      "SHM Splitz & IMB / PBG Siap Akad",
+      "5 Menit ke Bundaran Waru & Cito Mall",
+      "Bebas Seluruh Biaya Realisasi KPR",
+      "Saluran Bawah Tanah & Air PDAM Lancar"
+    ],
+    "imageUrl": "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=800&q=80",
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+    ],
+    "assignedAgentId": "maya-anggraini",
+    "status": "available"
+  },
+  {
+    "id": "rungkut-surabaya-cluster-7",
+    "codeName": "Grand Botanica Rungkut",
+    "locationArea": "Rungkut / Pandugo, Surabaya Timur",
+    "locationAreaShort": "Rungkut, Surabaya Timur",
+    "city": "Surabaya",
+    "floors": 2,
+    "priceStart": "Rp 580 Jt",
+    "priceStrikethrough": "Rp 690 Jt",
+    "cicilanPromo": "Rp 3,4 Jt / bln",
+    "cicilanNominal": 3.4,
+    "subsidiInfo": "Subsidi Angsuran Rp 1,4 Juta x 12 Bulan",
+    "utjAmount": "UTJ Rp 2 Jt",
+    "rating": 5,
+    "specs": {
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "luasTanah": "75 m²",
+      "luasBangunan": "60 m²"
+    },
+    "features": [
+      "DP 0% Tanpa Biaya KPR & Notaris",
+      "Desain Modern 2 Lantai Mewah",
+      "5 Menit ke Akses Tol Tambak Sumur & MERR",
+      "One Gate System & CCTV 24 Jam"
+    ],
+    "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
+    ],
+    "assignedAgentId": "mbak-ningsih",
+    "status": "available"
+  },
+  {
+    "id": "wiyung-surabaya-cluster-8",
+    "codeName": "Dian Premiere Wiyung",
+    "locationArea": "Wiyung / Karangpilang, Surabaya Barat",
+    "locationAreaShort": "Wiyung, Surabaya Barat",
+    "city": "Surabaya",
+    "floors": 1,
+    "priceStart": "Rp 450 Jt",
+    "priceStrikethrough": "Rp 520 Jt",
+    "cicilanPromo": "Rp 2,8 Jt / bln",
+    "cicilanNominal": 2.8,
+    "subsidiInfo": "Free Smart Door Lock & Canopy",
+    "utjAmount": "UTJ Rp 2 Jt",
+    "rating": 5,
+    "specs": {
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "luasTanah": "70 m²",
+      "luasBangunan": "42 m²"
+    },
+    "features": [
+      "DP 0% Cukup UTJ 2 Juta",
+      "10 Menit ke Pakuwon Mall & Tol Gunungsari",
+      "Bebas Banjir Lingkungan Asri Sejuk",
+      "Sertifikat SHM & IMB Siap Akad"
+    ],
+    "imageUrl": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80"
+    ],
+    "assignedAgentId": "rizky-pratama",
+    "status": "available"
+  },
+  {
+    "id": "sedati-juanda-cluster-9",
+    "codeName": "Skyline Juanda Gateway",
+    "locationArea": "Sedati Agung / Bypass Juanda, Sidoarjo",
+    "locationAreaShort": "Sedati, Juanda Gateway",
+    "city": "Sidoarjo",
+    "floors": 1,
+    "priceStart": "Rp 290 Jt",
+    "priceStrikethrough": "Rp 350 Jt",
+    "cicilanPromo": "Rp 1,7 Jt / bln",
+    "cicilanNominal": 1.7,
+    "subsidiInfo": "Subsidi Angsuran Rp 1,4 Juta x 6 Bulan",
+    "utjAmount": "UTJ Rp 1 Jt",
+    "rating": 5,
+    "specs": {
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "luasTanah": "72 m²",
+      "luasBangunan": "36 m²"
+    },
+    "features": [
+      "DP 0% Tanpa Biaya Tambahan",
+      "3 Menit ke Gerbang Tol Juanda & Bandara T1",
+      "Free Pompa Air & Meja Dapur",
+      "Row Jalan Lebar Paving 8 Meter"
+    ],
+    "imageUrl": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80"
+    ],
+    "assignedAgentId": "dimas-prasetyo",
+    "status": "available"
+  }
+]
