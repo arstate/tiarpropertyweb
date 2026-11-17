@@ -51,11 +51,11 @@ export function AgentDirectoryView() {
         {/* Editorial Header */}
         <section className="pt-24 sm:pt-28 pb-10 border-b border-[#C5BEB4] bg-[#FAF8F5]">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
-            <div className="flex items-center justify-between gap-3 text-xs font-medium text-[#57534A] mb-4">
+            <div className="flex items-center justify-between gap-3 text-xs font-medium text-[#57534A] mb-2">
               <div className="flex items-center gap-2">
                 <Link
                   href="/"
-                  className="inline-flex items-center gap-1.5 hover:text-[#38352C] transition-colors"
+                  className="inline-flex items-center gap-1.5 min-h-[44px] -ml-2 px-2 hover:text-[#38352C] transition-colors"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" strokeWidth={1.75} aria-hidden="true" />
                   <span>Beranda</span>
@@ -104,7 +104,7 @@ export function AgentDirectoryView() {
                       role="tab"
                       aria-selected={active}
                       onClick={() => setSelectedFilter(tab.key)}
-                      className={`inline-flex items-center gap-2 min-h-[44px] px-4 rounded-full text-xs font-medium whitespace-nowrap transition-all cursor-pointer ${
+                      className={`inline-flex items-center gap-2 min-h-[44px] px-4 rounded-full text-xs font-medium whitespace-nowrap transition-colors cursor-pointer ${
                         active
                           ? 'bg-[#38352C] text-[#E8E4E1]'
                           : 'text-[#57534A] hover:text-[#38352C]'
@@ -147,15 +147,14 @@ export function AgentDirectoryView() {
                 >
                   <div className="flex flex-col gap-4">
                     {/* Portrait Photo 3:4 */}
-                    <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden bg-[#C5BEB4]/40 ring-1 ring-inset ring-[#38352C]/10">
+                    <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden bg-[#C5BEB4]/40 ring-1 ring-inset ring-[#38352C]/10 group-hover:ring-[#38352C]/35 transition-colors">
                       <img
                         src={agent.photoUrl}
                         alt={agent.name}
                         width={600}
                         height={800}
-                        loading="lazy"
                         decoding="async"
-                        className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                        className="w-full h-full object-cover object-top"
                       />
                       <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[#38352C]/90 backdrop-blur-md text-[#E8E4E1] text-xs font-medium">
                         {agent.citySpecialist}

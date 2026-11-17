@@ -9,7 +9,7 @@ const COMPARISON_ROWS = [
     param: 'Pengeluaran Bulanan',
     ngontrak: (
       <>
-        <span className="num-clean">Rp 2</span> Jt –{' '}
+        <span className="num-clean">Rp 2</span> sampai{' '}
         <span className="num-clean">2,5</span> Jt/bulan (uang sewa hangus)
       </>
     ),
@@ -37,7 +37,7 @@ const COMPARISON_ROWS = [
     ),
     tiar: (
       <>
-        Potensi kenaikan nilai <span className="num-clean">10%–15%</span> setiap tahun
+        Potensi kenaikan nilai <span className="num-clean">10% hingga 15%</span> setiap tahun
       </>
     ),
   },
@@ -46,13 +46,13 @@ const COMPARISON_ROWS = [
     param: 'Modal Awal Masuk',
     ngontrak: (
       <>
-        Bayar sewa <span className="num-clean">1–2</span> tahun di depan (
-        <span className="num-clean">Rp 25–30</span> Jt)
+        Bayar sewa <span className="num-clean">1 sampai 2</span> tahun di depan (
+        <span className="num-clean">Rp 25 sampai 30</span> Jt)
       </>
     ),
     tiar: (
       <>
-        Cukup UTJ <span className="num-clean">Rp 1–2</span> Juta (DP{' '}
+        Cukup UTJ <span className="num-clean">Rp 1 sampai 2</span> Juta (DP{' '}
         <span className="num-clean">0%</span> All-In Free)
       </>
     ),
@@ -98,7 +98,7 @@ export function ComparisonTable() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="dual-cta"
+              className="dual-cta whitespace-nowrap"
             >
               <span className="dual-cta__label">Hitung Cicilan &amp; Cek SLIK via WhatsApp</span>
               <span className="dual-cta__circle" aria-hidden="true">
@@ -108,7 +108,7 @@ export function ComparisonTable() {
 
             <Link
               href="/properti"
-              className="inline-flex items-center justify-center min-h-[48px] px-5 rounded-full border border-[#C5BEB4] bg-transparent text-[#38352C] text-sm font-medium hover:bg-[#E8E4E1] hover:border-[#38352C] transition-all whitespace-nowrap"
+              className="inline-flex items-center justify-center min-h-[48px] px-5 rounded-full border border-[#C5BEB4] bg-transparent text-[#38352C] text-sm font-medium hover:bg-[#E8E4E1] hover:border-[#38352C] transition-colors whitespace-nowrap"
             >
               Lihat Unit Tersedia
             </Link>

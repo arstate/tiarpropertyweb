@@ -84,7 +84,7 @@ export function SearchFilterBar({
               type="button"
               onClick={() => handleClick(option.key, option.fallbackHref)}
               aria-pressed={isActive}
-              className={`inline-flex items-center gap-2 min-h-[44px] px-4 rounded-full border text-sm font-medium whitespace-nowrap transition-all cursor-pointer active:scale-[0.97] ${
+              className={`inline-flex items-center gap-2 min-h-[44px] px-4 rounded-full border text-sm font-medium whitespace-nowrap transition-[background-color,color,border-color,transform] motion-reduce:transition-none cursor-pointer active:scale-[0.97] ${
                 isActive
                   ? 'bg-[#38352C] text-[#E8E4E1] border-[#38352C]'
                   : 'bg-[#E8E4E1] text-[#38352C] border-[#C5BEB4] hover:border-[#38352C] hover:bg-[#FAF8F5]'

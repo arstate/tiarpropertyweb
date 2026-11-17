@@ -32,15 +32,15 @@ export function PropertyCard({
     <article className="group flex flex-col gap-4 min-w-0">
       <Link
         href={detailHref}
-        className={`relative block overflow-hidden rounded-xl bg-[#E8E4E1] ring-1 ring-inset ring-[#38352C]/14 ${aspectClass}`}
+        className={`relative block overflow-hidden rounded-xl bg-[#E8E4E1] ring-1 ring-inset ring-[#38352C]/14 group-hover:ring-[#38352C]/40 transition-colors ${aspectClass}`}
       >
         <img
           src={property.imageUrl}
           alt={`Fasad ${property.codeName} di ${property.locationAreaShort}`}
           width={1200}
           height={900}
-          loading="lazy"
-          className="w-full h-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-[1.03]"
+          decoding="async"
+          className="w-full h-full object-cover"
         />
         {property.status === 'reserved' && (
           <span className="num-clean absolute top-3 left-3 px-3 py-1 rounded-full bg-[#38352C]/90 text-[#FFCA4F] text-xs font-medium">
@@ -70,17 +70,22 @@ export function PropertyCard({
       <div className="flex flex-col gap-1.5 text-sm text-[#57534A]">
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
           <span>{property.locationAreaShort}</span>
-          <span className="num-clean">
-            {property.specs.bedrooms} KT · {property.specs.bathrooms} KM · LT {property.specs.luasTanah} · LB{' '}
-            {property.specs.luasBangunan}
-          </span>
+          <div className="num-clean flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[13px]">
+            <span>{property.specs.bedrooms} KT</span>
+            <span aria-hidden="true" className="text-[#C5BEB4]">/</span>
+            <span>{property.specs.bathrooms} KM</span>
+            <span aria-hidden="true" className="text-[#C5BEB4]">/</span>
+            <span>LT {property.specs.luasTanah}</span>
+            <span aria-hidden="true" className="text-[#C5BEB4]">/</span>
+            <span>LB {property.specs.luasBangunan}</span>
+          </div>
         </div>
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-[13px]">
           <span className="num-clean font-medium text-[#38352C]">
             Cicilan {property.cicilanPromo}
           </span>
           <span className="num-clean text-[#57534A]">
-            {property.utjAmount} · {property.floors} Lantai
+            {property.utjAmount} | {property.floors} Lantai
           </span>
         </div>
       </div>
@@ -89,7 +94,7 @@ export function PropertyCard({
       <div className="flex flex-wrap items-center gap-2 pt-1">
         <Link
           href={detailHref}
-          className="inline-flex items-center justify-center gap-2 min-h-[44px] px-4 rounded-full border border-[#C5BEB4] bg-transparent text-[#38352C] text-sm font-medium hover:bg-[#E8E4E1] hover:border-[#38352C] active:scale-[0.97] transition-all whitespace-nowrap"
+          className="inline-flex items-center justify-center gap-2 min-h-[44px] px-4 rounded-full border border-[#C5BEB4] bg-transparent text-[#38352C] text-sm font-medium hover:bg-[#E8E4E1] hover:border-[#38352C] active:scale-[0.97] transition-[background-color,border-color,transform] motion-reduce:transition-none whitespace-nowrap"
         >
           <span>Lihat Detail Unit</span>
           <ArrowRight className="w-4 h-4 shrink-0" strokeWidth={1.6} aria-hidden="true" />
@@ -99,7 +104,7 @@ export function PropertyCard({
           href={waHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 min-h-[44px] px-4 rounded-full bg-[#E8E4E1] text-[#38352C] border border-transparent text-sm font-medium hover:bg-[#38352C] hover:text-[#E8E4E1] active:scale-[0.97] transition-all whitespace-nowrap"
+          className="inline-flex items-center justify-center gap-2 min-h-[44px] px-4 rounded-full bg-[#E8E4E1] text-[#38352C] border border-transparent text-sm font-medium hover:bg-[#38352C] hover:text-[#E8E4E1] active:scale-[0.97] transition-[background-color,color,transform] motion-reduce:transition-none whitespace-nowrap"
         >
           <MessageCircle className="w-4 h-4 shrink-0" strokeWidth={1.6} aria-hidden="true" />
           <span>Tanya Unit</span>

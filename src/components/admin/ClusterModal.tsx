@@ -41,7 +41,7 @@ export function ClusterModal({
       luasBangunan: '36 m²',
     },
     features: ['DP 0% (Tanpa DP)', 'Free BPHTB, AJB, Notaris, & KPR', 'Row Jalan 8 Meter'],
-    imageUrl: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80',
+    imageUrl: '/images/properties/cluster-sukodono.webp',
     galleryImages: [],
     assignedAgentId: 'mbak-ningsih',
     status: 'available',
@@ -79,7 +79,7 @@ export function ClusterModal({
           luasBangunan: '36 m²',
         },
         features: ['DP 0% (Tanpa DP)', 'Free BPHTB, AJB, Notaris, & KPR', 'Row Jalan 8 Meter'],
-        imageUrl: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80',
+        imageUrl: '/images/properties/cluster-sukodono.webp',
         galleryImages: [],
         assignedAgentId: 'mbak-ningsih',
         status: 'available',
@@ -206,7 +206,7 @@ export function ClusterModal({
         luasBangunan: formData.specs?.luasBangunan || '36 m²',
       },
       features: formData.features || [],
-      imageUrl: formData.imageUrl || 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80',
+      imageUrl: formData.imageUrl || '/images/properties/cluster-sukodono.webp',
       galleryImages: formData.galleryImages && formData.galleryImages.length > 0 ? formData.galleryImages : [formData.imageUrl || ''],
       assignedAgentId: formData.assignedAgentId || 'mbak-ningsih',
       status: formData.status || 'available',
@@ -516,11 +516,11 @@ export function ClusterModal({
             <div>
               <label className="block font-bold text-white mb-1">URL Foto Utama</label>
               <input
-                type="url"
+                type="text"
                 required
                 value={formData.imageUrl || ''}
                 onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                placeholder="https://images.unsplash.com/..."
+                placeholder="/images/properties/cluster-sukodono.webp"
                 className="w-full bg-[#050b0a] border border-[#16362f] rounded-xl px-3 py-2 text-xs"
               />
             </div>
@@ -529,11 +529,11 @@ export function ClusterModal({
               <label className="block font-bold text-white mb-1">Galeri Foto Tambahan</label>
               <div className="flex gap-2 mb-2">
                 <input
-                  type="url"
+                  type="text"
                   value={galleryInput}
                   onChange={(e) => setGalleryInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddGallery())}
-                  placeholder="URL foto tambahan..."
+                  placeholder="/images/properties/... atau URL foto tambahan"
                   className="flex-1 bg-[#050b0a] border border-[#16362f] rounded-xl px-3 py-2 text-xs"
                 />
                 <button

@@ -7,6 +7,7 @@
   --color-surface-alt: #FAF8F5; /* oklch(98.0% 0.004 80) */
   --color-border: #C5BEB4;      /* oklch(80.2% 0.015 70) */
   --color-ink: #38352C;         /* oklch(32.9% 0.018 92) */
+  --color-ink-hover: #28251E;
   --color-ink-muted: #57534A;   /* oklch(42.0% 0.015 85) */
   --color-dark-panel: #38352C;
   --color-on-dark: #E8E4E1;
@@ -140,7 +141,7 @@ p {
 @media (hover: hover) and (pointer: fine) {
   .dual-cta--dark:hover .dual-cta__label,
   .dual-cta--dark:hover .dual-cta__circle {
-    background-color: #28251E;
+    background-color: var(--color-ink-hover);
   }
 }
 

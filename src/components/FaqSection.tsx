@@ -23,7 +23,7 @@ const FAQS = [
     a: (
       <>
         Jangan khawatir. Tim analis kami akan mengecek kondisi SLIK secara privat serta menghitung rasio angsuran (
-        <span className="num-clean">35%–40%</span> penghasilan bersih atau Joint Income pasangan) lalu memetakan ke{' '}
+        <span className="num-clean">35% hingga 40%</span> penghasilan bersih atau Joint Income pasangan) lalu memetakan ke{' '}
         <span className="num-clean">5</span> bank BUMN rekanan dengan kebijakan paling fleksibel.
       </>
     ),

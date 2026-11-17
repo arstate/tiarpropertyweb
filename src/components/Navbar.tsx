@@ -95,7 +95,7 @@ export function Navbar() {
           {/* Left Detached Brand Pill */}
           <Link
             href="/"
-            className="pointer-events-auto inline-flex items-center gap-2.5 min-h-[44px] pl-1.5 pr-4 rounded-full bg-[#E8E4E1]/95 backdrop-blur-md border border-[#38352C]/14 text-[#38352C] shadow-[0_4px_16px_rgba(20,18,14,0.09)] hover:bg-[#FAF8F5] active:scale-[0.97] transition-all whitespace-nowrap shrink-0"
+            className="pointer-events-auto inline-flex items-center gap-2.5 min-h-[44px] pl-1.5 pr-4 rounded-full bg-[#E8E4E1]/95 backdrop-blur-md border border-[#38352C]/14 text-[#38352C] shadow-[0_4px_16px_rgba(20,18,14,0.09)] hover:bg-[#FAF8F5] active:scale-[0.97] transition-[background-color,transform] motion-reduce:transition-none whitespace-nowrap shrink-0"
             aria-label="Tiar Property Beranda"
           >
             <span className="w-8 h-8 rounded-full bg-[#38352C] text-[#E8E4E1] flex items-center justify-center font-display text-sm font-semibold tracking-tight shrink-0">
@@ -113,7 +113,7 @@ export function Navbar() {
           >
             <Link
               href="/properti"
-              className="hidden md:inline-flex items-center justify-center min-h-[44px] px-4 rounded-full bg-[#F1F1F1]/95 backdrop-blur-md border border-[#C5BEB4] text-[#38352C] text-sm font-medium hover:bg-[#E8E4E1] active:scale-[0.97] transition-all whitespace-nowrap shadow-[0_4px_16px_rgba(20,18,14,0.06)]"
+              className="hidden md:inline-flex items-center justify-center min-h-[44px] px-4 rounded-full bg-[#F1F1F1]/95 backdrop-blur-md border border-[#C5BEB4] text-[#38352C] text-sm font-medium hover:bg-[#E8E4E1] active:scale-[0.97] transition-[background-color,transform] motion-reduce:transition-none whitespace-nowrap shadow-[0_4px_16px_rgba(20,18,14,0.06)]"
             >
               Semua Rumah
             </Link>
@@ -122,7 +122,7 @@ export function Navbar() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center justify-center gap-2 min-h-[44px] px-4 rounded-full bg-[#38352C] text-[#E8E4E1] text-sm font-medium hover:bg-[#28251E] active:scale-[0.97] transition-all whitespace-nowrap shadow-[0_4px_16px_rgba(20,18,14,0.14)]"
+              className="hidden sm:inline-flex items-center justify-center gap-2 min-h-[44px] px-4 rounded-full bg-[#38352C] text-[#E8E4E1] text-sm font-medium hover:bg-[#28251E] active:scale-[0.97] transition-[background-color,transform] motion-reduce:transition-none whitespace-nowrap shadow-[0_4px_16px_rgba(20,18,14,0.14)]"
             >
               <MessageCircle className="w-4 h-4 text-[#FFCA4F] shrink-0" strokeWidth={1.75} />
               <span>Konsultasi WA</span>
@@ -135,7 +135,7 @@ export function Navbar() {
               aria-expanded={drawerOpen}
               aria-controls="tiar-nav-drawer"
               aria-label={drawerOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'}
-              className="inline-flex items-center justify-center gap-2 min-h-[44px] px-4 rounded-full bg-[#E8E4E1]/95 backdrop-blur-md border border-[#38352C]/14 text-[#38352C] text-sm font-medium hover:bg-[#FAF8F5] active:scale-[0.97] transition-all whitespace-nowrap shadow-[0_4px_16px_rgba(20,18,14,0.09)] cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 min-h-[44px] px-4 rounded-full bg-[#E8E4E1]/95 backdrop-blur-md border border-[#38352C]/14 text-[#38352C] text-sm font-medium hover:bg-[#FAF8F5] active:scale-[0.97] transition-[background-color,transform] motion-reduce:transition-none whitespace-nowrap shadow-[0_4px_16px_rgba(20,18,14,0.09)] cursor-pointer"
             >
               <span>{drawerOpen ? 'Tutup' : 'Menu'}</span>
               {drawerOpen ? (
@@ -154,7 +154,7 @@ export function Navbar() {
         id="tiar-nav-drawer"
         aria-label="Menu navigasi cepat"
         aria-hidden={!drawerOpen}
-        className={`fixed top-[72px] sm:top-[76px] right-4 sm:right-6 lg:right-10 w-[calc(100%-2rem)] max-w-[360px] z-50 rounded-2xl bg-[#38352C] text-[#E8E4E1] p-6 shadow-[0_24px_64px_rgba(20,18,14,0.32)] border border-[#E8E4E1]/10 transition-all duration-200 origin-top-right ${
+        className={`fixed top-[72px] sm:top-[76px] right-4 sm:right-6 lg:right-10 w-[calc(100%-2rem)] max-w-[360px] z-50 rounded-2xl bg-[#38352C] text-[#E8E4E1] p-6 shadow-[0_24px_64px_rgba(20,18,14,0.32)] border border-[#E8E4E1]/10 transition-[opacity,transform] duration-200 motion-reduce:transition-none origin-top-right ${
           drawerOpen
             ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto'
             : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
@@ -178,7 +178,7 @@ export function Navbar() {
                   </span>
                 </span>
                 <ArrowRight
-                  className="w-5 h-5 text-[#C5BEB4] group-hover:text-[#FFCA4F] group-hover:translate-x-1 transition-all shrink-0"
+                  className="w-5 h-5 text-[#C5BEB4] group-hover:text-[#FFCA4F] group-hover:translate-x-1 transition-[color,transform] motion-reduce:transition-none shrink-0"
                   strokeWidth={1.5}
                 />
               </Link>
@@ -192,7 +192,7 @@ export function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             tabIndex={drawerOpen ? 0 : -1}
-            className="dual-cta w-full justify-between"
+            className="dual-cta whitespace-nowrap w-full justify-between"
           >
             <span className="dual-cta__label flex-1">Jadwalkan Survei WA</span>
             <span className="dual-cta__circle" aria-hidden="true">

@@ -24,7 +24,7 @@ export function UspFeatureBar({
               alt="Ruang keluarga hangat dengan pencahayaan alami di unit contoh Sidoarjo"
               width={1000}
               height={1250}
-              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover"
             />
           </div>

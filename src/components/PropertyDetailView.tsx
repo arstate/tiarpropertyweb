@@ -137,7 +137,7 @@ const PROMO_PERKS = [
     ),
     desc: (
       <>
-        Bantuan potongan cicilan bulanan nyata selama <span className="num-clean">6–12</span> bulan pertama.
+        Bantuan potongan cicilan bulanan nyata selama <span className="num-clean">6 hingga 12</span> bulan pertama.
       </>
     ),
     badge: 'Potongan Cicilan',
@@ -364,7 +364,7 @@ export function PropertyDetailView({
       sub: 'Instalasi PLN resmi',
     },
     { label: 'Sumber Air Bersih', value: 'PDAM / Sumur Bor', sub: 'Air jernih lancar 24 jam' },
-    { label: 'Kapasitas Carport', value: '1–2 Mobil', sub: 'Paving block tebal rapi' },
+    { label: 'Kapasitas Carport', value: '1 sampai 2 Mobil', sub: 'Paving block tebal rapi' },
     { label: 'Lebar ROW Jalan', value: rowVal, sub: 'Leluasa 2 mobil papasan' },
     { label: 'Legalitas Tanah', value: 'SHM & IMB/PBG Splitz', sub: 'Siap balik nama di notaris' },
     {
@@ -379,31 +379,27 @@ export function PropertyDetailView({
     <div className="min-h-screen flex flex-col bg-[#F1F1F1] text-[#38352C]">
       <main className="flex-1 pb-28 lg:pb-24">
         {/* Top Editorial Breadcrumb Bar */}
-        <section className="pt-24 sm:pt-28 pb-6 border-b border-[#C5BEB4] bg-[#FAF8F5]">
+        <section className="pt-24 sm:pt-28 pb-4 sm:pb-6 border-b border-[#C5BEB4] bg-[#FAF8F5]">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-2 text-xs font-medium text-[#57534A] min-w-0 truncate">
+            <div className="flex items-center gap-1.5 text-xs font-medium text-[#57534A] min-w-0 truncate">
               <Link
                 href="/"
-                className="hover:text-[#38352C] transition-colors hidden sm:inline shrink-0"
+                className="hover:text-[#38352C] transition-colors hidden sm:inline-flex items-center min-h-[44px] -ml-1.5 px-1.5 shrink-0"
               >
                 Beranda
               </Link>
-              <span aria-hidden="true" className="hidden sm:inline">
-                ·
-              </span>
+              <ChevronRight className="w-3.5 h-3.5 text-[#57534A] hidden sm:inline shrink-0" strokeWidth={1.75} aria-hidden="true" />
               <Link
                 href={basePath}
-                className="inline-flex items-center gap-1.5 text-[#38352C] font-semibold hover:underline underline-offset-4 shrink-0"
+                className="inline-flex items-center gap-1.5 min-h-[44px] px-1.5 text-[#38352C] font-semibold hover:underline underline-offset-4 shrink-0"
               >
                 <ArrowLeft className="w-3.5 h-3.5 sm:hidden" strokeWidth={1.75} aria-hidden="true" />
                 <span>Semua Rumah</span>
               </Link>
-              <span aria-hidden="true" className="hidden md:inline">
-                ·
-              </span>
-              <span className="hidden md:inline shrink-0">{property.city}</span>
-              <span aria-hidden="true">·</span>
-              <span className="text-[#38352C] font-semibold truncate">{property.codeName}</span>
+              <ChevronRight className="w-3.5 h-3.5 text-[#57534A] hidden md:inline shrink-0" strokeWidth={1.75} aria-hidden="true" />
+              <span className="hidden md:inline shrink-0 px-1">{property.city}</span>
+              <ChevronRight className="w-3.5 h-3.5 text-[#57534A] shrink-0" strokeWidth={1.75} aria-hidden="true" />
+              <span className="text-[#38352C] font-semibold truncate pl-1">{property.codeName}</span>
             </div>
 
             <div className="flex items-center gap-2 shrink-0">
@@ -462,7 +458,7 @@ export function PropertyDetailView({
                       src={gallery[activeImageIndex]}
                       alt={`${property.codeName} - Foto ${activeImageIndex + 1}`}
                       draggable={false}
-                      className="w-full h-full object-cover select-none pointer-events-none transition-transform duration-500 group-hover:scale-[1.02]"
+                      className="w-full h-full object-cover select-none pointer-events-none"
                     />
                   </div>
                   <div
@@ -487,7 +483,7 @@ export function PropertyDetailView({
                           prevImage();
                         }}
                         aria-label="Foto sebelumnya"
-                        className="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#38352C]/80 hover:bg-[#38352C] backdrop-blur-md text-[#FAF8F5] border border-white/20 items-center justify-center transition-all cursor-pointer z-10"
+                        className="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#38352C]/80 hover:bg-[#38352C] backdrop-blur-md text-[#FAF8F5] border border-white/20 items-center justify-center transition-colors cursor-pointer z-10"
                       >
                         <ChevronLeft className="w-5 h-5" strokeWidth={1.75} />
                       </button>
@@ -499,7 +495,7 @@ export function PropertyDetailView({
                           nextImage();
                         }}
                         aria-label="Foto selanjutnya"
-                        className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#38352C]/80 hover:bg-[#38352C] backdrop-blur-md text-[#FAF8F5] border border-white/20 items-center justify-center transition-all cursor-pointer z-10"
+                        className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#38352C]/80 hover:bg-[#38352C] backdrop-blur-md text-[#FAF8F5] border border-white/20 items-center justify-center transition-colors cursor-pointer z-10"
                       >
                         <ChevronRight className="w-5 h-5" strokeWidth={1.75} />
                       </button>
@@ -521,7 +517,7 @@ export function PropertyDetailView({
                         type="button"
                         onClick={() => setActiveImageIndex(idx)}
                         aria-label={`Pilih foto ${idx + 1}`}
-                        className={`relative w-22 sm:w-26 aspect-[4/3] rounded-xl overflow-hidden shrink-0 transition-all cursor-pointer ${
+                        className={`relative w-22 sm:w-26 aspect-[4/3] rounded-xl overflow-hidden shrink-0 transition-opacity cursor-pointer ${
                           activeImageIndex === idx
                             ? 'ring-2 ring-[#38352C] opacity-100'
                             : 'ring-1 ring-[#C5BEB4] opacity-60 hover:opacity-100'
@@ -592,7 +588,7 @@ export function PropertyDetailView({
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5">
-                          <h3 className="text-sm font-semibold text-[#38352C] truncate">
+                          <h3 className="font-body text-sm font-semibold text-[#38352C] truncate">
                             {assignedAgent.name}
                           </h3>
                           <span className="num-clean inline-flex items-center gap-0.5 text-[11px] font-semibold text-[#38352C] bg-[#E8E4E1] px-2 py-0.5 rounded-full shrink-0">
@@ -618,7 +614,7 @@ export function PropertyDetailView({
                     href={waUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="dual-cta w-full justify-between"
+                    className="dual-cta whitespace-nowrap w-full justify-between"
                   >
                     <span className="dual-cta__label flex-1">Mau Saya Temenin Cek Lokasi?</span>
                     <span className="dual-cta__circle" aria-hidden="true">
@@ -635,7 +631,7 @@ export function PropertyDetailView({
                     Garansi Bebas Biaya Ekstra
                   </span>
                   <h2 className="font-display font-medium text-[clamp(1.85rem,3vw,2.6rem)] leading-[1.1] text-[#38352C]">
-                    Paket Promo All-In Free — Hemat Puluhan Juta
+                    Paket Promo All-In Free, Hemat Puluhan Juta
                   </h2>
                   <p className="text-sm text-[#57534A] mt-2 leading-relaxed">
                     Seluruh biaya legalitas, pajak, notaris, hingga subsidi KPR bank sudah ditanggung all-in. Cukup
@@ -694,7 +690,7 @@ export function PropertyDetailView({
                       key={col.title}
                       className="rounded-xl bg-[#E8E4E1] p-5 ring-1 ring-inset ring-[#38352C]/14"
                     >
-                      <h3 className="font-body text-xs font-semibold uppercase tracking-wider text-[#57534A] pb-3 mb-3 border-b border-[#C5BEB4]">
+                      <h3 className="font-body text-xs font-semibold text-[#57534A] pb-3 mb-3 border-b border-[#C5BEB4]">
                         {col.title}
                       </h3>
                       <div className="divide-y divide-[#C5BEB4]">
@@ -776,8 +772,8 @@ export function PropertyDetailView({
                     <img
                       src={mapBgImage}
                       alt={`Peta kawasan ${property.codeName}`}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 contrast-[1.02]"
+                      decoding="async"
+                      className="w-full h-full object-cover contrast-[1.02]"
                     />
 
                     <div
@@ -792,7 +788,7 @@ export function PropertyDetailView({
                     </div>
 
                     {/* Google Maps Pin */}
-                    <div className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-full pointer-events-none z-10 transition-transform duration-300 group-hover:scale-110">
+                    <div className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-full pointer-events-none z-10">
                       <svg
                         className="w-9 h-11 sm:w-10 sm:h-12 drop-shadow-[0_8px_12px_rgba(0,0,0,0.35)]"
                         viewBox="0 0 32 40"
@@ -852,7 +848,7 @@ export function PropertyDetailView({
 
                     {/* Floating Bottom Center CTA Prompt */}
                     <div className="absolute bottom-3 sm:bottom-4 inset-x-3 sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 z-10">
-                      <div className="bg-[#38352C]/95 text-[#FAF8F5] px-4 sm:px-5 py-2.5 rounded-full shadow-xl backdrop-blur-md border border-white/15 flex items-center justify-center gap-2 text-xs font-medium whitespace-nowrap">
+                      <div className="bg-[#38352C]/95 text-[#FAF8F5] px-4 sm:px-5 py-2.5 rounded-full shadow-xl backdrop-blur-md flex items-center justify-center gap-2 text-xs font-medium whitespace-nowrap">
                         <Lock className="w-3.5 h-3.5 text-[#FFCA4F] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                         <span>Buka Rute &amp; Minta Shareloc Resmi</span>
                         <ArrowRight className="w-3.5 h-3.5 shrink-0" strokeWidth={1.75} aria-hidden="true" />
@@ -889,7 +885,7 @@ export function PropertyDetailView({
                     href={calcWaUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="dual-cta"
+                    className="dual-cta whitespace-nowrap"
                   >
                     <span className="dual-cta__label">Hitung Cicilan &amp; Cek SLIK via WhatsApp</span>
                     <span className="dual-cta__circle" aria-hidden="true">
@@ -980,7 +976,7 @@ export function PropertyDetailView({
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5">
-                          <h3 className="text-sm font-semibold text-[#38352C] truncate">
+                          <h3 className="font-body text-sm font-semibold text-[#38352C] truncate">
                             {assignedAgent.name}
                           </h3>
                           <span className="num-clean inline-flex items-center gap-0.5 text-[11px] font-semibold bg-[#E8E4E1] px-2 py-0.5 rounded-full shrink-0">
@@ -1007,7 +1003,7 @@ export function PropertyDetailView({
                     href={waUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="dual-cta w-full justify-between"
+                    className="dual-cta whitespace-nowrap w-full justify-between"
                   >
                     <span className="dual-cta__label flex-1">Mau Saya Temenin Cek Lokasi?</span>
                     <span className="dual-cta__circle" aria-hidden="true">
@@ -1090,7 +1086,7 @@ export function PropertyDetailView({
         >
           <div className="flex items-center justify-between text-[#FAF8F5] text-sm z-10">
             <span className="num-clean font-medium">
-              {property.codeName} — Foto {activeImageIndex + 1} dari {gallery.length}
+              {property.codeName}: Foto {activeImageIndex + 1} dari {gallery.length}
             </span>
             <button
               type="button"
@@ -1123,7 +1119,7 @@ export function PropertyDetailView({
                     prevImage();
                   }}
                   aria-label="Foto sebelumnya"
-                  className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer"
+                  className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center border border-white/20 transition-colors cursor-pointer"
                 >
                   <ChevronLeft className="w-6 h-6" strokeWidth={1.75} />
                 </button>
@@ -1134,7 +1130,7 @@ export function PropertyDetailView({
                     nextImage();
                   }}
                   aria-label="Foto selanjutnya"
-                  className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer"
+                  className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center border border-white/20 transition-colors cursor-pointer"
                 >
                   <ChevronRight className="w-6 h-6" strokeWidth={1.75} />
                 </button>
@@ -1148,7 +1144,7 @@ export function PropertyDetailView({
                 key={idx}
                 type="button"
                 onClick={() => setActiveImageIndex(idx)}
-                className={`relative w-16 h-12 rounded-xl overflow-hidden shrink-0 border transition-all cursor-pointer ${
+                className={`relative w-16 h-12 rounded-xl overflow-hidden shrink-0 border transition-[border-color,opacity,transform] motion-reduce:transition-none cursor-pointer ${
                   activeImageIndex === idx
                     ? 'border-[#FFCA4F] scale-105 opacity-100'
                     : 'border-white/20 opacity-50 hover:opacity-90'
@@ -1174,7 +1170,7 @@ export function PropertyDetailView({
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative bg-[#FAF8F5] text-[#38352C] rounded-2xl p-6 sm:p-7 max-w-[460px] w-full shadow-2xl border border-[#C5BEB4] flex flex-col gap-5"
+            className="relative bg-[#FAF8F5] text-[#38352C] rounded-2xl p-6 sm:p-7 max-w-[460px] w-full shadow-2xl flex flex-col gap-5"
           >
             <div className="flex items-start justify-between gap-3">
               <div className="space-y-1">
@@ -1232,7 +1228,7 @@ export function PropertyDetailView({
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-1.5 min-w-0">
-                    <h4 className="text-sm font-semibold text-[#38352C] truncate">
+                    <h4 className="font-body text-sm font-semibold text-[#38352C] truncate">
                       {assignedAgent.name}
                     </h4>
                     <ShieldCheck className="w-4 h-4 text-[#38352C] shrink-0" strokeWidth={1.75} />
@@ -1254,7 +1250,7 @@ export function PropertyDetailView({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsSharelocModalOpen(false)}
-                className="dual-cta w-full justify-between"
+                className="dual-cta whitespace-nowrap w-full justify-between"
               >
                 <span className="dual-cta__label flex-1">
                   Minta Titik Shareloc ke {assignedAgent.name.split(' ')[0]}
@@ -1308,7 +1304,7 @@ export function PropertyDetailView({
           href={waUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="dual-cta shrink-0"
+          className="dual-cta whitespace-nowrap shrink-0"
         >
           <span className="dual-cta__label">Mau Saya Temenin?</span>
           <span className="dual-cta__circle" aria-hidden="true">

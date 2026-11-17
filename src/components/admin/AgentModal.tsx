@@ -16,7 +16,7 @@ export function AgentModal({ isOpen, onClose, onSave, initialData }: AgentModalP
     id: '',
     name: '',
     role: 'Senior Property Consultant',
-    photoUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80',
+    photoUrl: '/images/agents/mbak-ningsih.webp',
     phone: '6282142193231',
     citySpecialist: 'Sidoarjo',
     areaFocus: ['Sukodono', 'Sedati Juanda'],
@@ -41,7 +41,7 @@ export function AgentModal({ isOpen, onClose, onSave, initialData }: AgentModalP
         id: '',
         name: '',
         role: 'Senior Property Consultant',
-        photoUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80',
+        photoUrl: '/images/agents/mbak-ningsih.webp',
         phone: '6282142193231',
         citySpecialist: 'Sidoarjo',
         areaFocus: ['Sukodono', 'Sedati Juanda'],
@@ -123,7 +123,7 @@ export function AgentModal({ isOpen, onClose, onSave, initialData }: AgentModalP
       role: formData.role || 'Property Consultant',
       photoUrl:
         formData.photoUrl ||
-        'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80',
+        '/images/agents/mbak-ningsih.webp',
       phone: cleanPhone,
       citySpecialist: formData.citySpecialist || 'Sidoarjo',
       areaFocus: formData.areaFocus || [],
@@ -244,10 +244,10 @@ export function AgentModal({ isOpen, onClose, onSave, initialData }: AgentModalP
             <label className="block font-bold text-white mb-1">URL Foto Profil</label>
             <div className="flex items-center gap-3">
               <input
-                type="url"
+                type="text"
                 value={formData.photoUrl || ''}
                 onChange={(e) => setFormData({ ...formData, photoUrl: e.target.value })}
-                placeholder="https://images.unsplash.com/..."
+                placeholder="/images/agents/mbak-ningsih.webp"
                 className="flex-1 bg-[#050b0a] border border-[#16362f] rounded-xl px-3 py-2 text-xs"
               />
               {formData.photoUrl && (

@@ -22,7 +22,7 @@ export function Footer() {
             href={waSurveyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="dual-cta self-start lg:self-auto"
+            className="dual-cta whitespace-nowrap self-start lg:self-auto"
           >
             <span className="dual-cta__label">Jadwalkan Survei Bersama</span>
             <span className="dual-cta__circle" aria-hidden="true">
@@ -39,7 +39,7 @@ export function Footer() {
               alt="Interior ruang tamu hangat rumah siap huni di kawasan Sidoarjo dan Surabaya"
               width={900}
               height={1200}
-              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover"
             />
           </div>
@@ -47,32 +47,32 @@ export function Footer() {
           <div className="lg:col-span-8 rounded-2xl bg-[#38352C] text-[#E8E4E1] p-7 sm:p-10 flex flex-col justify-between gap-12 overflow-hidden">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               <div>
-                <h3 className="font-body text-xs font-semibold uppercase tracking-wider text-[#C5BEB4] mb-4">
+                <h3 className="font-body text-xs font-semibold text-[#C5BEB4] mb-2">
                   Navigasi
                 </h3>
-                <ul className="flex flex-col gap-2.5 text-sm">
+                <ul className="flex flex-col text-sm">
                   <li>
-                    <Link href="/properti" className="hover:text-[#FFCA4F] transition-colors">
+                    <Link href="/properti" className="inline-flex items-center min-h-[44px] hover:text-[#FFCA4F] transition-colors">
                       Koleksi Klaster
                     </Link>
                   </li>
                   <li>
-                    <Link href="/#alur-kawal" className="hover:text-[#FFCA4F] transition-colors">
+                    <Link href="/#alur-kawal" className="inline-flex items-center min-h-[44px] hover:text-[#FFCA4F] transition-colors">
                       Alur Kawal Berkas
                     </Link>
                   </li>
                   <li>
-                    <Link href="/#komparasi" className="hover:text-[#FFCA4F] transition-colors">
+                    <Link href="/#komparasi" className="inline-flex items-center min-h-[44px] hover:text-[#FFCA4F] transition-colors">
                       Komparasi Rumah
                     </Link>
                   </li>
                   <li>
-                    <Link href="/agen" className="hover:text-[#FFCA4F] transition-colors">
+                    <Link href="/agen" className="inline-flex items-center min-h-[44px] hover:text-[#FFCA4F] transition-colors">
                       Tim Konsultan
                     </Link>
                   </li>
                   <li>
-                    <Link href="/#pertanyaan" className="hover:text-[#FFCA4F] transition-colors">
+                    <Link href="/#pertanyaan" className="inline-flex items-center min-h-[44px] hover:text-[#FFCA4F] transition-colors">
                       Pertanyaan Umum
                     </Link>
                   </li>
@@ -80,7 +80,7 @@ export function Footer() {
               </div>
 
               <div>
-                <h3 className="font-body text-xs font-semibold uppercase tracking-wider text-[#C5BEB4] mb-4">
+                <h3 className="font-body text-xs font-semibold text-[#C5BEB4] mb-4">
                   Area Pemasaran
                 </h3>
                 <ul className="flex flex-col gap-2.5 text-sm text-[#E8E4E1]/90">
@@ -92,13 +92,13 @@ export function Footer() {
               </div>
 
               <div>
-                <h3 className="font-body text-xs font-semibold uppercase tracking-wider text-[#C5BEB4] mb-4">
+                <h3 className="font-body text-xs font-semibold text-[#C5BEB4] mb-4">
                   Layanan Konsultan
                 </h3>
                 <ul className="flex flex-col gap-2.5 text-sm text-[#E8E4E1]/90">
                   <li>Mbak Ningsih (PIC Utama)</li>
                   <li className="mono-num text-[#FFCA4F]">0821-4219-3231</li>
-                  <li className="num-clean">Senin–Minggu, 08.00–20.00 WIB</li>
+                  <li className="num-clean">Setiap Hari, 08.00 sampai 20.00 WIB</li>
                   <li>Partner Resmi Bank BTN, BRI, BSI, Mandiri, BNI</li>
                 </ul>
               </div>
@@ -118,7 +118,7 @@ export function Footer() {
                 </p>
                 <Link
                   href="/admin"
-                  className="text-[#C5BEB4]/70 hover:text-[#E8E4E1] transition-colors"
+                  className="inline-flex items-center min-h-[44px] text-[#C5BEB4]/70 hover:text-[#E8E4E1] transition-colors"
                 >
                   Portal Admin
                 </Link>

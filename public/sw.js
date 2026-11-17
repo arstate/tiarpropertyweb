@@ -1,5 +1,5 @@
 // public/sw.js - PWA Service Worker Anti-Crash & Zero-Bandwidth
-const CACHE_NAME = 'tiar-property-bandwidth-v7';
+const CACHE_NAME = 'tiar-property-bandwidth-v8';
 
 // Pre-cache root page pada saat instalasi
 const PRECACHE_ASSETS = ['/'];
@@ -40,14 +40,13 @@ self.addEventListener('fetch', (event) => {
   // Guard bypass: Jangan pernah cache file Service Worker itu sendiri
   if (url.pathname === '/sw.js') return;
 
-  // Pola 1: Static Chunks Next.js, Media, Fonts, dan Gambar Unsplash -> CACHE-FIRST
+  // Pola 1: Static Chunks Next.js, Media, Fonts, dan Gambar Lokal -> CACHE-FIRST
   const isLocalStatic = (url.origin === self.location.origin) && (
     url.pathname.startsWith('/_next/static/') ||
     url.pathname.match(/\.(woff2|woff|ttf|eot|png|jpg|jpeg|webp|avif|svg|ico|css|js)$/)
   );
-  const isUnsplash = url.hostname.includes('unsplash.com');
 
-  if (isLocalStatic || isUnsplash) {
+  if (isLocalStatic) {
     event.respondWith(
       caches.match(request, { ignoreSearch: true }).then((cachedResponse) => {
         if (cachedResponse) {

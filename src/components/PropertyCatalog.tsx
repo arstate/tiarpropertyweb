@@ -105,7 +105,7 @@ export function PropertyCatalog() {
 
             <Link
               href="/properti"
-              className="inline-flex items-center gap-2 min-h-[44px] px-5 rounded-full border border-[#C5BEB4] bg-[#E8E4E1] text-[#38352C] text-sm font-medium hover:bg-[#38352C] hover:text-[#E8E4E1] hover:border-[#38352C] active:scale-[0.97] transition-all whitespace-nowrap self-start md:self-auto"
+              className="inline-flex items-center gap-2 min-h-[44px] px-5 rounded-full border border-[#C5BEB4] bg-[#E8E4E1] text-[#38352C] text-sm font-medium hover:bg-[#38352C] hover:text-[#E8E4E1] hover:border-[#38352C] active:scale-[0.97] transition-[background-color,color,border-color,transform] motion-reduce:transition-none whitespace-nowrap self-start md:self-auto"
             >
               <span className="num-clean">
                 Lihat Semua {TIAR_PROPERTIES.length} Klaster

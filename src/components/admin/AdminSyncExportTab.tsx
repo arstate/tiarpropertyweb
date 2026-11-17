@@ -79,14 +79,14 @@ export function AdminSyncExportTab({
     await new Promise((r) => setTimeout(r, 800));
 
     // Step 3: Verifikasi rute
-    setRebuildStage('3/3: Memverifikasi 26+ rute statis (katalog, agen, detail)...');
+    setRebuildStage('3/3: Memverifikasi 27 rute statis (katalog, agen, detail)...');
     await new Promise((r) => setTimeout(r, 700));
 
     setIsRebuilding(false);
     setRebuildStage(null);
     setRebuildResult({
       success: true,
-      routesCount: 26,
+      routesCount: 27,
       timestamp: new Date().toLocaleTimeString('id-ID'),
     });
   };
@@ -220,7 +220,7 @@ export function AdminSyncExportTab({
               <span>Trigger Rebuild & Sinkronisasi Rute Statis</span>
             </h4>
             <p className="text-xs text-white/70 mt-1">
-              Verifikasi kelayakan data dan perbarui status 26+ rute statis produksi Zero-Usage Vercel.
+              Verifikasi kelayakan data dan perbarui status 27 rute statis produksi Zero-Usage Vercel.
             </p>
           </div>
 
@@ -285,7 +285,7 @@ export function AdminSyncExportTab({
 
           <div className="bg-[#050b0a] border border-[#16362f] rounded-xl p-3.5 flex items-center justify-between">
             <div>
-              <span className="text-white/40 block text-[10px] mb-1 uppercase font-bold">2. Eksekusi Static Export (26+ Rute):</span>
+              <span className="text-white/40 block text-[10px] mb-1 uppercase font-bold">2. Eksekusi Static Export (27 Rute):</span>
               <span className="text-amber-300 font-bold">{buildCommand}</span>
             </div>
             <button
