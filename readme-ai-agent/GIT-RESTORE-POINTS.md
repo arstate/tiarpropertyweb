@@ -58,11 +58,19 @@
 - **Date:** 2026-10-21
 - **Scope:** Redesain total layout visual modal popup penguncian shareloc (`isSharelocModalOpen`) di `src/components/PropertyDetailView.tsx`. Menghilangkan lock box kotak bulky, garis pelangi murahan, dan tombol neon green yang bentrok. Menggantinya dengan arsitektur Swiss Dark Luxury yang rapi dan elegan: header title dengan badge navigasi + pulse dot, kartu konteks unit properti lengkap dengan mini thumbnail, kartu profil konsultan PIC concierge (ring emerald, rating bintang, kutipan ramah manusia asli "Saya Temenin Rule"), tombol CTA WhatsApp Dark Luxury `#081613` satu baris tegas di ponsel 390px, dan footer 3-kolom garansi terstruktur tanpa wrap glitch.
 
-## Pre-Flight Git Status & Rollback Command Helper
-> **Catatan Audit (2026-11-17):** Direktori proyek saat ini **belum memiliki repositori `.git`** (`fatal: not a git repository`). Sebelum memulai Milestone 1 di `src/`, wajib jalankan `git init && git add -A && git commit -m "chore: baseline pre-redesign"` agar perintah rollback di bawah ini berfungsi:
+### [Milestone 15 / v2.0.0] - `Mejuma Warm Stone` Full Redesign, Zero KPR Calculator & 0% Serif Numerals
+- **Date:** 2026-11-17
+- **Commits & Tags:**
+  - Pre-redesign Baseline: `f5e9614` (tag: `restore-pre-redesign`)
+  - Production Redesign (`v2.0.0`): `ecbd52b` (tag: `restore-v2-verified`)
+- **Scope:** Eksekusi penuh Milestone 0–6: palet `Mejuma Warm Stone` (`#F1F1F1`/`#E8E4E1`/`#C5BEB4`/`#38352C`/`#57534A`/`#FFCA4F`), Detached Floating Pill `Navbar` + Dark Drawer (`.01–.04`), `100svh` Monumental Hero + wordmark `tiar property`, 16 aset lokal WebP 4K (`/boost` CUDA `upscale-img`), Serif Marquee + Asymmetric Lookbook, Sticky `.01–.05` Journey, Komparasi, Testimoni, FAQ `<details>`, Split Footer `Ft2`, **hapus total `KprCalculator.tsx` & `#simulasi-kpr`**, **0% serif numerals** (`.num-clean`/`.mono-num`), fix `"Partner PT TMJ"` -> `"Partner Resmi"`, 0 emoji (`lucide-react`), `src/app/icon.svg`, `overflow-x: clip`, dan verifikasi build `out/` (`27/27` rute) + 7-viewport Chrome CDP port `9223`.
+
+## Git Status & Rollback Command Helper
 ```bash
 git status
-git checkout -- src/
+git log --oneline -n 5
+# Rollback ke pre-redesign v1.0.0 jika diperlukan:
+git checkout restore-pre-redesign -- src/
 ```
 
 
