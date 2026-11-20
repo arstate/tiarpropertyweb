@@ -229,7 +229,12 @@ export function AgentModal({ isOpen, onClose, onSave, initialData }: AgentModalP
               <label className="block font-bold text-white mb-1">Spesialisasi Kota</label>
               <select
                 value={formData.citySpecialist || 'Sidoarjo'}
-                onChange={(e) => setFormData({ ...formData, citySpecialist: e.target.value as any })}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    citySpecialist: e.target.value as AgentProfile['citySpecialist'],
+                  })
+                }
                 className="w-full bg-[#050b0a] border border-[#16362f] rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-amber-400"
               >
                 <option value="Sidoarjo">Sidoarjo</option>
@@ -252,7 +257,6 @@ export function AgentModal({ isOpen, onClose, onSave, initialData }: AgentModalP
               />
               {formData.photoUrl && (
                 <div className="w-9 h-9 rounded-full overflow-hidden border border-[#16362f] shrink-0">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={formData.photoUrl} alt="Preview" className="w-full h-full object-cover" />
                 </div>
               )}

@@ -8,15 +8,10 @@ import { ClusterModal } from './ClusterModal';
 import {
   Plus,
   Search,
-  Building2,
   Edit2,
   Trash2,
   ExternalLink,
   MapPin,
-  Bed,
-  Bath,
-  Maximize2,
-  Filter,
 } from 'lucide-react';
 
 interface AdminClustersTabProps {
@@ -128,7 +123,6 @@ export function AdminClustersTab({
                     <td className="py-3.5 px-4">
                       <div className="flex items-center gap-3">
                         <div className="w-12 h-12 rounded-xl overflow-hidden border border-[#16362f] bg-[#050b0a] shrink-0">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={prop.imageUrl}
                             alt={prop.codeName}
@@ -203,7 +197,6 @@ export function AdminClustersTab({
                     <td className="py-3.5 px-4">
                       {pic ? (
                         <div className="flex items-center gap-2">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={pic.photoUrl}
                             alt={pic.name}
@@ -278,7 +271,6 @@ export function AdminClustersTab({
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-xl overflow-hidden border border-[#16362f] bg-[#050b0a] shrink-0">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={prop.imageUrl}
                           alt={prop.codeName}
@@ -335,7 +327,6 @@ export function AdminClustersTab({
 
                   {pic && (
                     <div className="mt-2.5 pt-2.5 border-t border-[#16362f] flex items-center gap-2">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={pic.photoUrl}
                         alt={pic.name}

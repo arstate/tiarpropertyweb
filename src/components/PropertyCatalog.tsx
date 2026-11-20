@@ -6,6 +6,7 @@ import { ArrowRight, RotateCcw } from 'lucide-react';
 import { TIAR_PROPERTIES } from '@/data/properties';
 import { PropertyCard } from '@/components/PropertyCard';
 import { UspFeatureBar } from '@/components/UspFeatureBar';
+import { ScrollReveal } from '@/components/ScrollReveal';
 import type { QuickFilterKey } from '@/components/SearchFilterBar';
 
 const MARQUEE_ITEMS = [
@@ -90,7 +91,7 @@ export function PropertyCatalog() {
         className="py-16 sm:py-24 lg:py-32 bg-[#F1F1F1]"
       >
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
+          <ScrollReveal className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
             <div className="flex flex-col gap-3 max-w-[54ch]">
               <h2
                 id="lookbook-heading"
@@ -105,14 +106,14 @@ export function PropertyCatalog() {
 
             <Link
               href="/properti"
-              className="inline-flex items-center gap-2 min-h-[44px] px-5 rounded-full border border-[#C5BEB4] bg-[#E8E4E1] text-[#38352C] text-sm font-medium hover:bg-[#38352C] hover:text-[#E8E4E1] hover:border-[#38352C] active:scale-[0.97] transition-[background-color,color,border-color,transform] motion-reduce:transition-none whitespace-nowrap self-start md:self-auto"
+              className="group inline-flex items-center gap-2 min-h-[44px] px-5 rounded-full border border-[#C5BEB4] bg-[#E8E4E1] text-[#38352C] text-sm font-medium hover:bg-[#38352C] hover:text-[#E8E4E1] hover:border-[#38352C] active:scale-[0.97] transition-[background-color,color,border-color,transform] motion-reduce:transition-none whitespace-nowrap self-start md:self-auto"
             >
               <span className="num-clean">
                 Lihat Semua {TIAR_PROPERTIES.length} Klaster
               </span>
-              <ArrowRight className="w-4 h-4 shrink-0" strokeWidth={1.75} aria-hidden="true" />
+              <ArrowRight className="w-4 h-4 shrink-0 group-hover:translate-x-1 transition-transform duration-300" strokeWidth={1.75} aria-hidden="true" />
             </Link>
-          </div>
+          </ScrollReveal>
 
           {filteredProperties.length === 0 ? (
             <div className="rounded-2xl bg-[#E8E4E1] border border-[#C5BEB4] p-8 sm:p-10 flex flex-col items-start gap-4">
@@ -133,13 +134,17 @@ export function PropertyCatalog() {
               {filteredProperties.map((property, index) => {
                 const layout = LOOKBOOK_LAYOUTS[index % LOOKBOOK_LAYOUTS.length];
                 return (
-                  <div key={property.id} className={layout.gridClass}>
+                  <ScrollReveal
+                    key={property.id}
+                    delay={(index % 3) * 90}
+                    className={layout.gridClass}
+                  >
                     <PropertyCard
                       property={property}
                       basePath="/properti"
                       aspectVariant={layout.aspectVariant}
                     />
-                  </div>
+                  </ScrollReveal>
                 );
               })}
             </div>

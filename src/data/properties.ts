@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import propertiesData from './properties.json';
 
 export interface PropertyUnit {
@@ -29,26 +30,28 @@ export interface PropertyUnit {
 
 export const TIAR_PROPERTIES: PropertyUnit[] = propertiesData as PropertyUnit[];
 
-export const HERO_OFFERS = [
-  {
-    title: 'DP 0% (Tanpa DP)',
-    description: 'Cukup UTJ 1 Juta, langsung proses berkas KPR ke bank.',
-  },
-  {
-    title: 'All-In Free Biaya',
-    description: 'Gratis BPHTB, AJB, Notaris, & subsidi biaya KPR s/d 20 Jt.',
-  },
-  {
-    title: 'Subsidi Angsuran 1,4 Jt',
-    description: 'Potongan angsuran Rp 1,4 Juta/bulan di 6–12 bulan pertama.',
-  },
-  {
-    title: 'Kawal KPR 100% ACC',
-    description: 'Tim analis mengawal ke 5 bank rekanan BUMN sampai disetujui.',
-  },
-];
-
 export const WA_CS_NUMBER = '6282142193231';
-export const DEFAULT_WA_MESSAGE = encodeURIComponent(
-  'Halo Mbak Ningsih, saya lihat website Tiar Property. Mau tanya promo rumah DP 0% dan cicilan 1-2 Jt-an, boleh minta tolong ditemenin cek lokasinya kak?'
-);
+export const DEFAULT_WA_MESSAGE =
+  'Halo Mbak Ningsih, saya lihat website Tiar Property. Mau tanya promo rumah DP 0% dan cicilan 1-2 Jt-an, boleh minta tolong ditemenin cek lokasinya kak?';
+
+export function buildMainWaUrl(customMessage?: string): string {
+  const message = customMessage ?? DEFAULT_WA_MESSAGE;
+  return `https://wa.me/${WA_CS_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+export function buildPropertyMetadata(
+  property: PropertyUnit | undefined,
+  fallbackTitle: string
+): Metadata {
+  if (!property) return { title: fallbackTitle };
+
+  return {
+    title: `${property.codeName} - ${property.locationAreaShort} | Tiar Property`,
+    description: `${property.codeName} di ${property.locationArea}. Harga mulai ${property.priceStart}, ${property.cicilanPromo}, ${property.utjAmount}. Promo DP 0% & All-In Free Biaya.`,
+    openGraph: {
+      title: `${property.codeName} | Tiar Property`,
+      description: `${property.locationArea}. Harga mulai ${property.priceStart}, cicilan ${property.cicilanPromo}.`,
+      images: [{ url: property.imageUrl }],
+    },
+  };
+}

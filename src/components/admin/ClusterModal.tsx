@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { PropertyUnit } from '@/data/properties';
 import { AgentProfile } from '@/data/agents';
-import { X, ShieldAlert, Check, Plus, Trash2, Home, AlertCircle } from 'lucide-react';
+import { validateTiarGuardrails } from '@/lib/guardrails';
+import { X, Check, Plus, Trash2, Home, AlertCircle } from 'lucide-react';
 
 interface ClusterModalProps {
   isOpen: boolean;
@@ -92,33 +93,8 @@ export function ClusterModal({
 
   // Real-time guardrail check
   const checkTextForGuardrail = (val: string): string | null => {
-    const devRegex = /\b(pt\s*\.?\s*)?trimitra(\s+manunggal\s+jaya)?\b/i;
-    if (devRegex.test(val)) {
-      return 'Pelanggaran Information Gap Protocol: Dilarang menyebutkan nama legal developer PT Trimitra / Trimitra Manunggal Jaya. Wajib gunakan nama samaran strategis (contoh: "Cluster Modern Sukodono").';
-    }
-
-    const realEstatePatterns = [
-      /\bgrand\s+park\s+anggaswangi\b/i,
-      /\bgrand\s+masangan\s+permai\b/i,
-      /\bgrand\s+east\s+residence\b/i,
-      /\b(cluster\s+)?hazel\b/i,
-      /\btampak\s+siring\b/i,
-      /\bpuri\s+gading(\s+mas\s+raya)?\b/i,
-      /\balera\s+grove\b/i,
-      /\b(klopo|kelopo)\s+sepuluh\b/i,
-      /\b(gmp|ger|pgmr|gpa)\b/i,
-    ];
-    for (const p of realEstatePatterns) {
-      if (p.test(val)) {
-        return 'Pelanggaran Information Gap Protocol: Dilarang menyebutkan nama perumahan asli (seperti Grand Park Anggaswangi, Grand Masangan Permai, Grand East Residence, Cluster Hazel, Tampak Siring, Alera Grove, Puri Gading Mas Raya). Wajib gunakan nama samaran strategis dengan daya tarik tinggi (contoh: "Cluster Modern Sukodono", "Cluster Minimalis Juanda", "Cluster Sultan MERR").';
-      }
-    }
-
-    const bltRegex = /\b(blt|bantuan\s+likuiditas\s+transaksi)\b/i;
-    if (bltRegex.test(val)) {
-      return 'Pelanggaran Protokol Kerahasiaan: Dilarang mencantumkan kata "BLT" (komisi internal marketing)!';
-    }
-    return null;
+    const result = validateTiarGuardrails(val);
+    return result.ok ? null : result.reason;
   };
 
   const handleAddFeature = () => {
@@ -289,7 +265,7 @@ export function ClusterModal({
               <label className="block font-bold text-white mb-1">Kota Pemasaran</label>
               <select
                 value={formData.city || 'Sidoarjo'}
-                onChange={(e) => setFormData({ ...formData, city: e.target.value as any })}
+                onChange={(e) => setFormData({ ...formData, city: e.target.value as PropertyUnit['city'] })}
                 className="w-full bg-[#050b0a] border border-[#16362f] rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-emerald-500"
               >
                 <option value="Sidoarjo">Sidoarjo</option>
@@ -301,7 +277,12 @@ export function ClusterModal({
               <label className="block font-bold text-white mb-1">Status Unit</label>
               <select
                 value={formData.status || 'available'}
-                onChange={(e) => setFormData({ ...formData, status: e.target.value as any })}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    status: e.target.value as NonNullable<PropertyUnit['status']>,
+                  })
+                }
                 className="w-full bg-[#050b0a] border border-[#16362f] rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-emerald-500 font-bold"
               >
                 <option value="available">Tersedia (Ready)</option>

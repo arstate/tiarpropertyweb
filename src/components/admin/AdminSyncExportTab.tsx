@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { PropertyUnit } from '@/data/properties';
 import { AgentProfile } from '@/data/agents';
+import { validateTiarGuardrails } from '@/lib/guardrails';
 import {
   Download,
   Copy,
@@ -13,6 +14,7 @@ import {
   RotateCcw,
   Sparkles,
   Zap,
+  AlertCircle,
 } from 'lucide-react';
 
 interface AdminSyncExportTabProps {
@@ -20,6 +22,13 @@ interface AdminSyncExportTabProps {
   agents: AgentProfile[];
   onResetToDefaults: () => void;
   hasLocalChanges: boolean;
+}
+
+interface ValidationResult {
+  success: boolean;
+  routesCount: number;
+  timestamp: string;
+  issues: string[];
 }
 
 export function AdminSyncExportTab({
@@ -33,16 +42,9 @@ export function AdminSyncExportTab({
   const [copiedMcpCmd, setCopiedMcpCmd] = useState(false);
   const [copiedBuildCmd, setCopiedBuildCmd] = useState(false);
 
-  // Trigger Rebuild State
-  const [isRebuilding, setIsRebuilding] = useState(false);
-  const [rebuildStage, setRebuildStage] = useState<string | null>(null);
-  const [rebuildResult, setRebuildResult] = useState<{
-    success: boolean;
-    routesCount: number;
-    timestamp: string;
-  } | null>(null);
+  const [validationResult, setValidationResult] = useState<ValidationResult | null>(null);
 
-  const downloadJson = (filename: string, data: any) => {
+  const downloadJson = (filename: string, data: unknown) => {
     const jsonStr = JSON.stringify(data, null, 2);
     const blob = new Blob([jsonStr], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -66,33 +68,54 @@ export function AdminSyncExportTab({
     setTimeout(() => setter(false), 2000);
   };
 
-  const handleTriggerRebuild = async () => {
-    setIsRebuilding(true);
-    setRebuildResult(null);
+  const handleValidateIntegrity = () => {
+    const issues: string[] = [];
+    const agentIds = new Set(agents.map((a) => a.id));
+    const propIds = new Set<string>();
 
-    // Step 1: Validasi skema
-    setRebuildStage('1/3: Memvalidasi integritas data klaster & relasi konsultan...');
-    await new Promise((r) => setTimeout(r, 600));
+    for (const prop of properties) {
+      if (!prop.id || !prop.codeName.trim()) {
+        issues.push(`Klaster tanpa ID/nama valid ditemukan.`);
+      } else if (propIds.has(prop.id)) {
+        issues.push(`Duplikasi ID klaster "${prop.id}".`);
+      } else {
+        propIds.add(prop.id);
+      }
 
-    // Step 2: Sinkronisasi storage
-    setRebuildStage('2/3: Menyinkronkan dataset ke format ekspor static Next.js...');
-    await new Promise((r) => setTimeout(r, 800));
+      const guard = validateTiarGuardrails(prop);
+      if (!guard.ok) {
+        issues.push(`[${prop.codeName}] ${guard.reason}`);
+      }
 
-    // Step 3: Verifikasi rute
-    setRebuildStage('3/3: Memverifikasi 27 rute statis (katalog, agen, detail)...');
-    await new Promise((r) => setTimeout(r, 700));
+      if (!prop.imageUrl || (!prop.imageUrl.startsWith('/') && !prop.imageUrl.startsWith('https://'))) {
+        issues.push(`[${prop.codeName}] Path foto utama "${prop.imageUrl}" tidak valid.`);
+      }
 
-    setIsRebuilding(false);
-    setRebuildStage(null);
-    setRebuildResult({
-      success: true,
-      routesCount: 27,
+      if (prop.assignedAgentId && !agentIds.has(prop.assignedAgentId)) {
+        issues.push(`[${prop.codeName}] PIC agen "${prop.assignedAgentId}" tidak ditemukan di agents.json.`);
+      }
+    }
+
+    for (const agent of agents) {
+      const cleanPhone = agent.phone.replace(/[^\d]/g, '');
+      if (!cleanPhone.startsWith('628') || cleanPhone.length < 10) {
+        issues.push(`[Agen ${agent.name}] Format WhatsApp "${agent.phone}" harus diawali 628.`);
+      }
+    }
+
+    // Total static routes: 5 main routes (/, /properti, /produk, /agen, /admin) + 2 detail prefixes per cluster
+    const routesCount = 5 + properties.length * 2;
+
+    setValidationResult({
+      success: issues.length === 0,
+      routesCount,
       timestamp: new Date().toLocaleTimeString('id-ID'),
+      issues,
     });
   };
 
-  const mcpCommand = `bun scripts/tiar-mcp-server.ts`;
-  const buildCommand = `node ./node_modules/next/dist/bin/next build`;
+  const mcpCommand = `npx tsx scripts/tiar-mcp-server.ts`;
+  const buildCommand = `npm run build`;
 
   return (
     <div className="space-y-6">
@@ -211,49 +234,69 @@ export function AdminSyncExportTab({
         </div>
       </div>
 
-      {/* Trigger Rebuild & Sinkronisasi Card */}
+      {/* Real Schema & Guardrail Integrity Check Card */}
       <div className="bg-[#081613] border border-[#16362f] rounded-2xl p-5 sm:p-6 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h4 className="text-base font-black text-white tracking-tight flex items-center gap-2">
-              <RefreshCw className={`w-4 h-4 text-emerald-400 ${isRebuilding ? 'animate-spin' : ''}`} />
-              <span>Trigger Rebuild & Sinkronisasi Rute Statis</span>
+              <RefreshCw className="w-4 h-4 text-emerald-400" />
+              <span>Validasi Skema, Guardrail &amp; Rute Statis</span>
             </h4>
             <p className="text-xs text-white/70 mt-1">
-              Verifikasi kelayakan data dan perbarui status 27 rute statis produksi Zero-Usage Vercel.
+              Memeriksa kelengkapan data klaster, relasi PIC agen, format WA, dan kepatuhan Information Gap &amp; Anti-BLT sebelum ekspor.
             </p>
           </div>
 
           <button
             type="button"
             data-testid="btn-trigger-rebuild"
-            disabled={isRebuilding}
-            onClick={handleTriggerRebuild}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-[#050b0a] font-black text-xs shadow-md transition-all active:scale-95 disabled:opacity-50 shrink-0"
+            onClick={handleValidateIntegrity}
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-[#050b0a] font-black text-xs shadow-md transition-all active:scale-95 shrink-0"
           >
-            <RefreshCw className={`w-4 h-4 ${isRebuilding ? 'animate-spin' : ''}`} />
-            <span>{isRebuilding ? 'Memproses Rebuild...' : 'Trigger Rebuild Sekarang'}</span>
+            <RefreshCw className="w-4 h-4" />
+            <span>Validasi Integritas Data</span>
           </button>
         </div>
 
-        {/* Processing State */}
-        {isRebuilding && (
-          <div className="p-4 rounded-xl bg-[#050b0a] border border-emerald-500/40 text-emerald-300 text-xs font-mono flex items-center gap-3 animate-pulse">
-            <RefreshCw className="w-4 h-4 animate-spin text-emerald-400 shrink-0" />
-            <span>{rebuildStage}</span>
-          </div>
-        )}
-
         {/* Result Feedback */}
-        {rebuildResult && (
-          <div className="p-4 rounded-xl bg-[#0e241f] border border-emerald-500/50 text-white text-xs space-y-2">
-            <div className="flex items-center gap-2 text-emerald-400 font-bold">
-              <Check className="w-4 h-4" />
-              <span>Sinkronisasi & Verifikasi Berhasil ({rebuildResult.timestamp})</span>
+        {validationResult && (
+          <div
+            className={`p-4 rounded-xl border text-white text-xs space-y-2 ${
+              validationResult.success
+                ? 'bg-[#0e241f] border-emerald-500/50'
+                : 'bg-rose-950/30 border-rose-500/50'
+            }`}
+          >
+            <div
+              className={`flex items-center gap-2 font-bold ${
+                validationResult.success ? 'text-emerald-400' : 'text-rose-400'
+              }`}
+            >
+              {validationResult.success ? (
+                <Check className="w-4 h-4" />
+              ) : (
+                <AlertCircle className="w-4 h-4" />
+              )}
+              <span>
+                {validationResult.success
+                  ? `Validasi Skema & Guardrail Lolos (${validationResult.timestamp})`
+                  : `Ditemukan ${validationResult.issues.length} Masalah Data (${validationResult.timestamp})`}
+              </span>
             </div>
-            <p className="text-[11px] text-white/70">
-              Total {rebuildResult.routesCount} rute statis terverifikasi sempurna. Untuk mempublikasikan permanen ke hosting produksi, pastikan file JSON disimpan di folder <code className="text-emerald-400">src/data/</code> lalu jalankan build terminal atau tool MCP <code className="text-amber-400">tiar_rebuild_and_deploy</code>.
-            </p>
+            {validationResult.success ? (
+              <p className="text-[11px] text-white/70">
+                Estimasi {validationResult.routesCount} rute statis siap diekspor. Simpan berkas JSON di{' '}
+                <code className="text-emerald-400">src/data/</code> lalu jalankan{' '}
+                <code className="text-amber-400">npm run build</code> atau tool MCP{' '}
+                <code className="text-amber-400">tiar_rebuild_and_deploy</code>.
+              </p>
+            ) : (
+              <ul className="list-disc pl-5 text-[11px] text-rose-200 space-y-1">
+                {validationResult.issues.map((issue, i) => (
+                  <li key={i}>{issue}</li>
+                ))}
+              </ul>
+            )}
           </div>
         )}
       </div>
@@ -262,36 +305,41 @@ export function AdminSyncExportTab({
       <div className="bg-[#081613] border border-[#16362f] rounded-2xl p-5 sm:p-6 space-y-4">
         <div className="flex items-center gap-2 text-white font-black text-sm">
           <Terminal className="w-4 h-4 text-emerald-400" />
-          <span>Panduan Rebuild & AI MCP Server</span>
+          <span>Panduan Rebuild &amp; AI MCP Server</span>
         </div>
         <p className="text-xs text-white/70 leading-relaxed">
-          Karena website menggunakan arsitektur statis 100% Zero-Usage Vercel (<code className="text-emerald-400 font-mono">output: &apos;export&apos;</code>), setelah memperbarui berkas JSON, jalankan perintah build lokal atau gunakan MCP server untuk rebuild otomatis ~7-20 detik:
+          Karena website menggunakan arsitektur statis 100% Zero-Usage Vercel (
+          <code className="text-emerald-400 font-mono">output: &apos;export&apos;</code>), setelah memperbarui berkas JSON, jalankan perintah build lokal atau gunakan MCP server:
         </p>
 
         <div className="space-y-3 font-mono text-xs">
-          <div className="bg-[#050b0a] border border-[#16362f] rounded-xl p-3.5 flex items-center justify-between">
-            <div>
-              <span className="text-white/40 block text-[10px] mb-1 uppercase font-bold">1. Jalankan AI MCP Server:</span>
-              <span className="text-emerald-400 font-bold">{mcpCommand}</span>
+          <div className="bg-[#050b0a] border border-[#16362f] rounded-xl p-3.5 flex items-center justify-between gap-3">
+            <div className="min-w-0">
+              <span className="text-white/40 block text-[10px] mb-1 uppercase font-bold">
+                1. Jalankan AI MCP Server:
+              </span>
+              <span className="text-emerald-400 font-bold break-all">{mcpCommand}</span>
             </div>
             <button
               type="button"
               onClick={() => copyToClipboard(mcpCommand, setCopiedMcpCmd)}
-              className="p-2 rounded-lg bg-[#0e241f] border border-[#16362f] text-white/70 hover:text-white"
+              className="p-2 rounded-lg bg-[#0e241f] border border-[#16362f] text-white/70 hover:text-white shrink-0"
             >
               {copiedMcpCmd ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
             </button>
           </div>
 
-          <div className="bg-[#050b0a] border border-[#16362f] rounded-xl p-3.5 flex items-center justify-between">
-            <div>
-              <span className="text-white/40 block text-[10px] mb-1 uppercase font-bold">2. Eksekusi Static Export (27 Rute):</span>
-              <span className="text-amber-300 font-bold">{buildCommand}</span>
+          <div className="bg-[#050b0a] border border-[#16362f] rounded-xl p-3.5 flex items-center justify-between gap-3">
+            <div className="min-w-0">
+              <span className="text-white/40 block text-[10px] mb-1 uppercase font-bold">
+                2. Eksekusi Static Export (27+ Rute):
+              </span>
+              <span className="text-amber-300 font-bold break-all">{buildCommand}</span>
             </div>
             <button
               type="button"
               onClick={() => copyToClipboard(buildCommand, setCopiedBuildCmd)}
-              className="p-2 rounded-lg bg-[#0e241f] border border-[#16362f] text-white/70 hover:text-white"
+              className="p-2 rounded-lg bg-[#0e241f] border border-[#16362f] text-white/70 hover:text-white shrink-0"
             >
               {copiedBuildCmd ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
             </button>

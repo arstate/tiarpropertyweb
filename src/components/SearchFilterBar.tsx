@@ -43,13 +43,13 @@ const FILTER_OPTIONS: {
     key: 'under2',
     label: 'Cicilan < Rp 2 Jt',
     icon: CreditCard,
-    fallbackHref: '/properti?cicilan=2.0',
+    fallbackHref: '/properti?cicilan=dibawah-2jt',
   },
   {
     key: '2floor',
     label: 'Rumah 2 Lantai',
     icon: Layers,
-    fallbackHref: '/properti?tipe=2-Lantai',
+    fallbackHref: '/properti?tipe=2',
   },
 ];
 

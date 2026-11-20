@@ -127,3 +127,19 @@
   4. Primary CTA Button: Tombol Dark Luxury `#081613` tegas dengan ikon WhatsApp hijau `#25D366` dan tanda panah, teks proporsional satu baris di 390px (`Minta Titik Shareloc ke [Nama] ->`).
   5. Trust Grid 3-Kolom: Grid terstruktur rapi bergaris pembatas vertikal (`Gratis Survei / Siap Dijemput`, `Respon Cepat / < 5 Menit di WA`, `Resmi Tiar / Partner PT TMJ`) tanpa bug text wrapping.
 - **Rule:** Seluruh modal dialog wajib memiliki hierarki vertikal seimbang, kartu konteks unit yang jelas, tombol aksi beraksen Dark Luxury terpadu, dan layout anti-overflow di viewport ponsel (360px–390px).
+
+---
+
+### [2026-11-19] - v2.0.1 Code Audit, Deduplication, ESLint Setup & MCP Image Path Bugfix
+- **Issues Found:**
+  1. `npm run lint` (`next lint`) macet di prompt interaktif karena `eslint` / `eslint-config-next` dan `eslint.config.mjs` belum terpasang.
+  2. `scripts/tiar-mcp-server.ts` memvalidasi `imageUrl` & `galleryImages` memakai `z.string().url()`, sehingga menolak aset lokal WebP `v2.0.0` (`/images/properties/*.webp`) dan masih memakai URL eksternal Unsplash sebagai default `tiar_register_agent`.
+  3. Regex guardrail *Information Gap* & *Anti-BLT* terduplikasi antara `ClusterModal.tsx` dan `tiar-mcp-server.ts`; helper URL WhatsApp terduplikasi di 8 komponen publik.
+  4. `SearchFilterBar.tsx` memakai query string non-kanonik (`?cicilan=2.0`, `?tipe=2-Lantai`), `PropertyDetailView.tsx` merender 2 elemen `<h1>` di DOM (mobile card + desktop sidebar), dan `AdminSyncExportTab.tsx` memakai simulasi `setTimeout` palsu.
+  5. 17 file legacy v1 (`src/utils/kpr*`, 7 skrip Python v1 di root, `design-style-preview.html`, 7 PNG v1 di `docs/`) menumpuk di repo.
+- **Root Fixes:**
+  1. Pasang `eslint`, `eslint-config-next`, `@eslint/eslintrc`, `tsx`, buat `eslint.config.mjs` (`FlatCompat`), ubah `"lint": "eslint ."`, dan bersihkan error JSX quote + unused imports (`0` error/warning).
+  2. Ganti validator gambar MCP dengan `imagePathSchema` (terima `/images/...` & `https://...`) dan default photo agen ke `/images/agents/mbak-ningsih.webp`; hilangkan seluruh `: any`.
+  3. Sentralisasi `src/lib/guardrails.ts` + `buildMainWaUrl()` & `buildPropertyMetadata()` di `src/data/properties.ts`.
+  4. Perbaiki `fallbackHref` kanonik di `SearchFilterBar.tsx`, ubah `<h1>` mobile di `PropertyDetailView.tsx` ke `<h2>`, tambah cleanup timeout `useRef`, dan ubah validator `/admin` menjadi pengecekan skema/guardrail/PIC riil.
+  5. Hapus 17 file legacy v1 yang sudah tidak terpakai.

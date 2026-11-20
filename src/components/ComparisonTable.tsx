@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, Check } from 'lucide-react';
-import { WA_CS_NUMBER } from '@/data/properties';
+import { buildMainWaUrl } from '@/data/properties';
+import { ScrollReveal } from '@/components/ScrollReveal';
 
 const COMPARISON_ROWS = [
   {
@@ -66,10 +67,9 @@ const COMPARISON_ROWS = [
 ];
 
 export function ComparisonTable() {
-  const waMsg = encodeURIComponent(
+  const waUrl = buildMainWaUrl(
     'Halo Mbak Ningsih, saya mau minta tolong hitung estimasi cicilan KPR DP 0% dan cek kelayakan SLIK OJK secara privat.'
   );
-  const waUrl = `https://wa.me/${WA_CS_NUMBER}?text=${waMsg}`;
 
   return (
     <section
@@ -78,7 +78,7 @@ export function ComparisonTable() {
       className="py-16 sm:py-24 lg:py-32 bg-[#F1F1F1]"
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-14">
+        <ScrollReveal className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-14">
           <div className="flex flex-col gap-3 max-w-[56ch]">
             <h2
               id="komparasi-heading"
@@ -113,7 +113,7 @@ export function ComparisonTable() {
               Lihat Unit Tersedia
             </Link>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Mobile (< md): Stacked Clean Travertine Comparison Cards */}
         <div className="grid grid-cols-1 gap-3 md:hidden">
@@ -154,7 +154,7 @@ export function ComparisonTable() {
         </div>
 
         {/* Desktop (md+): Hairline Editorial Comparison Table */}
-        <div className="hidden md:block overflow-hidden rounded-2xl border border-[#C5BEB4] bg-[#FAF8F5]">
+        <ScrollReveal delay={120} className="hidden md:block overflow-hidden rounded-2xl border border-[#C5BEB4] bg-[#FAF8F5]">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-[#C5BEB4] bg-[#E8E4E1]">
@@ -188,7 +188,7 @@ export function ComparisonTable() {
               ))}
             </tbody>
           </table>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

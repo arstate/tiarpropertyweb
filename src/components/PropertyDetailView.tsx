@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import Link from 'next/link';
 import {
   ArrowLeft,
@@ -178,6 +178,15 @@ export function PropertyDetailView({
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [isSharelocModalOpen, setIsSharelocModalOpen] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
+  const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const swipeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (copyTimerRef.current) clearTimeout(copyTimerRef.current);
+      if (swipeTimerRef.current) clearTimeout(swipeTimerRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
@@ -270,7 +279,8 @@ export function PropertyDetailView({
     }
     setTouchStartX(null);
     setDragOffset(0);
-    setTimeout(() => setIsSwiping(false), 80);
+    if (swipeTimerRef.current) clearTimeout(swipeTimerRef.current);
+    swipeTimerRef.current = setTimeout(() => setIsSwiping(false), 80);
   };
 
   const handlePointerCancel = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -328,7 +338,8 @@ export function PropertyDetailView({
         .writeText(window.location.href)
         .then(() => {
           setIsCopied(true);
-          setTimeout(() => setIsCopied(false), 2000);
+          if (copyTimerRef.current) clearTimeout(copyTimerRef.current);
+          copyTimerRef.current = setTimeout(() => setIsCopied(false), 2000);
         })
         .catch(() => {});
     }
@@ -543,9 +554,9 @@ export function PropertyDetailView({
                     </span>
                   </div>
 
-                  <h1 className="font-display font-medium text-3xl leading-[1.1] text-[#38352C]">
+                  <h2 className="font-display font-medium text-3xl leading-[1.1] text-[#38352C]">
                     {property.codeName}
-                  </h1>
+                  </h2>
 
                   <div className="pt-1 flex items-baseline flex-wrap gap-x-3 gap-y-1">
                     <span className="num-clean text-2xl font-semibold text-[#38352C]">

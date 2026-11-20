@@ -6,13 +6,11 @@ import { AgentModal } from './AgentModal';
 import {
   Plus,
   Search,
-  Users,
   Edit2,
   Trash2,
   Phone,
   CheckCircle2,
   XCircle,
-  ExternalLink,
 } from 'lucide-react';
 
 interface AdminAgentsTabProps {
@@ -125,7 +123,6 @@ export function AdminAgentsTab({
                   <td className="py-3.5 px-4">
                     <div className="flex items-center gap-3">
                       <div className="w-11 h-11 rounded-full overflow-hidden border border-[#16362f] bg-[#050b0a] shrink-0">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={ag.photoUrl}
                           alt={ag.name}
@@ -252,7 +249,6 @@ export function AdminAgentsTab({
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded-full overflow-hidden border border-[#16362f] bg-[#050b0a] shrink-0">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={ag.photoUrl} alt={ag.name} className="w-full h-full object-cover" />
                     </div>
                     <div>

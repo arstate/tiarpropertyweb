@@ -1,6 +1,6 @@
 # 🎨 STYLE GUIDE & DESIGN DNA (`Mejuma Warm Stone` × `Tiar Property`)
 
-> **Approved Choice:** **Opsi 1 (`Mejuma Warm Stone`)** dari [`design-style-preview.html`](file:///mnt/HDD-2/BACKUP%20LINUX/FILE%20DATA/TIAR.PROPERTY/website/tiar-property-website/design-style-preview.html) yang terinspirasi [`https://www.mejuma-tuscany.com/`](https://www.mejuma-tuscany.com/).
+> **Approved Choice:** **Opsi 1 (`Mejuma Warm Stone`)** yang terinspirasi [`https://www.mejuma-tuscany.com/`](https://www.mejuma-tuscany.com/).
 > **300-Ref Vault Fusion:** **Ref #093 Aman Resorts / Ref #111 Terracotta Warm Living** + **Concierge Turnkey Real Estate**.
 
 ---

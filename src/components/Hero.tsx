@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { ScrollReveal } from '@/components/ScrollReveal';
 
 export function Hero() {
   return (
@@ -31,13 +32,16 @@ export function Hero() {
       {/* Foreground Content + Bottom-Bleed Wordmark */}
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 pt-24 pb-3 sm:pb-5 flex flex-col gap-6 sm:gap-8 lg:gap-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-8 items-end">
-          <div className="md:col-span-7">
+          <ScrollReveal delay={0} className="md:col-span-7">
             <h1 className="font-display font-medium text-[clamp(2.25rem,4.5vw,4.35rem)] leading-[1.03] tracking-[-0.025em] text-[#FAF8F5] max-w-[16ch]">
               Rumah Surabaya dan Sidoarjo tanpa DP.
             </h1>
-          </div>
+          </ScrollReveal>
 
-          <div className="md:col-span-5 md:justify-self-end md:max-w-[40ch] flex flex-col items-start gap-4">
+          <ScrollReveal
+            delay={120}
+            className="md:col-span-5 md:justify-self-end md:max-w-[40ch] flex flex-col items-start gap-4"
+          >
             <p className="font-body text-[15px] sm:text-base lg:text-[18px] leading-[1.5] text-[#FAF8F5]/92">
               UTJ mulai <span className="num-clean font-medium">Rp 1</span> juta, bebas biaya akad, dan subsidi angsuran{' '}
               <span className="num-clean font-medium">Rp 1,4</span> juta per bulan.
@@ -48,16 +52,18 @@ export function Hero() {
                 <ArrowRight className="w-4 h-4" strokeWidth={1.75} />
               </span>
             </a>
-          </div>
+          </ScrollReveal>
         </div>
 
         {/* Monumental Bottom-Bleed Wordmark */}
-        <div
-          aria-hidden="true"
-          className="w-full font-display font-medium text-[clamp(2.75rem,13.6vw,13.5rem)] leading-[0.84] tracking-[-0.035em] text-[#FAF8F5] text-center whitespace-nowrap select-none pt-1"
-        >
-          tiar property
-        </div>
+        <ScrollReveal delay={220}>
+          <div
+            aria-hidden="true"
+            className="w-full font-display font-medium text-[clamp(2.75rem,13.6vw,13.5rem)] leading-[0.84] tracking-[-0.035em] text-[#FAF8F5] text-center whitespace-nowrap select-none pt-1"
+          >
+            tiar property
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

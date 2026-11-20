@@ -20,6 +20,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
+import type { PropertyUnit } from '../src/data/properties';
+import type { AgentProfile } from '../src/data/agents';
+import {
+  FORBIDDEN_LEGAL_DEV_REGEX,
+  FORBIDDEN_REAL_ESTATE_PATTERNS,
+  FORBIDDEN_BLT_REGEX,
+  validateTiarGuardrails,
+} from '../src/lib/guardrails';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,78 +35,42 @@ const ROOT_DIR = path.resolve(__dirname, '..');
 const PROPERTIES_PATH = path.resolve(ROOT_DIR, 'src/data/properties.json');
 const AGENTS_PATH = path.resolve(ROOT_DIR, 'src/data/agents.json');
 
-// Helper I/O
-function loadProperties(): any[] {
-  if (!fs.existsSync(PROPERTIES_PATH)) return [];
-  const raw = fs.readFileSync(PROPERTIES_PATH, 'utf-8');
-  return JSON.parse(raw);
+function getErrorMessage(err: unknown): string {
+  if (err instanceof Error) return err.message;
+  return String(err);
 }
 
-function saveProperties(data: any[]): void {
+// Helper I/O
+function loadProperties(): PropertyUnit[] {
+  if (!fs.existsSync(PROPERTIES_PATH)) return [];
+  const raw = fs.readFileSync(PROPERTIES_PATH, 'utf-8');
+  return JSON.parse(raw) as PropertyUnit[];
+}
+
+function saveProperties(data: PropertyUnit[]): void {
   fs.writeFileSync(PROPERTIES_PATH, JSON.stringify(data, null, 2), 'utf-8');
 }
 
-function loadAgents(): any[] {
+function loadAgents(): AgentProfile[] {
   if (!fs.existsSync(AGENTS_PATH)) return [];
   const raw = fs.readFileSync(AGENTS_PATH, 'utf-8');
-  return JSON.parse(raw);
+  return JSON.parse(raw) as AgentProfile[];
 }
 
-function saveAgents(data: any[]): void {
+function saveAgents(data: AgentProfile[]): void {
   fs.writeFileSync(AGENTS_PATH, JSON.stringify(data, null, 2), 'utf-8');
 }
 
-// Guardrail check: Information Gap Protocol & Anti-BLT
-export const FORBIDDEN_LEGAL_DEV_REGEX = /\b(pt\s*\.?\s*)?trimitra(\s+manunggal\s+jaya)?\b/i;
-
-export const FORBIDDEN_REAL_ESTATE_PATTERNS = [
-  /\bgrand\s+park\s+anggaswangi\b/i,
-  /\bgrand\s+masangan\s+permai\b/i,
-  /\bgrand\s+east\s+residence\b/i,
-  /\b(cluster\s+)?hazel\b/i,
-  /\btampak\s+siring\b/i,
-  /\bpuri\s+gading(\s+mas\s+raya)?\b/i,
-  /\balera\s+grove\b/i,
-  /\b(klopo|kelopo)\s+sepuluh\b/i,
-  /\b(gmp|ger|pgmr|gpa)\b/i,
-];
-
-export const FORBIDDEN_BLT_REGEX = /\b(blt|bantuan\s+likuiditas\s+transaksi)\b/i;
-
 function checkGuardrails(payload: unknown): { ok: boolean; reason?: string } {
-  const jsonStr = JSON.stringify(payload).toLowerCase();
-
-  // 1. Cek developer legal
-  if (FORBIDDEN_LEGAL_DEV_REGEX.test(jsonStr)) {
-    return {
-      ok: false,
-      reason:
-        'Pelanggaran Information Gap Protocol: Dilarang menyebutkan nama legal developer PT Trimitra / Trimitra Manunggal Jaya. Wajib gunakan nama samaran strategis bernilai jual tinggi (contoh: "Cluster Modern Sukodono", "Cluster Elit Juanda").',
-    };
-  }
-
-  // 2. Cek nama perumahan asli (SOP Kerahasiaan Nama Perumahan)
-  for (const pattern of FORBIDDEN_REAL_ESTATE_PATTERNS) {
-    if (pattern.test(jsonStr)) {
-      return {
-        ok: false,
-        reason:
-          'Pelanggaran Information Gap Protocol: Dilarang menyebutkan nama perumahan asli (seperti Grand Park Anggaswangi, Grand Masangan Permai, Grand East Residence, Cluster Hazel, Tampak Siring, Alera Grove, Puri Gading Mas Raya). Wajib gunakan nama samaran strategis bernilai jual tinggi (contoh: "Cluster Modern Sukodono", "Cluster Elit Juanda", "Cluster Sultan MERR").',
-      };
-    }
-  }
-
-  // 3. Cek komisi internal BLT
-  if (FORBIDDEN_BLT_REGEX.test(jsonStr)) {
-    return {
-      ok: false,
-      reason:
-        'Pelanggaran Protokol Kerahasiaan: Dilarang menyebutkan kata "BLT" (Bantuan Likuiditas Transaksi) atau nominal insentif komisi internal marketing kepada konsumen/publik!',
-    };
-  }
-
-  return { ok: true };
+  return validateTiarGuardrails(payload);
 }
+
+const imagePathSchema = z
+  .string()
+  .min(1)
+  .refine((val) => val.startsWith('/images/') || /^https?:\/\//i.test(val), {
+    message: 'Wajib berupa path lokal (/images/...) atau URL https:// yang valid.',
+  });
 
 function slugify(text: string): string {
   return text
@@ -177,9 +149,9 @@ server.tool(
           },
         ],
       };
-    } catch (err: any) {
+    } catch (err: unknown) {
       return {
-        content: [{ type: 'text', text: JSON.stringify({ success: false, error: err.message }) }],
+        content: [{ type: 'text', text: JSON.stringify({ success: false, error: getErrorMessage(err) }) }],
         isError: true,
       };
     }
@@ -209,8 +181,8 @@ server.tool(
       luasBangunan: z.string(),
     }),
     features: z.array(z.string()).describe('Daftar fitur keunggulan (contoh: ["DP 0%", "Free BPHTB"])'),
-    imageUrl: z.string().url().describe('URL foto utama klaster'),
-    galleryImages: z.array(z.string().url()).optional().describe('URL galeri foto pendukung'),
+    imageUrl: imagePathSchema.describe('Path lokal (/images/properties/...) atau URL foto utama klaster'),
+    galleryImages: z.array(imagePathSchema).optional().describe('Daftar path lokal atau URL galeri foto pendukung'),
     assignedAgentId: z.string().optional().describe('ID agen PIC konsultan pendamping'),
     status: z
       .enum(['available', 'reserved', 'sold'])
@@ -219,7 +191,6 @@ server.tool(
       .describe('Status ketersediaan unit klaster (available / reserved / sold)'),
   },
   async (args) => {
-    // 1. Guardrail Validation
     const guardrail = checkGuardrails(args);
     if (!guardrail.ok) {
       return {
@@ -245,7 +216,6 @@ server.tool(
       const properties = loadProperties();
       const agents = loadAgents();
 
-      // Cek agen jika diisi
       if (args.assignedAgentId) {
         const agentExists = agents.some((a) => a.id === args.assignedAgentId);
         if (!agentExists) {
@@ -264,15 +234,14 @@ server.tool(
         }
       }
 
-      // Generate ID unik
-      let baseId = slugify(`${args.codeName}-${args.city}`) || 'cluster-baru';
+      const baseId = slugify(`${args.codeName}-${args.city}`) || 'cluster-baru';
       let newId = baseId;
       let counter = 1;
       while (properties.some((p) => p.id === newId)) {
         newId = `${baseId}-${counter++}`;
       }
 
-      const newProperty = {
+      const newProperty: PropertyUnit = {
         id: newId,
         codeName: args.codeName,
         locationArea: args.locationArea,
@@ -297,7 +266,6 @@ server.tool(
       properties.push(newProperty);
       saveProperties(properties);
 
-      // Hubungkan juga ke profil agen
       const targetAgentId = newProperty.assignedAgentId;
       const agentIndex = agents.findIndex((a) => a.id === targetAgentId);
       if (agentIndex !== -1) {
@@ -324,9 +292,9 @@ server.tool(
           },
         ],
       };
-    } catch (err: any) {
+    } catch (err: unknown) {
       return {
-        content: [{ type: 'text', text: JSON.stringify({ success: false, error: err.message }) }],
+        content: [{ type: 'text', text: JSON.stringify({ success: false, error: getErrorMessage(err) }) }],
         isError: true,
       };
     }
@@ -339,10 +307,9 @@ server.tool(
   'Perbarui data unit klaster properti yang sudah ada (harga, status unit, promo cicilan, spesifikasi, PIC agen).',
   {
     id: z.string().describe('ID klaster properti yang akan diupdate'),
-    patchData: z.record(z.string(), z.any()).describe('Objek data parsial yang ingin diperbarui'),
+    patchData: z.record(z.string(), z.unknown()).describe('Objek data parsial yang ingin diperbarui'),
   },
   async ({ id, patchData }) => {
-    // Guardrail Check
     const guardrail = checkGuardrails(patchData);
     if (!guardrail.ok) {
       return {
@@ -384,9 +351,9 @@ server.tool(
         };
       }
 
-      // Validasi assignedAgentId jika ada dalam patchData
-      if (patchData.assignedAgentId) {
-        const agentExists = agents.some((a) => a.id === patchData.assignedAgentId);
+      const nextAgentId = typeof patchData.assignedAgentId === 'string' ? patchData.assignedAgentId : undefined;
+      if (nextAgentId) {
+        const agentExists = agents.some((a) => a.id === nextAgentId);
         if (!agentExists) {
           return {
             content: [
@@ -394,7 +361,7 @@ server.tool(
                 type: 'text',
                 text: JSON.stringify({
                   success: false,
-                  error: `Agen dengan ID '${patchData.assignedAgentId}' tidak ditemukan di sistem.`,
+                  error: `Agen dengan ID '${nextAgentId}' tidak ditemukan di sistem.`,
                 }),
               },
             ],
@@ -403,15 +370,17 @@ server.tool(
         }
       }
 
-      // Validasi status jika diisi
-      if (patchData.status && !['available', 'reserved', 'sold'].includes(patchData.status)) {
+      if (
+        patchData.status !== undefined &&
+        !['available', 'reserved', 'sold'].includes(String(patchData.status))
+      ) {
         return {
           content: [
             {
               type: 'text',
               text: JSON.stringify({
                 success: false,
-                error: `Status unit '${patchData.status}' tidak valid. Wajib salah satu: 'available', 'reserved', 'sold'.`,
+                error: `Status unit '${String(patchData.status)}' tidak valid. Wajib salah satu: 'available', 'reserved', 'sold'.`,
               }),
             },
           ],
@@ -420,34 +389,31 @@ server.tool(
       }
 
       const oldAgentId = properties[index].assignedAgentId;
-      const updated = {
+      const updated: PropertyUnit = {
         ...properties[index],
-        ...patchData,
-        id, // cegah manipulasi ID
+        ...(patchData as Partial<PropertyUnit>),
+        id,
       };
 
       properties[index] = updated;
       saveProperties(properties);
 
-      // Jika assignedAgentId berganti, update agents.json
-      if (patchData.assignedAgentId && patchData.assignedAgentId !== oldAgentId) {
-        const agents = loadAgents();
-        // Hapus dari agen lama
+      if (nextAgentId && nextAgentId !== oldAgentId) {
+        const latestAgents = loadAgents();
         if (oldAgentId) {
-          const oldAg = agents.find((a) => a.id === oldAgentId);
+          const oldAg = latestAgents.find((a) => a.id === oldAgentId);
           if (oldAg && oldAg.assignedProperties) {
-            oldAg.assignedProperties = oldAg.assignedProperties.filter((pid: string) => pid !== id);
+            oldAg.assignedProperties = oldAg.assignedProperties.filter((pid) => pid !== id);
           }
         }
-        // Tambahkan ke agen baru
-        const newAg = agents.find((a) => a.id === patchData.assignedAgentId);
+        const newAg = latestAgents.find((a) => a.id === nextAgentId);
         if (newAg) {
           if (!newAg.assignedProperties) newAg.assignedProperties = [];
           if (!newAg.assignedProperties.includes(id)) {
             newAg.assignedProperties.push(id);
           }
         }
-        saveAgents(agents);
+        saveAgents(latestAgents);
       }
 
       return {
@@ -466,9 +432,9 @@ server.tool(
           },
         ],
       };
-    } catch (err: any) {
+    } catch (err: unknown) {
       return {
-        content: [{ type: 'text', text: JSON.stringify({ success: false, error: err.message }) }],
+        content: [{ type: 'text', text: JSON.stringify({ success: false, error: getErrorMessage(err) }) }],
         isError: true,
       };
     }
@@ -512,9 +478,9 @@ server.tool(
           },
         ],
       };
-    } catch (err: any) {
+    } catch (err: unknown) {
       return {
-        content: [{ type: 'text', text: JSON.stringify({ success: false, error: err.message }) }],
+        content: [{ type: 'text', text: JSON.stringify({ success: false, error: getErrorMessage(err) }) }],
         isError: true,
       };
     }
@@ -533,11 +499,10 @@ server.tool(
     areaFocus: z.array(z.string()).describe('Daftar area fokus keahlian'),
     badges: z.array(z.string()).describe('Daftar badge keahlian'),
     bio: z.string().describe('Biografi singkat profesional agen'),
-    photoUrl: z.string().optional().describe('URL foto profil agen'),
+    photoUrl: imagePathSchema.optional().describe('Path lokal (/images/agents/...) atau URL foto profil agen'),
     orderPriority: z.number().int().optional().describe('Urutan prioritas tampilan'),
   },
   async (args) => {
-    // Validasi nomor WhatsApp
     const cleanPhone = args.phone.replace(/[^\d]/g, '');
     if (!cleanPhone.startsWith('628') || cleanPhone.length < 10 || cleanPhone.length > 15) {
       return {
@@ -558,17 +523,16 @@ server.tool(
     try {
       const agents = loadAgents();
 
-      let baseId = slugify(args.name);
+      const baseId = slugify(args.name);
       let newId = baseId;
       let counter = 1;
       while (agents.some((a) => a.id === newId)) {
         newId = `${baseId}-${counter++}`;
       }
 
-      const defaultPhoto =
-        'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80';
+      const defaultPhoto = '/images/agents/mbak-ningsih.webp';
 
-      const newAgent = {
+      const newAgent: AgentProfile = {
         id: newId,
         name: args.name,
         role: args.role,
@@ -604,9 +568,9 @@ server.tool(
           },
         ],
       };
-    } catch (err: any) {
+    } catch (err: unknown) {
       return {
-        content: [{ type: 'text', text: JSON.stringify({ success: false, error: err.message }) }],
+        content: [{ type: 'text', text: JSON.stringify({ success: false, error: getErrorMessage(err) }) }],
         isError: true,
       };
     }
@@ -662,15 +626,13 @@ server.tool(
       properties[propIndex].assignedAgentId = agentId;
       saveProperties(properties);
 
-      // Cabut dari agen lama jika ada
       if (oldAgentId && oldAgentId !== agentId) {
         const oldAg = agents.find((a) => a.id === oldAgentId);
         if (oldAg && oldAg.assignedProperties) {
-          oldAg.assignedProperties = oldAg.assignedProperties.filter((pid: string) => pid !== propertyId);
+          oldAg.assignedProperties = oldAg.assignedProperties.filter((pid) => pid !== propertyId);
         }
       }
 
-      // Tambahkan ke agen baru jika belum ada
       if (!agents[agentIndex].assignedProperties) agents[agentIndex].assignedProperties = [];
       if (!agents[agentIndex].assignedProperties.includes(propertyId)) {
         agents[agentIndex].assignedProperties.push(propertyId);
@@ -695,9 +657,9 @@ server.tool(
           },
         ],
       };
-    } catch (err: any) {
+    } catch (err: unknown) {
       return {
-        content: [{ type: 'text', text: JSON.stringify({ success: false, error: err.message }) }],
+        content: [{ type: 'text', text: JSON.stringify({ success: false, error: getErrorMessage(err) }) }],
         isError: true,
       };
     }
@@ -707,7 +669,7 @@ server.tool(
 // Tool 7: tiar_rebuild_and_deploy
 server.tool(
   'tiar_rebuild_and_deploy',
-  'Jalankan static export Next.js lokal dan verifikasi output build 26+ rute untuk mempublikasikan data properti terbaru.',
+  'Jalankan static export Next.js lokal dan verifikasi output build 27+ rute untuk mempublikasikan data properti terbaru.',
   {
     commitMessage: z.string().optional().describe('Pesan keterangan update konten'),
     purgeCache: z.boolean().optional().describe('Opsi purge Cloudflare cache'),
@@ -723,8 +685,6 @@ server.tool(
       });
 
       const durationSec = ((Date.now() - startTime) / 1000).toFixed(1);
-
-      // Cek output folder
       const outDir = path.resolve(ROOT_DIR, 'out');
       const hasOut = fs.existsSync(outDir);
 
@@ -746,14 +706,15 @@ server.tool(
           },
         ],
       };
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const execErr = err as { stderr?: string; message?: string };
       return {
         content: [
           {
             type: 'text',
             text: JSON.stringify({
               success: false,
-              error: 'Build gagal: ' + (err.stderr || err.message),
+              error: 'Build gagal: ' + (execErr.stderr || getErrorMessage(err)),
             }),
           },
         ],
@@ -763,20 +724,26 @@ server.tool(
   }
 );
 
-// Jalankan transport stdio jika dieksekusi langsung
 export async function startServer() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
   console.error('[Tiar MCP Server] Berjalan pada transport stdio. Siap menerima instruksi AI Agent.');
 }
 
-export { server, checkGuardrails, loadProperties, saveProperties, loadAgents, saveAgents };
+export {
+  server,
+  checkGuardrails,
+  loadProperties,
+  saveProperties,
+  loadAgents,
+  saveAgents,
+  FORBIDDEN_LEGAL_DEV_REGEX,
+  FORBIDDEN_REAL_ESTATE_PATTERNS,
+  FORBIDDEN_BLT_REGEX,
+};
 
-const isMain =
-  Boolean((import.meta as any).main) ||
-  (typeof process !== 'undefined' &&
-    process.argv[1] &&
-    process.argv[1].endsWith('tiar-mcp-server.ts'));
+const entryFile = process.argv[1] || '';
+const isMain = entryFile.endsWith('tiar-mcp-server.ts') || entryFile.endsWith('tiar-mcp-server.js');
 
 if (isMain) {
   startServer().catch((err) => {
@@ -784,4 +751,3 @@ if (isMain) {
     process.exit(1);
   });
 }
-

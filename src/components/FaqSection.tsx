@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Plus, Minus } from 'lucide-react';
-import { WA_CS_NUMBER, DEFAULT_WA_MESSAGE } from '@/data/properties';
+import { buildMainWaUrl } from '@/data/properties';
+import { ScrollReveal } from '@/components/ScrollReveal';
 
 const FAQS = [
   {
@@ -50,7 +51,7 @@ const FAQS = [
 ];
 
 export function FaqSection() {
-  const waUrl = `https://wa.me/${WA_CS_NUMBER}?text=${DEFAULT_WA_MESSAGE}`;
+  const waUrl = buildMainWaUrl();
 
   return (
     <section
@@ -61,7 +62,7 @@ export function FaqSection() {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           {/* Left Sticky Question Intro + CTA Box */}
-          <div className="lg:col-span-5 flex flex-col gap-5">
+          <ScrollReveal className="lg:col-span-5 flex flex-col gap-5">
             <h2
               id="faq-heading"
               className="font-display font-medium text-[clamp(2.1rem,3.8vw,3.3rem)] leading-[1.08] tracking-[-0.025em] text-[#38352C] max-w-[16ch]"
@@ -88,10 +89,10 @@ export function FaqSection() {
                 </span>
               </a>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Right Native <details> Accordion with 1px Hairline Dividers */}
-          <div className="lg:col-span-7 border-t border-[#C5BEB4]">
+          <ScrollReveal delay={120} className="lg:col-span-7 border-t border-[#C5BEB4]">
             {FAQS.map((item, idx) => (
               <details
                 key={idx}
@@ -113,7 +114,7 @@ export function FaqSection() {
                 </div>
               </details>
             ))}
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

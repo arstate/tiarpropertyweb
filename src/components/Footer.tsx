@@ -1,39 +1,42 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { WA_CS_NUMBER } from '@/data/properties';
+import { buildMainWaUrl } from '@/data/properties';
+import { ScrollReveal } from '@/components/ScrollReveal';
 
 export function Footer() {
-  const waSurveyUrl = `https://wa.me/${WA_CS_NUMBER}?text=${encodeURIComponent(
+  const waSurveyUrl = buildMainWaUrl(
     'Halo Mbak Ningsih, saya mau booking jadwal survei rumah Sabtu atau Minggu ini.'
-  )}`;
+  );
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-[#F1F1F1] pt-14 sm:pt-20 pb-10 border-t border-[#C5BEB4]">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10">
         {/* Pre-Footer Survey CTA Strip */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-12 mb-12 border-b border-[#C5BEB4]">
-          <h2 className="font-display font-medium text-[clamp(2.1rem,4vw,3.6rem)] leading-[1.06] tracking-[-0.025em] text-[#38352C] max-w-[18ch]">
-            Siap melihat langsung kondisi unit akhir pekan ini?
-          </h2>
+        <ScrollReveal delay={0}>
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-12 mb-12 border-b border-[#C5BEB4]">
+            <h2 className="font-display font-medium text-[clamp(2.1rem,4vw,3.6rem)] leading-[1.06] tracking-[-0.025em] text-[#38352C] max-w-[18ch]">
+              Siap melihat langsung kondisi unit akhir pekan ini?
+            </h2>
 
-          <a
-            href={waSurveyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="dual-cta whitespace-nowrap self-start lg:self-auto"
-          >
-            <span className="dual-cta__label">Jadwalkan Survei Bersama</span>
-            <span className="dual-cta__circle" aria-hidden="true">
-              <ArrowRight className="w-4 h-4" strokeWidth={1.75} />
-            </span>
-          </a>
-        </div>
+            <a
+              href={waSurveyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="dual-cta whitespace-nowrap self-start lg:self-auto"
+            >
+              <span className="dual-cta__label">Jadwalkan Survei Bersama</span>
+              <span className="dual-cta__circle" aria-hidden="true">
+                <ArrowRight className="w-4 h-4" strokeWidth={1.75} />
+              </span>
+            </a>
+          </div>
+        </ScrollReveal>
 
         {/* Ft2 Split Grid: 4-col Portrait Photo + 8-col Dark #38352C Panel */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-          <div className="lg:col-span-4 rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-[3/4] bg-[#E8E4E1] ring-1 ring-inset ring-[#38352C]/14">
+          <ScrollReveal delay={80} className="lg:col-span-4 rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-[3/4] bg-[#E8E4E1] ring-1 ring-inset ring-[#38352C]/14">
             <img
               src="/images/properties/editorial-footer.webp"
               alt="Interior ruang tamu hangat rumah siap huni di kawasan Sidoarjo dan Surabaya"
@@ -42,9 +45,9 @@ export function Footer() {
               decoding="async"
               className="w-full h-full object-cover"
             />
-          </div>
+          </ScrollReveal>
 
-          <div className="lg:col-span-8 rounded-2xl bg-[#38352C] text-[#E8E4E1] p-7 sm:p-10 flex flex-col justify-between gap-12 overflow-hidden">
+          <ScrollReveal delay={160} className="lg:col-span-8 rounded-2xl bg-[#38352C] text-[#E8E4E1] p-7 sm:p-10 flex flex-col justify-between gap-12 overflow-hidden">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               <div>
                 <h3 className="font-body text-xs font-semibold text-[#C5BEB4] mb-2">
@@ -124,7 +127,7 @@ export function Footer() {
                 </Link>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </footer>

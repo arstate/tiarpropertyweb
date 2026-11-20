@@ -3,7 +3,7 @@
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import { MessageCircle } from 'lucide-react';
-import { WA_CS_NUMBER, DEFAULT_WA_MESSAGE } from '@/data/properties';
+import { buildMainWaUrl } from '@/data/properties';
 
 export function FloatingWhatsApp() {
   const pathname = usePathname();
@@ -12,7 +12,7 @@ export function FloatingWhatsApp() {
     return null;
   }
 
-  const waUrl = `https://wa.me/${WA_CS_NUMBER}?text=${DEFAULT_WA_MESSAGE}`;
+  const waUrl = buildMainWaUrl();
 
   return (
     <aside

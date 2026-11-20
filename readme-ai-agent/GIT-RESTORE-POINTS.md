@@ -65,6 +65,11 @@
   - Production Redesign (`v2.0.0`): `ecbd52b` (tag: `restore-v2-verified`)
 - **Scope:** Eksekusi penuh Milestone 0–6: palet `Mejuma Warm Stone` (`#F1F1F1`/`#E8E4E1`/`#C5BEB4`/`#38352C`/`#57534A`/`#FFCA4F`), Detached Floating Pill `Navbar` + Dark Drawer (`.01–.04`), `100svh` Monumental Hero + wordmark `tiar property`, 16 aset lokal WebP 4K (`/boost` CUDA `upscale-img`), Serif Marquee + Asymmetric Lookbook, Sticky `.01–.05` Journey, Komparasi, Testimoni, FAQ `<details>`, Split Footer `Ft2`, **hapus total `KprCalculator.tsx` & `#simulasi-kpr`**, **0% serif numerals** (`.num-clean`/`.mono-num`), fix `"Partner PT TMJ"` -> `"Partner Resmi"`, 0 emoji (`lucide-react`), `src/app/icon.svg`, `overflow-x: clip`, dan verifikasi build `out/` (`27/27` rute) + 7-viewport Chrome CDP port `9223`.
 
+### [Milestone 16 / v2.0.1] - Code Audit, Deduplication, ESLint Setup & Repo Hygiene
+- **Date:** 2026-11-19
+- **Pre-Cleanup Restore Point:** `023d853` (tag: `restore-pre-cleanup-20261119-1352`)
+- **Scope:** Sentralisasi `src/lib/guardrails.ts`, helper `buildMainWaUrl()` & `buildPropertyMetadata()`, penghapusan duplikasi di 8 komponen publik & 2 route metadata, perbaikan bug schema gambar lokal MCP Server & default foto lokal agen, perbaikan filter URL kanonik (`SearchFilterBar.tsx`), single `<h1>` (`PropertyDetailView.tsx`), validasi integritas nyata (`/admin`), setup non-interaktif `npm run lint` (`eslint .`), eliminasi `0` `: any`, penghapusan 17 file legacy v1, serta verifikasi `15/15` tes MCP + `27/27` build statis.
+
 ## Git Status & Rollback Command Helper
 ```bash
 git status

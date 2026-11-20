@@ -6,6 +6,9 @@ export const dynamic = 'force-static';
 export const revalidate = false;
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/properti',
+  },
   title: 'Katalog Produk & Rumah Pilihan | Tiar Property',
   description:
     'Temukan daftar lengkap produk klaster hunian modern di Surabaya & Sidoarjo. Promo DP 0%, Cukup UTJ 1–2 Jt Langsung Berkas KPR, Cicilan 1–2 Jt-an, All-In Bebas Seluruh Biaya.',

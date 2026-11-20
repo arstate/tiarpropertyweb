@@ -17,7 +17,7 @@ import {
 import { Footer } from '@/components/Footer';
 import { FloatingWhatsApp } from '@/components/FloatingWhatsApp';
 import { PropertyCard } from '@/components/PropertyCard';
-import { TIAR_PROPERTIES, WA_CS_NUMBER } from '@/data/properties';
+import { TIAR_PROPERTIES, buildMainWaUrl } from '@/data/properties';
 
 type CityFilter = 'semua' | 'Surabaya' | 'Sidoarjo';
 type FloorFilter = 'semua' | 1 | 2;
@@ -224,9 +224,9 @@ export function PropertiCatalogView({
     syncFiltersToUrl('', 'semua', 'semua', 'semua');
   };
 
-  const consultationWaUrl = `https://wa.me/${WA_CS_NUMBER}?text=${encodeURIComponent(
+  const consultationWaUrl = buildMainWaUrl(
     'Halo Mbak Ningsih, saya sedang melihat katalog rumah di website Tiar Property. Mau minta tolong hitung cicilan dan ditemenin cek lokasinya kak?'
-  )}`;
+  );
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F1F1F1] text-[#38352C]">

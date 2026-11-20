@@ -119,7 +119,7 @@ export function AdminStatsSummary({ properties, agents }: AdminStatsSummaryProps
               SOP Brand Tiar Property: Information Gap Protocol & Anti-BLT
             </h4>
             <p className="text-xs text-white/80 mt-0.5 leading-relaxed">
-              Dilarang menyebutkan nama developer legal (PT Trimitra) dan nama persis perumahan di materi promosi. Wajib memakai nama samaran bernilai jual tinggi. Dilarang menyebut kata "BLT" (komisi internal rahasia).
+              Dilarang menyebutkan nama developer legal (PT Trimitra) dan nama persis perumahan di materi promosi. Wajib memakai nama samaran bernilai jual tinggi. Dilarang menyebut kata &quot;BLT&quot; (komisi internal rahasia).
             </p>
           </div>
         </div>

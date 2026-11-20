@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, MessageCircle } from 'lucide-react';
 import type { PropertyUnit } from '@/data/properties';
-import { WA_CS_NUMBER } from '@/data/properties';
+import { buildMainWaUrl } from '@/data/properties';
 
 interface PropertyCardProps {
   property: PropertyUnit;
@@ -16,10 +16,9 @@ export function PropertyCard({
   aspectVariant = 'standard',
 }: PropertyCardProps) {
   const detailHref = `${basePath}/${property.id}`;
-  const waMessage = encodeURIComponent(
+  const waHref = buildMainWaUrl(
     `Halo Mbak Ningsih, saya tertarik dengan klaster "${property.codeName}" (${property.locationAreaShort}) harga mulai ${property.priceStart}. Boleh minta tolong ditemenin survei lokasinya kak?`
   );
-  const waHref = `https://wa.me/${WA_CS_NUMBER}?text=${waMessage}`;
 
   const aspectClass =
     aspectVariant === 'wide'

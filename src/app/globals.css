@@ -75,35 +75,54 @@ p {
 
 /* Signature Dual-Pill CTA (Button-040) */
 .dual-cta {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 4px;
   border: none;
+  border-radius: 9999px;
+  overflow: hidden;
+  isolation: isolate;
   background: transparent;
   padding: 0;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
+  transition: background-color 240ms var(--ease-mejuma);
 }
 
 .dual-cta__label {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 48px;
   padding: 0 24px;
   border-radius: 9999px;
-  background-color: var(--color-accent);
+  background-color: transparent;
   color: var(--color-accent-ink);
   font-family: var(--font-body), system-ui, sans-serif;
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
   white-space: nowrap;
-  transition: background-color 240ms var(--ease-mejuma), transform 150ms var(--ease-out);
+  transition: padding-right 240ms var(--ease-mejuma), transform 150ms var(--ease-out);
+}
+
+.dual-cta__label::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background-color: var(--color-accent);
+  transition: background-color 240ms var(--ease-mejuma);
 }
 
 .dual-cta__circle {
+  position: relative;
+  z-index: 3;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -117,13 +136,30 @@ p {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .dual-cta:hover .dual-cta__label,
-  .dual-cta:hover .dual-cta__circle {
+  .dual-cta:hover {
+    background-color: var(--color-accent-hover);
+  }
+  .dual-cta:hover .dual-cta__label {
+    padding-right: 36px;
+  }
+  .dual-cta:hover .dual-cta__label::before {
     background-color: var(--color-accent-hover);
   }
   .dual-cta:hover .dual-cta__circle {
-    transform: translateX(3px);
+    background-color: rgba(232, 181, 61, 0.55);
+    mix-blend-mode: multiply;
+    transform: translate3d(var(--cta-x, -110px), var(--cta-y, 0px), 0) scale(1.45);
+    transition:
+      background-color 280ms var(--ease-mejuma),
+      transform 140ms cubic-bezier(0.23, 1, 0.32, 1);
   }
+  .dual-cta:hover .dual-cta__circle svg {
+    transform: rotate(-45deg) scale(0.75);
+  }
+}
+
+.dual-cta__circle svg {
+  transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dual-cta:active .dual-cta__label,
@@ -132,16 +168,23 @@ p {
 }
 
 /* Dark Pill Variant */
-.dual-cta--dark .dual-cta__label,
+.dual-cta--dark .dual-cta__label::before,
 .dual-cta--dark .dual-cta__circle {
   background-color: var(--color-ink);
+}
+
+.dual-cta--dark .dual-cta__label,
+.dual-cta--dark .dual-cta__circle {
   color: var(--color-on-dark);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .dual-cta--dark:hover .dual-cta__label,
-  .dual-cta--dark:hover .dual-cta__circle {
+  .dual-cta--dark:hover,
+  .dual-cta--dark:hover .dual-cta__label::before {
     background-color: var(--color-ink-hover);
+  }
+  .dual-cta--dark:hover .dual-cta__circle {
+    background-color: transparent;
   }
 }
 
@@ -169,10 +212,39 @@ p {
   .marquee-track {
     animation: none;
   }
+  .reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
   *, *::before, *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
+}
+
+/* Scroll Reveal (Staggered Fade-Up + Scale + Slide) */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(28px) scale(0.975);
+  transition:
+    opacity 680ms var(--ease-mejuma),
+    transform 680ms var(--ease-mejuma);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal-item.is-revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Hamburger to X SVG Morph */
+.hamburger-line {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    transform 320ms var(--ease-mejuma),
+    opacity 220ms var(--ease-mejuma);
 }
 
 /* Hide native scrollbar while preserving scroll gesture */

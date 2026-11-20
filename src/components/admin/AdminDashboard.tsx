@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { PropertyUnit, TIAR_PROPERTIES } from '@/data/properties';
 import { AgentProfile, TIAR_AGENTS } from '@/data/agents';
@@ -32,6 +32,13 @@ export function AdminDashboard() {
   const [agents, setAgents] = useState<AgentProfile[]>(TIAR_AGENTS);
   const [hasLocalChanges, setHasLocalChanges] = useState<boolean>(false);
   const [saveToast, setSaveToast] = useState<string | null>(null);
+  const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    };
+  }, []);
 
   // Load auth state & saved local changes on client mount
   useEffect(() => {
@@ -59,7 +66,8 @@ export function AdminDashboard() {
 
   const triggerToast = (msg: string) => {
     setSaveToast(msg);
-    setTimeout(() => setSaveToast(null), 3000);
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    toastTimerRef.current = setTimeout(() => setSaveToast(null), 3000);
   };
 
   // Property handlers

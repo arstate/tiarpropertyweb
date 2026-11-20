@@ -5,7 +5,6 @@ import { Upload, Download, Copy, Check, Image as ImageIcon, Sliders, RefreshCw, 
 
 export function AdminImageCompressor() {
   const [originalFile, setOriginalFile] = useState<File | null>(null);
-  const [originalPreview, setOriginalPreview] = useState<string | null>(null);
   const [compressedDataUrl, setCompressedDataUrl] = useState<string | null>(null);
   const [originalSize, setOriginalSize] = useState<number>(0);
   const [compressedSize, setCompressedSize] = useState<number>(0);
@@ -24,7 +23,6 @@ export function AdminImageCompressor() {
     const reader = new FileReader();
     reader.onload = (e) => {
       const src = e.target?.result as string;
-      setOriginalPreview(src);
 
       const img = new Image();
       img.onload = () => {
@@ -240,7 +238,6 @@ export function AdminImageCompressor() {
 
               {/* Image Preview Box */}
               <div className="relative rounded-2xl overflow-hidden border border-[#16362f] bg-[#050b0a] aspect-video flex items-center justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={compressedDataUrl}
                   alt="WebP Preview"

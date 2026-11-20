@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Cormorant_Garamond, Golos_Text, JetBrains_Mono } from 'next/font/google';
 import { Navbar } from '@/components/Navbar';
 import ServiceWorkerRegister from '@/components/ServiceWorkerRegister';
+import { TrackingScripts } from '@/components/TrackingScripts';
+import { JsonLdSchema } from '@/components/JsonLdSchema';
 import './globals.css';
 
 const cormorant = Cormorant_Garamond({
@@ -27,6 +29,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://tiarproperty.com'),
   title: 'Tiar Property | Hunian Eksklusif Surabaya & Sidoarjo — DP 0% All-In Free',
   description:
     'Kurasi hunian strategis di Sukodono, Sedati Juanda, Waru, MERR, dan Surabaya Barat. Program DP 0%, UTJ mulai Rp 1 Juta, bebas biaya akad, dan pendampingan 5 bank BUMN hingga ACC.',
@@ -66,9 +69,11 @@ export default function RootLayout({
       className={`scroll-smooth ${cormorant.variable} ${golos.variable} ${jetbrains.variable}`}
     >
       <body className="min-h-screen bg-[#F1F1F1] text-[#38352C] antialiased selection:bg-[#FFCA4F] selection:text-[#38352C]">
+        <JsonLdSchema />
         <Navbar />
         {children}
         <ServiceWorkerRegister />
+        <TrackingScripts />
       </body>
     </html>
   );

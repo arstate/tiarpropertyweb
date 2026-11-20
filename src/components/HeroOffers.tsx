@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { WA_CS_NUMBER } from '@/data/properties';
+import { buildMainWaUrl } from '@/data/properties';
+import { ScrollReveal } from '@/components/ScrollReveal';
 
 const JOURNEY_STEPS = [
   {
@@ -66,10 +67,9 @@ const JOURNEY_STEPS = [
 ];
 
 export function HeroOffers() {
-  const waMessage = encodeURIComponent(
+  const waUrl = buildMainWaUrl(
     'Halo Mbak Ningsih, saya mau ditemenin cek kelayakan KPR dan pilih klaster terbaik Tiar Property.'
   );
-  const waUrl = `https://wa.me/${WA_CS_NUMBER}?text=${waMessage}`;
 
   return (
     <section
@@ -79,7 +79,7 @@ export function HeroOffers() {
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
         {/* Sticky Left 5-col Editorial Spine */}
-        <div className="lg:col-span-5 lg:sticky lg:top-24 flex flex-col items-start gap-5">
+        <ScrollReveal className="lg:col-span-5 lg:sticky lg:top-[max(6.5rem,calc(50svh-10.5rem))] flex flex-col items-start gap-5">
           <h2
             id="journey-heading"
             className="font-display font-medium text-[clamp(2.3rem,4.4vw,4.35rem)] leading-[1.03] tracking-[-0.03em] text-[#38352C] max-w-[14ch]"
@@ -102,27 +102,28 @@ export function HeroOffers() {
               <ArrowRight className="w-4 h-4" strokeWidth={1.75} />
             </span>
           </a>
-        </div>
+        </ScrollReveal>
 
         {/* Right 7-col .01-.05 Travertine Cards (0% Serif Numerals) */}
         <div className="lg:col-span-7 flex flex-col gap-4">
-          {JOURNEY_STEPS.map((step) => (
-            <article
-              key={step.num}
-              className="grid grid-cols-[auto_minmax(0,1fr)] gap-5 sm:gap-6 items-start rounded-2xl bg-[#E8E4E1] p-6 sm:p-7 ring-1 ring-inset ring-[#38352C]/14"
-            >
-              <span className="num-clean text-2xl sm:text-[26px] font-semibold leading-none text-[#57534A] pt-1">
-                {step.num}
-              </span>
-              <div className="min-w-0">
-                <h3 className="font-display font-medium text-[clamp(1.35rem,2vw,1.75rem)] leading-[1.2] text-[#38352C] mb-1.5">
-                  {step.title}
-                </h3>
-                <p className="font-body text-[15px] leading-[1.6] text-[#57534A]">
-                  {step.desc}
-                </p>
-              </div>
-            </article>
+          {JOURNEY_STEPS.map((step, idx) => (
+            <ScrollReveal key={step.num} delay={idx * 90}>
+              <article
+                className="grid grid-cols-[auto_minmax(0,1fr)] gap-5 sm:gap-6 items-start rounded-2xl bg-[#E8E4E1] p-6 sm:p-7 ring-1 ring-inset ring-[#38352C]/14"
+              >
+                <span className="num-clean text-2xl sm:text-[26px] font-semibold leading-none text-[#57534A] pt-1">
+                  {step.num}
+                </span>
+                <div className="min-w-0">
+                  <h3 className="font-display font-medium text-[clamp(1.35rem,2vw,1.75rem)] leading-[1.2] text-[#38352C] mb-1.5">
+                    {step.title}
+                  </h3>
+                  <p className="font-body text-[15px] leading-[1.6] text-[#57534A]">
+                    {step.desc}
+                  </p>
+                </div>
+              </article>
+            </ScrollReveal>
           ))}
         </div>
       </div>

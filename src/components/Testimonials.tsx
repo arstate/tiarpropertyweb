@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShieldCheck } from 'lucide-react';
+import { ScrollReveal } from '@/components/ScrollReveal';
 
 const VALUE_CARDS = [
   {
@@ -86,11 +87,11 @@ export function Testimonials() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16 sm:mb-20">
-          {VALUE_CARDS.map((card) => (
-            <article
-              key={card.index}
-              className="rounded-2xl bg-[#E8E4E1] p-6 min-h-[220px] flex flex-col justify-between gap-6 ring-1 ring-inset ring-[#38352C]/14"
-            >
+          {VALUE_CARDS.map((card, idx) => (
+            <ScrollReveal key={card.index} delay={idx * 80} className="h-full">
+              <article
+                className="rounded-2xl bg-[#E8E4E1] p-6 min-h-[220px] h-full flex flex-col justify-between gap-6 ring-1 ring-inset ring-[#38352C]/14"
+              >
               <span className="num-clean text-2xl font-semibold leading-none text-[#57534A]">
                 {card.index}
               </span>
@@ -102,7 +103,8 @@ export function Testimonials() {
                   {card.text}
                 </p>
               </div>
-            </article>
+              </article>
+            </ScrollReveal>
           ))}
         </div>
 
@@ -119,11 +121,11 @@ export function Testimonials() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {TESTIMONIALS.map((item) => (
-            <article
-              key={item.name}
-              className="rounded-2xl bg-[#E8E4E1] p-6 ring-1 ring-inset ring-[#38352C]/14 flex flex-col justify-between gap-6"
-            >
+          {TESTIMONIALS.map((item, idx) => (
+            <ScrollReveal key={item.name} delay={idx * 100} className="h-full">
+              <article
+                className="rounded-2xl bg-[#E8E4E1] p-6 h-full ring-1 ring-inset ring-[#38352C]/14 flex flex-col justify-between gap-6"
+              >
               <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-between gap-2">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#38352C] text-[#E8E4E1] text-xs font-medium whitespace-nowrap">
@@ -147,7 +149,8 @@ export function Testimonials() {
                   <p className="text-xs text-[#57534A]">{item.profile}</p>
                 </div>
               </div>
-            </article>
+              </article>
+            </ScrollReveal>
           ))}
         </div>
       </div>
